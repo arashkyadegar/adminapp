@@ -1,15 +1,12 @@
 
+@import url(fontiran.css); /* لینک فایلی که وظیفه بارگذاری فونت ها را برعهده دارد */
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }
 
-/* body {
-
-	direction: rtl;
-  text-align: right;
-} */
 .sun-editor .se-dialog .se-dialog-inner .se-dialog-content {
 	margin: 100px auto !important;
 }

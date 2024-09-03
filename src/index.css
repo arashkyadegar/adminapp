@@ -1,9 +1,18 @@
+
 @tailwind base;
+
 @tailwind components;
 
-body {
-  direction: rtl;
-  text-align: right;
-}
-
 @tailwind utilities;
+@import url(fontiran.css); /* لینک فایلی که وظیفه بارگذاری فونت ها را برعهده دارد */
+
+#roote {
+	font-family: IRANSans  !important;
+
+}
+body {
+
+	direction: rtl;
+
+	margin: 0;
+}

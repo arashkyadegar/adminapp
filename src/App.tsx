@@ -15,10 +15,13 @@ import OrderAddComponent from './components/order/order-add';
 import OrderListComponent from './components/order/order-list';
 
 function App() {
+  
+
   const [languageDrpDwnIsOpen, setLanguageDrpDwnIsOpen] = useState(false);
   const [userDrpDwnIsOpen, setUserDrpDwnIsOpen] = useState(false);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
-  const [asidePostDrpToggle, setAsidePostDrpToggle] = useState(false);
+  const [asideOrderDrpToggle, setAsideOrderDrpToggle] = useState(false)
+  const [asideUserDrpToggle, setAsideUserDrpToggle] = useState(false)
   const [asideFinancialDrpToggle, setAsideFinancialDrpToggle] = useState(false)
   const [asideCellarDrpToggle, setAsideCellarDrpToggle] = useState(false);
   const [asideToggle, setAsideToggle] = useState(false);
@@ -29,14 +32,17 @@ function App() {
   return (
     <myAppContext.Provider
       value={{
+
         languageDrpDwnIsOpen,
         setLanguageDrpDwnIsOpen,
         userDrpDwnIsOpen,
         setUserDrpDwnIsOpen,
         passwordVisibility,
         setPasswordVisibility,
-        asidePostDrpToggle,
-        setAsidePostDrpToggle,
+        asideOrderDrpToggle,
+        setAsideOrderDrpToggle,
+        asideUserDrpToggle,
+        setAsideUserDrpToggle,
         asideFinancialDrpToggle,
         setAsideFinancialDrpToggle,
         asideCellarDrpToggle,

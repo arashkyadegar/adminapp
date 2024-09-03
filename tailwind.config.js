@@ -8,7 +8,10 @@ module.exports = {
       colors: {
         'primary-green': '#088178',
         'secondary-gray': '#f4f5f9',
-      }
+      },
+      fontFamily: {
+        iransSans: ['iransSans'],
+      },
     },
   },
   plugins: [],

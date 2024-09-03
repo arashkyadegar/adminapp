@@ -1,0 +1,97 @@
+[
+     {
+          "_id": "66d5f44571675b72da8436ce",
+          "name": "home",
+          "parentId": 0
+     },
+     {
+          "_id": "66d5f44c71675b72da8436cf",
+          "name": "school",
+          "parentId": 0
+     },
+     {
+          "_id": "66d5f45271675b72da8436d0",
+          "name": "sport",
+          "parentId": 0
+     },
+     {
+          "_id": "66d5f45771675b72da8436d1",
+          "name": "art",
+          "parentId": 0
+     },
+     {
+          "_id": "66d5f47d71675b72da8436d2",
+          "name": "actor",
+          "parentId": "66d5f45771675b72da8436d1"
+     },
+     {
+          "_id": "66d5f48271675b72da8436d3",
+          "name": "music",
+          "parentId": "66d5f45771675b72da8436d1"
+     },
+     {
+          "_id": "66d5f48871675b72da8436d4",
+          "name": "theater",
+          "parentId": "66d5f45771675b72da8436d1"
+     },
+     {
+          "_id": "66d5f48d71675b72da8436d5",
+          "name": "singing",
+          "parentId": "66d5f45771675b72da8436d1"
+     },
+     {
+          "_id": "66d5f4ac71675b72da8436d6",
+          "name": "footbal",
+          "parentId": "66d5f45271675b72da8436d0"
+     },
+     {
+          "_id": "66d5f4b171675b72da8436d7",
+          "name": "swim",
+          "parentId": "66d5f45271675b72da8436d0"
+     },
+     {
+          "_id": "66d5f4b571675b72da8436d8",
+          "name": "kyte",
+          "parentId": "66d5f45271675b72da8436d0"
+     },
+     {
+          "_id": "66d5f4ba71675b72da8436d9",
+          "name": "boxing",
+          "parentId": "66d5f45271675b72da8436d0"
+     },
+     {
+          "_id": "66d5f4c971675b72da8436da",
+          "name": "pen",
+          "parentId": "66d5f44c71675b72da8436cf"
+     },
+     {
+          "_id": "66d5f4cd71675b72da8436db",
+          "name": "pencil",
+          "parentId": "66d5f44c71675b72da8436cf"
+     },
+     {
+          "_id": "66d5f4d071675b72da8436dc",
+          "name": "bag",
+          "parentId": "66d5f44c71675b72da8436cf"
+     },
+     {
+          "_id": "66d5f4dc71675b72da8436dd",
+          "name": "sofa",
+          "parentId": "66d5f44571675b72da8436ce"
+     },
+     {
+          "_id": "66d5f4e071675b72da8436de",
+          "name": "oven",
+          "parentId": "66d5f44571675b72da8436ce"
+     },
+     {
+          "_id": "66d5f4e371675b72da8436df",
+          "name": "bed",
+          "parentId": "66d5f44571675b72da8436ce"
+     },
+     {
+          "_id": "66d5f4e771675b72da8436e0",
+          "name": "table",
+          "parentId": "66d5f44571675b72da8436ce"
+     }
+]

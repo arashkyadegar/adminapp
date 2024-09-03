@@ -4,31 +4,8 @@ import myAppContext from "../context/context";
 
 export default function PcNavbarComponent() {
      const { languageDrpDwnIsOpen, setLanguageDrpDwnIsOpen } = React.useContext(myAppContext);
-
      const { userDrpDwnIsOpen, setUserDrpDwnIsOpen } = React.useContext(myAppContext);
      const { asideToggle, setAsideToggle } = React.useContext(myAppContext);
-     const { asidePostDrpToggle, setAsidePostDrpToggle } = React.useContext(myAppContext);
-     const { asideCellarDrpToggle, setAsideCellarDrpToggle } = React.useContext(myAppContext);
-     const { asideFinancialDrpToggle, setAsideFinancialDrpToggle } = React.useContext(myAppContext);
-
-
-     function togglePostMenu(event: any) {
-          setAsidePostDrpToggle(!asidePostDrpToggle);
-          setAsideCellarDrpToggle(false);
-          setAsideFinancialDrpToggle(false);
-     }
-
-     function toggleCellarMenu(event: any) {
-          setAsideCellarDrpToggle(!asideCellarDrpToggle);
-          setAsidePostDrpToggle(false);
-          setAsideFinancialDrpToggle(false);
-     }
-
-     function toggleFinancialMenu(event: any) {
-          setAsideFinancialDrpToggle(!asideFinancialDrpToggle);
-          setAsideCellarDrpToggle(false);
-          setAsidePostDrpToggle(false);
-     }
 
      function toggleLanguageUserDrpDwn() {
           setUserDrpDwnIsOpen(false);
@@ -184,7 +161,7 @@ export default function PcNavbarComponent() {
                     }}
                     data-collapse-toggle="navbar-sticky"
                     type="button"
-                    className="text-red-600 inline-flex transition-all duration-300 items-center ml-2 w-10 h-10 justify-center text-sm   rounded-lg outline-none "
+                    className="sm:hidden inline-flex transition-all duration-300 items-center ml-2 w-10 h-10 justify-center text-sm   rounded-lg outline-none "
                     aria-controls="navbar-sticky"
                     aria-expanded="false"
                >
