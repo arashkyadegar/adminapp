@@ -32,7 +32,8 @@ export default function PcSidebarComponent() {
           setAsideFinancialDrpToggle(!asideFinancialDrpToggle);
      }
      return (
-          <div className="border-gray-200 border text-sm pt-12 z-40 w-16 absolute h-screen hidden sm:inline-block bg-white  flex-col justify-start  m-1 right-0 ">
+          <div className="border-gray-200 border text-sm  z-40 w-16 absolute h-screen hidden sm:inline-block bg-white  flex-col justify-start  m-1 right-0 ">
+               <img src="/imgs/brands/brand-1.jpg"  />
                {/* صفحه اصلی */}
                <div className="relative flex cursor-pointer rounded-md hover:bg-gray-400 border border-gray-200  text-gray-500 duration-150 flex-col  m-2 h-10 items-center justify-center">
                     <Link to="/dashboard">

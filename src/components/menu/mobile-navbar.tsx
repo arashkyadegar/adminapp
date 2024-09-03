@@ -8,25 +8,13 @@ export default function MobileNavbarComponent() {
   const { asideCellarDrpToggle, setAsideCellarDrpToggle } = React.useContext(myAppContext);
   const { asideFinancialDrpToggle, setAsideFinancialDrpToggle } = React.useContext(myAppContext);
 
-
-  function togglePostMenu(event: any) {
-
-    setAsideCellarDrpToggle(false);
-    setAsideFinancialDrpToggle(false);
-
-  }
-
   function toggleCellarMenu(event: any) {
-
-
     setAsideFinancialDrpToggle(false);
     setAsideCellarDrpToggle(!asideCellarDrpToggle);
   }
 
   function toggleFinancialMenu(event: any) {
-
     setAsideCellarDrpToggle(false);
-
     setAsideFinancialDrpToggle(!asideFinancialDrpToggle);
   }
 
@@ -39,48 +27,20 @@ export default function MobileNavbarComponent() {
       <div
         className={
           asideToggle
-            ? "z-10  sm:hidden absolute bg-white flex flex-col justify-end  m-1  top-0  right-0 transition-all "
-            : "z-10 w-full h-0 flex  bg-white  flex-row  justify-end transition-all "
+            ? "border-gray-200 border z-10  sm:hidden absolute bg-white flex flex-col justify-end  m-1  top-0  right-0 transition-all "
+            : "border-gray-200 border z-10 w-full h-0 flex  bg-white  flex-row  justify-end transition-all "
         }
       >
 
         <div
           className={
             asideToggle
-              ? "border border-blue-400 w-full flex flex-col justify-center  bg-gray-50 sm:bg-transparent top-0"
-              : "border border-blue-400 w-10 h-0 overflow-hidden flex-col bg-gray-50 sm:bg-transparent top-0"
+              ? " w-full flex flex-col justify-center   sm:bg-transparent top-0"
+              : " w-10 h-0 overflow-hidden flex-col  sm:bg-transparent top-0"
           }
         >
-
-          <ul className="space-y-2 font-medium w-full  pt-6 border border-red-400">
-            <li className="">
-              <button type="button" onClick={togglePostMenu} className="flex flex-row-reverse justify-between items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-teal-200 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
-
-                <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
-                </svg>
-                <span className="flex-1 ms-3 mx-4 text-right rtl:text-right whitespace-nowrap">پست</span>
-                <svg className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 21">
-                  <path d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z" />
-                </svg>
-              </button>
-
-              <ul id="dropdown-example" className=" text-sm py-2 space-y-2">
-                <li className="flex items-center justify-end w-full p-2 px-10 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-teal-200 dark:text-white dark:hover:bg-gray-700">
-
-                </li>
-                <li className="flex items-center justify-end w-full p-2 px-10 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-teal-200 dark:text-white dark:hover:bg-gray-700">
-
-                </li>
-                <li className="flex items-center justify-end w-full p-2 px-10 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-teal-200 dark:text-white dark:hover:bg-gray-700">
-
-                </li>
-              </ul>
-
-
-
-            </li>
-
+          <img src="/imgs/brands/brand-1.jpg" />
+          <ul className="space-y-2 font-medium w-full">
             <li>
               <button type="button" onClick={toggleCellarMenu} className="flex flex-row-reverse justify-between items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-teal-200 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                 <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
