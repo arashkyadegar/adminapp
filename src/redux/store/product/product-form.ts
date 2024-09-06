@@ -1,12 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-// Part 1
-export interface PostInitialState {
-     product: number;
-}
-export const initialState: PostInitialState = {
-     product: 0,
-};
 
 // Part 2
 export const productFormSlice = createSlice({
@@ -14,8 +7,6 @@ export const productFormSlice = createSlice({
      initialState: {
           data: {
                _id: "",
-
-               //info
                name: "",
                subCategories: [],
                mainCategory: "",
@@ -26,7 +17,6 @@ export const productFormSlice = createSlice({
                weakPoints: [],
                strongPoints: [],
 
-               //info Err
                nameErr: "",
                subCategoriesErr: "",
                mainCategoryErr: "",
@@ -37,21 +27,18 @@ export const productFormSlice = createSlice({
                weakPointsErr: "",
                strongPointsErr: [],
 
-               //seo
                pageTitle: "",
                pageLink: "",
                desc: "",
                keywords: [],
                tags: [],
 
-               //seoErr
                pageTitleErr: "",
                pageLinkErr: "",
                desErrc: "",
                keywordsErr: "",
                tagsErr: "",
 
-               //sell
                size: "",
                price: 0,
                purchasePrice: 0,
@@ -59,7 +46,6 @@ export const productFormSlice = createSlice({
                stockStatus: "",
                color: "",
 
-               //sellErr
                sizeErr: "",
                priceErr: "",
                purchasePriceErr: "",
@@ -67,7 +53,7 @@ export const productFormSlice = createSlice({
                stockStatusErr: "",
                colorErr: "",
 
-               formIsValid: false,
+               formIsValid: false
 
           },
           isLoading: false,
@@ -78,7 +64,6 @@ export const productFormSlice = createSlice({
                state.data = {
                     _id: "",
 
-                    //info
                     name: "",
                     subCategories: [],
                     mainCategory: "",
@@ -89,7 +74,7 @@ export const productFormSlice = createSlice({
                     weakPoints: [],
                     strongPoints: [],
 
-                    //info Err
+
                     nameErr: "",
                     subCategoriesErr: "",
                     mainCategoryErr: "",
@@ -100,21 +85,20 @@ export const productFormSlice = createSlice({
                     weakPointsErr: "",
                     strongPointsErr: [],
 
-                    //seo
+
                     pageTitle: "",
                     pageLink: "",
                     desc: "",
                     keywords: [],
                     tags: [],
 
-                    //seoErr
+
                     pageTitleErr: "",
                     pageLinkErr: "",
                     desErrc: "",
                     keywordsErr: "",
                     tagsErr: "",
 
-                    //sell
                     size: "",
                     price: 0,
                     purchasePrice: 0,
@@ -122,7 +106,6 @@ export const productFormSlice = createSlice({
                     stockStatus: "",
                     color: "",
 
-                    //sellErr
                     sizeErr: "",
                     priceErr: "",
                     purchasePriceErr: "",
@@ -131,14 +114,13 @@ export const productFormSlice = createSlice({
                     colorErr: "",
 
                     formIsValid: false,
-               },
-                    state.isLoading = false,
-                    state.lastFetch = "";
+               };
+               state.isLoading = false;
+               state.lastFetch = null;
           },
           productFormRequested: (state: any, action: PayloadAction<any>) => {
                state.isLoading = true;
           },
-
           productFormLoadingStoped: (state: any, action: PayloadAction<any>) => {
                state.isLoading = false;
           },
@@ -151,17 +133,31 @@ export const productFormSlice = createSlice({
           productFormFilled: (state: any, action: PayloadAction<any>) => {
                state.data = action.payload;
                state.lastFetch = "";
+          },
+          productFormSubcategoryAdded: (state: any, action: PayloadAction<any>) => {
+               state.data.subCategories = action.payload;
+               state.lastFetch = "";
+          },
+          productFormWeakPointsAdded: (state: any, action: PayloadAction<any>) => {
+               state.data.weakPoints = action.payload;
+               state.lastFetch = "";
+          },
+          productFormStrongPointsAdded: (state: any, action: PayloadAction<any>) => {
+               state.data.strongPoints = action.payload;
+               state.lastFetch = "";
           }
 
-     },
+     }
 });
 
 // action creator
 export const {
+     productFormStrongPointsAdded,
+     productFormWeakPointsAdded,
      productFormRequested,
      productFormLoadingStoped,
      productFormCleared,
      productFormFilled,
-     productFormFetched
-} = productFormSlice.actions;
+     productFormFetched,
+} = productFormSlice.actions
 export default productFormSlice.reducer;

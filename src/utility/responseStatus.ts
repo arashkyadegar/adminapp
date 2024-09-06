@@ -14,4 +14,4 @@ export const ResponseRedirect = () => {
     },
   };
 };
-module.exports = { ResponseStatus };
+export default ResponseStatus;

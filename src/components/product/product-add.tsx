@@ -3,15 +3,146 @@ import LabelComponent from "../share/label";
 import BoxTitleLgComponent from "../share/lg-box-title";
 import 'suneditor/dist/css/suneditor.min.css'
 import Editor from "../share/MyEditor";
+import validator from "validator";
 import LargSubmitbtnComponent from "../share/btn/lg-submit-btn";
 import TagComponent from "../share/tag";
 import ErrComponent from "../share/err";
+import InputBox1Component from "../share/inputBox1";
+import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
+import { rgx_insecure } from "../../utility/regex";
+import { productFormFilled } from "../../redux/store/product/product-form";
 export default function ProductAddComponent() {
-     function onKeyDown(e: any) {
-          console.log(e.key)
-          if (e.key === "Tab") {
-               e.preventDefault();
-               console.log("Tab");
+     const dispatch = useAppDispatch();
+     const productFormState = useAppSelector((state) => state.entities.productForm);
+     function onTagsKeyDown(event: any) {
+          let text: string = event.target.value;
+          if (!validator.isEmpty(text.trim())) {
+               if (event.key === "Tab") {
+                    event.preventDefault();
+                    dispatch(
+                         productFormFilled({
+                              ...productFormState.data,
+                              tags: [...productFormState.data.tags, text]
+                         }))
+               }
+          }
+     }
+     function onKeywordsKeyDown(event: any) {
+          let text: string = event.target.value;
+          if (!validator.isEmpty(text.trim())) {
+               if (event.key === "Tab") {
+                    event.preventDefault();
+                    dispatch(
+                         productFormFilled({
+                              ...productFormState.data,
+                              keywords: [...productFormState.data.keywords, text]
+                         }))
+               }
+          }
+     }
+     function onWeakPointsKeyDown(event: any) {
+          let text: string = event.target.value;
+          if (!validator.isEmpty(text.trim())) {
+               if (event.key === "Tab") {
+                    event.preventDefault();
+                    dispatch(
+                         productFormFilled({
+                              ...productFormState.data,
+                              weakPoints: [...productFormState.data.weakPoints, text]
+                         }))
+               }
+          }
+     }
+     function onStrongPointsKeyDown(event: any) {
+          let text: string = event.target.value;
+          if (!validator.isEmpty(text.trim())) {
+               if (event.key === "Tab") {
+                    event.preventDefault();
+                    dispatch(
+                         productFormFilled({
+                              ...productFormState.data,
+                              strongPoints: [...productFormState.data.strongPoints, text]
+                         }))
+               }
+          }
+     }
+     function onSubCategoriesKeyDown(event: any) {
+          let text: string = event.target.value;
+          if (!validator.isEmpty(text.trim())) {
+               if (event.key === "Tab") {
+                    event.preventDefault();
+                    console.log("Tab");
+                    console.log(text);
+                    dispatch(
+                         productFormFilled({
+                              ...productFormState.data,
+                              subCategories: [...productFormState.data.subCategories, text]
+                         }))
+               }
+          }
+     }
+
+     function fillProductName(event: any) {
+          let text: string = event.target.value;
+          if (validator.isEmpty(text)) {
+               dispatch(
+                    productFormFilled({
+                         ...productFormState.data,
+                         nameErr: "لطفا نام محصول را وارد کنید",
+                         formIsValid: false,
+                         name: text,
+                    })
+               );
+          } else if (validator.matches(text, rgx_insecure)) {
+               dispatch(
+                    productFormFilled({
+                         ...productFormState.data,
+                         nameErr: "لطفا کارکترهای غیرمجاز وارد نکنید",
+                         formIsValid: false,
+                         name: text,
+                    })
+               );
+          } else {
+               dispatch(
+                    productFormFilled({
+                         ...productFormState.data,
+                         nameErr: "",
+                         name: text,
+                         formIsValid: true,
+                    })
+               );
+          }
+     }
+
+     function fillProductShortDesc(event: any) {
+          let text: string = event.target.value;
+          if (validator.isEmpty(text)) {
+               dispatch(
+                    productFormFilled({
+                         ...productFormState.data,
+                         shortDescErr: "لطفا توضیحات کوتاه محصول را وارد کنید",
+                         formIsValid: false,
+                         shortDesc: text,
+                    })
+               );
+          } else if (validator.matches(text, rgx_insecure)) {
+               dispatch(
+                    productFormFilled({
+                         ...productFormState.data,
+                         shortDescErr: "لطفا کارکترهای غیرمجاز وارد نکنید",
+                         formIsValid: false,
+                         shortDesc: text,
+                    })
+               );
+          } else {
+               dispatch(
+                    productFormFilled({
+                         ...productFormState.data,
+                         shortDescErr: "",
+                         shortDesc: text,
+                         formIsValid: true,
+                    })
+               );
           }
      }
      return (
@@ -23,197 +154,220 @@ export default function ProductAddComponent() {
                               <div className="flex flex-col w-full bg-white  border border-gray-200">
                                    <BoxTitleUnderlineComponent title="اطلاعات اصلی" />
                                    <div className="p-4">
-
                                         <div className="mb-4">
-                                             <LabelComponent title="عنوان محصول" required="true" />
-                                             <div className="flex w-full flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                                  <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
-                                             </div>
+                                             <LabelComponent name="name" title="عنوان محصول" required="true" />
+                                             <InputBox1Component
+                                                  name="name"
+                                                  value={productFormState.data.name}
+                                                  onchangeFunc={fillProductName}
+                                             />
+                                             <ErrComponent text={productFormState.data.nameErr} />
                                         </div>
                                         <div className="mb-4">
                                              <LabelComponent title="زیر مجموعه" />
 
                                              <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
                                                   <div className="w-full">
-                                                       <input type="text" onKeyDown={onKeyDown} className=" w-full  bg-gray-100  text-gray-900 text-sm  block  p-2.5     outline-none" />
+                                                       <input type="text" onKeyDown={onSubCategoriesKeyDown} className=" w-full  bg-gray-100  text-gray-900 text-sm  block  p-2.5     outline-none" />
                                                   </div>
-                                                  <div className="grid grid-cols-4 justify-start items-start">
-                                                       <TagComponent title="متن نمونه" />
-                                                       <TagComponent title="متن نمونه خیلی خیلی زیاد نمونه" />
+                                                  <div className="grid grid-cols-4 w-full justify-start items-start">
+                                                       {productFormState.data.subCategories.map((item: any) => (
+                                                            <TagComponent title={item} />
+                                                       ))}
                                                   </div>
 
                                              </div>
                                         </div>
                                         <div className="mb-4">
-                                             <LabelComponent title="زیر مجموعه اصلی"  required="true" />
+                                             <LabelComponent title="زیر مجموعه اصلی" required="true" />
 
                                              <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
                                                   <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
                                              </div>       </div>
-                                  
-                                   <div className="mb-4">
-                                        <LabelComponent title="برند"  required="true" />
 
-                                        <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                             <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
-                                        </div>
+                                        <div className="mb-4">
+                                             <LabelComponent title="برند" />
+                                             <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
 
-                                   </div>
-                                   <div className="mb-4">
-                                        <LabelComponent title="تصاویر محصول"  />
+                                                  <select id="countries" className="bg-gray-100 border
+                                              border-gray-100 text-gray-900 text-sm rounded-lg  block  p-2.5
+                                              w-full    outline-non">
+                                                       <option value="0">همه دسته ها</option>
+                                                       <option value="">الکترونیک</option>
+                                                       <option value="">لباس</option>
+                                                       <option value="">خودرو</option>
+                                                  </select>
 
-                                        <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                             <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
-                                        </div>
-                                   </div>
-                                   <div className="mb-4">
-                                        <LabelComponent title="توضیح کوتاه"  required="true" />
-
-                                        <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                             <textarea name="desc" rows={5} id="desc"
-                                                  // onChange={fillProductDesc}
-                                                  // value={productFormState.data.desc}
-                                                  className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none"></textarea>
-                                        </div>
-                                   </div>
-                                   <div className="mb-4">
-                                        <LabelComponent title="نقاط قوت"   required="true"/>
-
-                                        <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                             <div className="w-full">
-                                                  <input type="text" className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
-                                             </div>
-                                             <div className="grid grid-cols-4 justify-start items-start w-full">
-                                                  <TagComponent title="متن نمونه" />
-                                                  <TagComponent title="متن نمونه خیلی خیلی زیاد نمونه" />
                                              </div>
                                         </div>
-                                   </div>
-                                   <div className="mb-4">
-                                        <LabelComponent title="نقاط ضعف"  required="true" />
+                                        <div className="mb-4">
+                                             <LabelComponent title="تصاویر محصول" />
 
-                                        <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                             <div className="w-full">
-                                                  <input type="text" className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
-                                             </div>
-                                             <div className="grid grid-cols-4 justify-start items-start w-full">
-                                                  <TagComponent title="متن نمونه" />
-                                                  <TagComponent title="متن نمونه خیلی خیلی زیاد نمونه" />
+                                             <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                                  <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
                                              </div>
                                         </div>
+                                        <div className="mb-4">
+                                             <LabelComponent title="توضیح کوتاه" required="true" />
+
+                                             <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                                  <textarea name="desc" rows={5} id="desc"
+                                                       onChange={fillProductShortDesc}
+                                                       value={productFormState.data.shortDesc}
+                                                       className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none"></textarea>
+                                             </div>
+                                             <ErrComponent text={productFormState.data.shortDescErr} />
+
+                                        </div>
+                                        <div className="mb-4">
+                                             <LabelComponent title="نقاط قوت" required="true" />
+
+                                             <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                                  <div className="w-full">
+                                                       <input type="text" onKeyDown={onStrongPointsKeyDown} className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
+                                                  </div>
+                                                  <div className="grid grid-cols-4 justify-start items-start w-full">
+                                                       {productFormState.data.strongPoints.map((item: any) => (
+                                                            <TagComponent title={item} />
+                                                       ))}
+                                                  </div>
+                                             </div>
+                                        </div>
+                                        <div className="mb-4">
+                                             <LabelComponent title="نقاط ضعف" required="true" />
+
+                                             <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                                  <div className="w-full">
+                                                       <input type="text" onKeyDown={onWeakPointsKeyDown} className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
+                                                  </div>
+                                                  <div className="grid grid-cols-4 justify-start items-start w-full">
+                                                       {productFormState.data.weakPoints.map((item: any) => (
+                                                            <TagComponent title={item} />
+                                                       ))}
+                                                  </div>
+                                             </div>
+                                        </div>
+                                        <div className="mb-4">
+                                             <LabelComponent title="توضیحات محصول" />
+                                             <Editor onSave={() => { }} />
+                                        </div>
                                    </div>
-                                   <div className="mb-4">
-                                        <LabelComponent title="توضیحات محصول" />
-                                        <Editor onSave={() => { }} />
+                                   <div className="flex w-full flex-col  gap-4  border border-gray-200">
+
                                    </div>
-                              </div>
-                              <div className="flex w-full flex-col  gap-4  border border-gray-200">
 
                               </div>
 
                          </div>
+                         <div className="flex w-full sm:w-3/4 flex-col  gap-4  border border-gray-200">
+                              <div className="flex flex-col w-full bg-white  border border-gray-200">
+                                   <BoxTitleUnderlineComponent title="Seo" />
+                                   <div className="p-4">
+                                        <div className="mb-4">
+                                             <LabelComponent title="عنوان در صفحه" required="true" />
+                                             <div className="flex w-full flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                                  <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
+                                             </div>
+                                             <ErrComponent text="توضیحات" />
+                                        </div>
+
+
+                                        <div className="mb-4">
+                                             <LabelComponent title="عنوان لینک" required="true" />
+
+                                             <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                                  <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
+                                             </div>
+                                             <ErrComponent text="توضیحات" />
+                                        </div>
+
+                                        <div className="mb-4">
+                                             <LabelComponent title="توضیحات" required="true" />
+                                             <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                                  <textarea name="desc" rows={5} id="desc"
+                                                       // onChange={fillProductDesc}
+                                                       // value={productFormState.data.desc}
+                                                       className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none"></textarea>
+                                             </div>
+                                             <ErrComponent text="توضیحات" />
+                                        </div>
+
+                                        <div className="mb-4">
+                                             <LabelComponent title="کلمات کلیدی" />
+                                             <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+
+                                                  <div className="w-full">
+                                                       <input type="text" onKeyDown={onKeywordsKeyDown} className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
+                                                  </div>
+                                                  <div className="grid grid-cols-4 justify-start items-start w-full">
+                                                       {productFormState.data.keywords.map((item: any) => (
+                                                            <TagComponent title={item} />
+                                                       ))}
+                                                  </div>
+                                             </div>
+                                        </div>
+
+                                        <div className="mb-4">
+                                             <LabelComponent title="برچسب ها" />
+                                             <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                                  <div className="w-full">
+                                                       <input type="text" onKeyDown={onTagsKeyDown} className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
+                                                  </div>
+                                                  <div className="grid grid-cols-4 justify-start items-start w-full">
+                                                       {productFormState.data.tags.map((item: any) => (
+                                                            <TagComponent title={item} />
+                                                       ))}
+                                                  </div>
+                                             </div>
+                                        </div>
+                                   </div>
+                              </div>
+
+                              <div className="flex flex-col w-full bg-white  border border-gray-200">
+                                   <BoxTitleUnderlineComponent title="فروش" />
+                                   <div className="p-4">
+                                        <div className="mb-4">
+                                             <LabelComponent title="قیمت" required="true" />
+                                             <div className="flex w-full flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                                  <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
+
+                                             </div>   <ErrComponent text="توضیحات" />     </div>
+                                        <div className="mb-4">
+                                             <LabelComponent title="قیمت فروش" required="true" />
+                                             <div className="flex w-full flex-col gap-2 justify-end items-start bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                                  <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
+
+                                             </div>   <ErrComponent text="توضیحات" />    </div>
+                                        <div className="mb-4">
+                                             <LabelComponent title="سایز" required="true" />
+                                             <div className="flex w-full flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                                  <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
+
+                                             </div>   <ErrComponent text="توضیحات" />    </div>
+                                        <div className="mb-4">
+                                             <LabelComponent title="موجودی" required="true" />
+                                             <div className="flex w-full flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                                  <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
+
+                                             </div>    <ErrComponent text="توضیحات" />    </div>
+                                        <div className="mb-4">
+                                             <LabelComponent title="رنگ" />
+                                             <div className="flex w-full flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                                  <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
+                                             </div>       </div>
+                                   </div>
+                              </div>
+                         </div>
+
 
                     </div>
-                    <div className="flex w-full sm:w-3/4 flex-col  gap-4  border border-gray-200">
-                         <div className="flex flex-col w-full bg-white  border border-gray-200">
-                              <BoxTitleUnderlineComponent title="Seo" />
-                              <div className="p-4">
-                                   <div className="mb-4">
-                                        <LabelComponent title="عنوان در صفحه" required="true" />
-                                        <div className="flex w-full flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                             <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
-                                        </div>
-                                        <ErrComponent text="توضیحات" />
-                                   </div>
 
 
-                                   <div className="mb-4">
-                                        <LabelComponent title="عنوان لینک" required="true" />
 
-                                        <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                             <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
-                                        </div>
-                                        <ErrComponent text="توضیحات" />
-                                   </div>
-
-                                   <div className="mb-4">
-                                        <LabelComponent title="توضیحات" required="true" />
-                                        <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                             <textarea name="desc" rows={5} id="desc"
-                                                  // onChange={fillProductDesc}
-                                                  // value={productFormState.data.desc}
-                                                  className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none"></textarea>
-                                        </div>
-                                        <ErrComponent text="توضیحات" />
-                                   </div>
-
-                                   <div className="mb-4">
-                                        <LabelComponent title="کلمات کلیدی" />
-                                        <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                             <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
-                                        </div>
-                                   </div>
-
-                                   <div className="mb-4">
-                                        <LabelComponent title="برچسب ها" />
-                                        <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                             <div className="w-full">
-                                                  <input type="text" className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
-                                             </div>
-                                             <div className="grid grid-cols-4 justify-start items-start">
-                                                  <TagComponent title="متن نمونه" />
-                                                  <TagComponent title="متن نمونه خیلی خیلی زیاد نمونه" />
-                                             </div>
-                                        </div>
-                                   </div>
-                              </div>
-                         </div>
-
-                         <div className="flex flex-col w-full bg-white  border border-gray-200">
-                              <BoxTitleUnderlineComponent title="فروش" />
-                              <div className="p-4">
-                                   <div className="mb-4">
-                                        <LabelComponent title="قیمت" required="true" />
-                                        <div className="flex w-full flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                             <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
-
-                                        </div>   <ErrComponent text="توضیحات" />     </div>
-                                   <div className="mb-4">
-                                        <LabelComponent title="قیمت فروش" required="true" />
-                                        <div className="flex w-full flex-col gap-2 justify-end items-start bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                             <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
-
-                                        </div>   <ErrComponent text="توضیحات" />    </div>
-                                   <div className="mb-4">
-                                        <LabelComponent title="سایز" required="true" />
-                                        <div className="flex w-full flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                             <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
-
-                                        </div>   <ErrComponent text="توضیحات" />    </div>
-                                   <div className="mb-4">
-                                        <LabelComponent title="موجودی" required="true" />
-                                        <div className="flex w-full flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                             <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
-
-                                        </div>    <ErrComponent text="توضیحات" />    </div>
-                                   <div className="mb-4">
-                                        <LabelComponent title="رنگ" />
-                                        <div className="flex w-full flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                             <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
-                                        </div>       </div>
-                              </div>
-                         </div>
+                    <div className="flex flex-col justify-start items-end">
+                         <LargSubmitbtnComponent title="ثبت دسته بندی" />
                     </div>
-
-
                </div>
-
-
-
-               <div className="flex flex-col justify-start items-end">
-                    <LargSubmitbtnComponent title="ثبت دسته بندی" />
-               </div>
-          </div>
           </div >
      )
 }

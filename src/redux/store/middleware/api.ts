@@ -1,4 +1,3 @@
-import { toast } from "react-toastify";
 import * as actions from "../api";
 import { ResponseStatus } from "../../../utility/responseStatus";
 import { ToastAuthFail, ToastFail, ToastSuccess } from "../../../utility/tostify";

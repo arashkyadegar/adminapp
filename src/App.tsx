@@ -13,9 +13,12 @@ import ProductAddComponent from './components/product/product-add';
 import DashboardComponent from './components/dashboard';
 import OrderAddComponent from './components/order/order-add';
 import OrderListComponent from './components/order/order-list';
+import { makeStore } from "./redux/store/store";
+import { Provider } from 'react-redux';
+import { initialState } from './redux/store/product/products';
 
 function App() {
-  
+
 
   const [languageDrpDwnIsOpen, setLanguageDrpDwnIsOpen] = useState(false);
   const [userDrpDwnIsOpen, setUserDrpDwnIsOpen] = useState(false);
@@ -29,6 +32,8 @@ function App() {
   const [drpDwnIsOpen, setDrpDwnIsOpen] = useState(false);
   const [storeUserLinkDlgShow, setStoreUserLinkDlgShow] = useState(false);
   const [navbarShow, setNavbarShow] = useState(false);
+
+  const store = makeStore();
   return (
     <myAppContext.Provider
       value={{
@@ -59,36 +64,38 @@ function App() {
         setNavbarShow,
       }}
     >
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" >
-            <Route path="/login" element={<LoginComponent />} />
-          </Route>
-          <Route path="/" element={<Layout />}>
-            {/* <Route index element={<LandingPageComponent />} /> */}
-            {/* <Route path="login" element={<LoginComponent />} /> */}
-            <Route path="dashboard" element={<DashboardComponent />} />
+      <Provider store={store}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" >
+              <Route path="/login" element={<LoginComponent />} />
+            </Route>
+            <Route path="/" element={<Layout />}>
+              {/* <Route index element={<LandingPageComponent />} /> */}
+              {/* <Route path="login" element={<LoginComponent />} /> */}
+              <Route path="dashboard" element={<DashboardComponent />} />
 
 
-            <Route path="product/product-add" element={<ProductAddComponent />} />
-            <Route path="product/product-list" element={<ProductListComponent />} />
-            <Route path="product/product-edit/:id" element={<ProductEditComponent />} />
+              <Route path="product/product-add" element={<ProductAddComponent />} />
+              <Route path="product/product-list" element={<ProductListComponent />} />
+              <Route path="product/product-edit/:id" element={<ProductEditComponent />} />
 
 
-            <Route path="category/category-add" element={<CategoryAddComponent />} />
-            <Route path="category/category-list" element={<CategoryListComponent />} />
-            <Route path="category/category-edit/:id" element={<CategoryEditComponent />} />
+              <Route path="category/category-add" element={<CategoryAddComponent />} />
+              <Route path="category/category-list" element={<CategoryListComponent />} />
+              <Route path="category/category-edit/:id" element={<CategoryEditComponent />} />
 
-            <Route path="order/order-add" element={<OrderAddComponent />} />
-            <Route path="order/order-list" element={<OrderListComponent />} />
+              <Route path="order/order-add" element={<OrderAddComponent />} />
+              <Route path="order/order-list" element={<OrderListComponent />} />
 
 
-            {/* <Route path="category-list" element={<CategoryList />} />
+              {/* <Route path="category-list" element={<CategoryList />} />
           <Route path="category-edit/:id" element={<CategoryEdit />} /> */}
-            {/*<Route path="direct" element={<DirectMsgComponent />} /> */}
-          </Route>
-        </Routes>
-      </BrowserRouter>
+              {/*<Route path="direct" element={<DirectMsgComponent />} /> */}
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </Provider>
     </myAppContext.Provider>
   );
 }
