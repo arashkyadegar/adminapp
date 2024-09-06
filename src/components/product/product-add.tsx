@@ -23,41 +23,51 @@ export default function ProductAddComponent() {
                               <div className="flex flex-col w-full bg-white  border border-gray-200">
                                    <BoxTitleUnderlineComponent title="اطلاعات اصلی" />
                                    <div className="p-4">
-                                        <LabelComponent title="عنوان محصول" />
-                                        <div className="flex w-full flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                             <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
-                                        </div>
 
-                                        <LabelComponent title="زیر مجموعه" />
-
-                                        <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                             <div className="w-full">
-                                                  <input type="text" onKeyDown={onKeyDown} className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
+                                        <div className="mb-4">
+                                             <LabelComponent title="عنوان محصول" required="true" />
+                                             <div className="flex w-full flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                                  <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
                                              </div>
-                                             <div className="grid grid-cols-4 justify-start items-start">
-                                                  <TagComponent title="متن نمونه" />
-                                                  <TagComponent title="متن نمونه خیلی خیلی زیاد نمونه" />
+                                        </div>
+                                        <div className="mb-4">
+                                             <LabelComponent title="زیر مجموعه" />
+
+                                             <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                                  <div className="w-full">
+                                                       <input type="text" onKeyDown={onKeyDown} className=" w-full  bg-gray-100  text-gray-900 text-sm  block  p-2.5     outline-none" />
+                                                  </div>
+                                                  <div className="grid grid-cols-4 justify-start items-start">
+                                                       <TagComponent title="متن نمونه" />
+                                                       <TagComponent title="متن نمونه خیلی خیلی زیاد نمونه" />
+                                                  </div>
+
                                              </div>
-
-
                                         </div>
-                                        <LabelComponent title="زیر مجموعه اصلی" />
+                                        <div className="mb-4">
+                                             <LabelComponent title="زیر مجموعه اصلی"  required="true" />
 
-                                        <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                             <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
-                                        </div>
-                                        <LabelComponent title="برند" />
-
-                                        <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                             <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
-                                        </div>
-                                        <LabelComponent title="تصاویر محصول" />
+                                             <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                                  <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
+                                             </div>       </div>
+                                  
+                                   <div className="mb-4">
+                                        <LabelComponent title="برند"  required="true" />
 
                                         <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
                                              <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
                                         </div>
 
-                                        <LabelComponent title="توضیح کوتاه" />
+                                   </div>
+                                   <div className="mb-4">
+                                        <LabelComponent title="تصاویر محصول"  />
+
+                                        <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                             <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
+                                        </div>
+                                   </div>
+                                   <div className="mb-4">
+                                        <LabelComponent title="توضیح کوتاه"  required="true" />
 
                                         <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
                                              <textarea name="desc" rows={5} id="desc"
@@ -65,72 +75,87 @@ export default function ProductAddComponent() {
                                                   // value={productFormState.data.desc}
                                                   className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none"></textarea>
                                         </div>
-
-                                        <LabelComponent title="نقاط قوت" />
-
-                                        <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                             <div className="w-full">
-                                                  <input type="text" className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
-                                             </div>
-                                             <div className="grid grid-cols-2 justify-start items-start w-full">
-                                                  <TagComponent title="متن نمونه" />
-                                                  <TagComponent title="متن نمونه خیلی خیلی زیاد نمونه" />
-                                             </div>
-                                        </div>
-
-                                        <LabelComponent title="نقاط ضعف" />
+                                   </div>
+                                   <div className="mb-4">
+                                        <LabelComponent title="نقاط قوت"   required="true"/>
 
                                         <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
                                              <div className="w-full">
                                                   <input type="text" className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
                                              </div>
-                                             <div className="grid grid-cols-2 justify-start items-start w-full">
+                                             <div className="grid grid-cols-4 justify-start items-start w-full">
                                                   <TagComponent title="متن نمونه" />
                                                   <TagComponent title="متن نمونه خیلی خیلی زیاد نمونه" />
                                              </div>
                                         </div>
+                                   </div>
+                                   <div className="mb-4">
+                                        <LabelComponent title="نقاط ضعف"  required="true" />
 
+                                        <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                             <div className="w-full">
+                                                  <input type="text" className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
+                                             </div>
+                                             <div className="grid grid-cols-4 justify-start items-start w-full">
+                                                  <TagComponent title="متن نمونه" />
+                                                  <TagComponent title="متن نمونه خیلی خیلی زیاد نمونه" />
+                                             </div>
+                                        </div>
+                                   </div>
+                                   <div className="mb-4">
                                         <LabelComponent title="توضیحات محصول" />
                                         <Editor onSave={() => { }} />
                                    </div>
-                                   <div className="flex w-full flex-col  gap-4  border border-gray-200">
-
-                                   </div>
+                              </div>
+                              <div className="flex w-full flex-col  gap-4  border border-gray-200">
 
                               </div>
 
                          </div>
-                         <div className="flex w-full sm:w-3/4 flex-col  gap-4  border border-gray-200">
-                              <div className="flex flex-col w-full bg-white  border border-gray-200">
-                                   <BoxTitleUnderlineComponent title="Seo" />
-                                   <div className="p-4">
-                                        <LabelComponent title="عنوان در صفحه" />
+
+                    </div>
+                    <div className="flex w-full sm:w-3/4 flex-col  gap-4  border border-gray-200">
+                         <div className="flex flex-col w-full bg-white  border border-gray-200">
+                              <BoxTitleUnderlineComponent title="Seo" />
+                              <div className="p-4">
+                                   <div className="mb-4">
+                                        <LabelComponent title="عنوان در صفحه" required="true" />
                                         <div className="flex w-full flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
                                              <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
                                         </div>
-                                        <LabelComponent title="عنوان لینک" />
+                                        <ErrComponent text="توضیحات" />
+                                   </div>
+
+
+                                   <div className="mb-4">
+                                        <LabelComponent title="عنوان لینک" required="true" />
 
                                         <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
                                              <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
                                         </div>
                                         <ErrComponent text="توضیحات" />
-                                        <LabelComponent title="توضیحات" />
+                                   </div>
 
+                                   <div className="mb-4">
+                                        <LabelComponent title="توضیحات" required="true" />
                                         <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
                                              <textarea name="desc" rows={5} id="desc"
                                                   // onChange={fillProductDesc}
                                                   // value={productFormState.data.desc}
                                                   className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none"></textarea>
                                         </div>
+                                        <ErrComponent text="توضیحات" />
+                                   </div>
 
+                                   <div className="mb-4">
                                         <LabelComponent title="کلمات کلیدی" />
-
                                         <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
                                              <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
                                         </div>
+                                   </div>
 
+                                   <div className="mb-4">
                                         <LabelComponent title="برچسب ها" />
-
                                         <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
                                              <div className="w-full">
                                                   <input type="text" className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
@@ -139,51 +164,56 @@ export default function ProductAddComponent() {
                                                   <TagComponent title="متن نمونه" />
                                                   <TagComponent title="متن نمونه خیلی خیلی زیاد نمونه" />
                                              </div>
-
-
-                                        </div>
-                                   </div>
-                              </div>
-
-                              <div className="flex flex-col w-full bg-white  border border-gray-200">
-                                   <BoxTitleUnderlineComponent title="فروش" />
-                                   <div className="p-4">
-                                        <LabelComponent title="قیمت" />
-                                        <div className="flex w-full flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                             <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
-                                        </div>
-
-                                        <LabelComponent title="قیمت فروش" />
-                                        <div className="flex w-full flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                             <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
-                                        </div>
-                                        <LabelComponent title="سایز" />
-                                        <div className="flex w-full flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                             <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
-                                        </div>
-
-                                        <LabelComponent title="موجودی" />
-                                        <div className="flex w-full flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                             <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
-                                        </div>
-
-                                        <LabelComponent title="رنگ" />
-                                        <div className="flex w-full flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                             <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
                                         </div>
                                    </div>
                               </div>
                          </div>
 
+                         <div className="flex flex-col w-full bg-white  border border-gray-200">
+                              <BoxTitleUnderlineComponent title="فروش" />
+                              <div className="p-4">
+                                   <div className="mb-4">
+                                        <LabelComponent title="قیمت" required="true" />
+                                        <div className="flex w-full flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                             <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
 
+                                        </div>   <ErrComponent text="توضیحات" />     </div>
+                                   <div className="mb-4">
+                                        <LabelComponent title="قیمت فروش" required="true" />
+                                        <div className="flex w-full flex-col gap-2 justify-end items-start bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                             <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
+
+                                        </div>   <ErrComponent text="توضیحات" />    </div>
+                                   <div className="mb-4">
+                                        <LabelComponent title="سایز" required="true" />
+                                        <div className="flex w-full flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                             <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
+
+                                        </div>   <ErrComponent text="توضیحات" />    </div>
+                                   <div className="mb-4">
+                                        <LabelComponent title="موجودی" required="true" />
+                                        <div className="flex w-full flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                             <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
+
+                                        </div>    <ErrComponent text="توضیحات" />    </div>
+                                   <div className="mb-4">
+                                        <LabelComponent title="رنگ" />
+                                        <div className="flex w-full flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                             <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
+                                        </div>       </div>
+                              </div>
+                         </div>
                     </div>
 
 
+               </div>
 
-                    <div className="flex flex-col justify-start items-end">
-                         <LargSubmitbtnComponent title="ثبت دسته بندی" />
-                    </div>
+
+
+               <div className="flex flex-col justify-start items-end">
+                    <LargSubmitbtnComponent title="ثبت دسته بندی" />
                </div>
           </div>
+          </div >
      )
 }
