@@ -100,9 +100,6 @@ export default function CategoryAddComponent() {
                                         </div>
                                    </div>
                               </div>
-
-
-
                          </div>
                     </div>
                     <div className="flex flex-col justify-start items-end">
