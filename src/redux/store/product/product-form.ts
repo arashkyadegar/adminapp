@@ -35,7 +35,7 @@ export const productFormSlice = createSlice({
 
                pageTitleErr: "",
                pageLinkErr: "",
-               desErrc: "",
+               descErr: "",
                keywordsErr: "",
                tagsErr: "",
 
@@ -43,15 +43,15 @@ export const productFormSlice = createSlice({
                price: 0,
                purchasePrice: 0,
                weight: "",
-               stockStatus: "",
-               color: "",
+               stock: "",
+               colors: [],
 
                sizeErr: "",
                priceErr: "",
                purchasePriceErr: "",
                weightErr: "",
-               stockStatusErr: "",
-               colorErr: "",
+               stockErr: "",
+               colorsErr: "",
 
                formIsValid: false
 
@@ -95,7 +95,7 @@ export const productFormSlice = createSlice({
 
                     pageTitleErr: "",
                     pageLinkErr: "",
-                    desErrc: "",
+                    descErr: "",
                     keywordsErr: "",
                     tagsErr: "",
 
@@ -103,15 +103,15 @@ export const productFormSlice = createSlice({
                     price: 0,
                     purchasePrice: 0,
                     weight: "",
-                    stockStatus: "",
-                    color: "",
+                    stock: "",
+                    colors: [],
 
                     sizeErr: "",
                     priceErr: "",
                     purchasePriceErr: "",
                     weightErr: "",
-                    stockStatusErr: "",
-                    colorErr: "",
+                    stockErr: "",
+                    colorsErr: "",
 
                     formIsValid: false,
                };

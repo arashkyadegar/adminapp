@@ -2,6 +2,7 @@ import React, { Component, createRef } from "react";
 import suneditor from "suneditor";
 import { en } from "suneditor/src/lang";
 import plugins from "suneditor/src/plugins";
+import SunEditorCore from "suneditor/src/lib/core";
 // import codeMirror from "codemirror";
 import katex from "katex";
 
@@ -20,7 +21,7 @@ interface State {
 class Editor extends Component<Props, State> {
     txtArea: any;
     editor: any;
-        
+
     constructor(props: any) {
         super(props);
         this.txtArea = createRef();
@@ -28,7 +29,7 @@ class Editor extends Component<Props, State> {
             imageList: [],
             selectedImages: [],
             imageSize: "0KB",
-          };
+        };
     }
 
     componentDidMount() {
@@ -60,10 +61,10 @@ class Editor extends Component<Props, State> {
                 ['removeFormat'],
                 ['outdent', 'indent'],
                 ['align', 'horizontalRule', 'list', 'lineHeight'],
-               //  ['table', 'link', 'image', 'video'],
+                //  ['table', 'link', 'image', 'video'],
                 ['fullScreen', 'showBlocks', 'codeView'],
                 ['preview'],
-               //  ['save'],
+                //  ['save'],
                 // responsive
                 ['%1161', [
                     ['undo', 'redo'],
@@ -130,7 +131,9 @@ class Editor extends Component<Props, State> {
         editor.onImageUpload = this.imageUpload.bind(this);
         // editor.onVideoUpload = videoUpload;
     }
-
+    getSunEditorInstance = (sunEditor: SunEditorCore) => {
+        this.editor.current = sunEditor;
+    }
     componentDidUpdate(prevProps: any) {
         if (this.props.contents !== prevProps.contents) {
             this.editor.setContents(this.props.contents);
@@ -145,7 +148,7 @@ class Editor extends Component<Props, State> {
     // image, video
     findIndex(arr: any[], index: number) {
         let idx = -1;
-    
+
         arr.some(function (a, i) {
             if ((typeof a === 'number' ? a : a.index) === index) {
                 idx = i;
@@ -153,10 +156,10 @@ class Editor extends Component<Props, State> {
             }
             return false;
         })
-    
+
         return idx;
     }
-    
+
     imageUpload(targetElement: Element, index: number, state: string, imageInfo: Record<string, string>, remainingFilesCount: number) {
         if (state === 'delete') {
             this.state.imageList.splice(this.findIndex(this.state.imageList, index), 1)
@@ -181,7 +184,7 @@ class Editor extends Component<Props, State> {
     }
 
     setImageList() {
-        const imageList = this.state.imageList;    
+        const imageList = this.state.imageList;
         let size = 0;
 
         for (let i = 0; i < imageList.length; i++) {

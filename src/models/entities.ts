@@ -1,6 +1,6 @@
 export class ProductEntity {
      _id: string = "";
-     
+
      //info
      name: string = "";
      subCategories: string[] = [];
@@ -24,8 +24,8 @@ export class ProductEntity {
      price: number = 0;
      purchasePrice: number = 0;
      weight: string = "";
-     stockStatus: string = "";
-     color: string = "";
+     stock: string = "";
+     color: string[] = [];
 
      userId: string = "";
      createdAt!: Date;
