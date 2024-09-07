@@ -7,7 +7,7 @@ const api =
   async (action: any) => {
     if (action.type !== actions.apiCallBegan.type) return next(action);
     next(action);
-    const baseURL = process.env.NEXT_PUBLIC_BASEURL;
+    const baseURL = process.env.REACT_APP_BASEURL;
     const {
       url,
       method,

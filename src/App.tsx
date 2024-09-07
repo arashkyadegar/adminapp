@@ -15,7 +15,8 @@ import OrderAddComponent from './components/order/order-add';
 import OrderListComponent from './components/order/order-list';
 import { makeStore } from "./redux/store/store";
 import { Provider } from 'react-redux';
-import { initialState } from './redux/store/product/products';
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from 'react-toastify';
 
 function App() {
 
@@ -65,6 +66,7 @@ function App() {
       }}
     >
       <Provider store={store}>
+        <ToastContainer />
         <BrowserRouter>
           <Routes>
             <Route path="/" >

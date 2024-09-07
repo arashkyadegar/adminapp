@@ -15,8 +15,16 @@ import SunEditor from 'suneditor-react';
 import SunEditorCore from "suneditor/src/lib/core";
 import 'suneditor/dist/css/suneditor.min.css';
 import { useRef } from "react";
+import { getDefaultImageAvator } from "../../utility/imageUtility";
+import ResponseStatus from "../../utility/responseStatus";
+import { ToastAuthFail, ToastFail, ToastSuccess } from "../../utility/tostify";
+import { FileService } from "../../services/fileService";
+import LgSubmitbtnComponent from "../share/btn/lg-submit-btn";
+import { submitAddProductAction } from "../../redux/store/product/product-action";
+import Loading from "../share/loading";
 
 export default function ProductAddComponent() {
+     const formdata2 = new FormData();
      const editorRef = useRef<SunEditorCore>();
      // The sunEditor parameter will be set to the core suneditor instance when this function is called
      const getSunEditorInstance = (sunEditor: SunEditorCore) => {
@@ -329,6 +337,37 @@ export default function ProductAddComponent() {
 
           }
      }
+     function fillProductWeight(event: any) {
+          let text: string = event.target.value;
+          if (validator.isEmpty(text)) {
+               dispatch(
+                    productFormFilled({
+                         ...productFormState.data,
+                         weightErr: "لطفا وزن محصول را وارد کنید",
+                         formIsValid: false,
+                         weight: text,
+                    })
+               );
+          } else if (validator.matches(text, rgx_insecure)) {
+               dispatch(
+                    productFormFilled({
+                         ...productFormState.data,
+                         weightErr: "لطفا کارکترهای غیرمجاز وارد نکنید",
+                         formIsValid: false,
+                         weight: text,
+                    })
+               );
+          } else {
+               dispatch(
+                    productFormFilled({
+                         ...productFormState.data,
+                         weightErr: "",
+                         weight: text,
+                         formIsValid: true,
+                    })
+               );
+          }
+     }
      function fillProductStock(event: any) {
           let text: string = event.target.value;
           if (validator.isEmpty(text)) {
@@ -391,11 +430,135 @@ export default function ProductAddComponent() {
                );
           }
      }
+     function selectProductCategoryId(event: any) {
+          const text = event.target.value
+          if (text == 11) {
+               dispatch(
+                    productFormFilled({
+                         ...productFormState.data,
+                         categoryIdErr: "لطفا زیر مجموعه اصلی کالا را انتخاب کنید",
+                         formIsValid: false,
+                         categoryId: text,
+                    })
+               );
+
+
+          } else {
+               dispatch(
+                    productFormFilled({
+                         ...productFormState.data,
+                         categoryIdErr: "",
+                         categoryId: text,
+                         formIsValid: true,
+                    })
+               );
+          }
+     }
+     function selectProductBrand(event: any) {
+          const text = event.target.value
+          if (text == 11) {
+               dispatch(
+                    productFormFilled({
+                         ...productFormState.data,
+                         brandErr: "لطفا برند کالا را انتخاب کنید",
+                         formIsValid: false,
+                         brand: text,
+                    })
+               );
+
+
+          } else {
+               dispatch(
+                    productFormFilled({
+                         ...productFormState.data,
+                         brandErr: "",
+                         brand: text,
+                         formIsValid: true,
+                    })
+               );
+          }
+     }
+     async function fillProductImages(event: any) {
+          let count = event.target.files.length;
+          if (count <= 3) {
+               formdata2.append("files", event.target.files[0]);
+               formdata2.append("files", event.target.files[1]);
+               formdata2.append("files", event.target.files[2]);
+               const uploader = new FileService();
+               // try {
+               const response = await uploader.upload(formdata2);
+               switch (response.status) {
+                    case ResponseStatus.OK: {
+                         const repo = await response.json();
+                         dispatch(
+                              productFormFilled({
+                                   ...productFormState.data,
+                                   imagesError: "",
+                                   images: repo.files,
+                                   formIsValid: true,
+                              })
+                         );
+                         ToastSuccess();
+                         break;
+                    }
+                    case ResponseStatus.BAD_REQUEST: {
+                         ToastFail();
+                         break;
+                    }
+                    case ResponseStatus.UNAUTHORIZED: {
+                         ToastAuthFail();
+                    }
+               }
+          } else {
+               ToastFail("تنها میتوانید ۳ تصویر انتخاب کنید")
+          }
+     }
      function submit(event: any) {
-          alert(editorRef.current?.getContents(true))
+          //alert(editorRef.current?.getContents(true))
+          if (productFormState.data.formIsValid) {
+               const entity = {
+                    _id: "",
+
+                    name: productFormState.data.name,
+                    subCategories: productFormState.data.subCategories,
+                    categoryId: productFormState.data.categoryId,
+                    brand: productFormState.data.brand,
+                    images: productFormState.data.images,
+                    shortDesc: productFormState.data.shortDesc,
+                    longdesc: editorRef.current?.getContents(true),
+                    weakPoints: productFormState.data.weakPoints,
+                    strongPoints: productFormState.data.strongPoints,
+
+                    pageTitle: productFormState.data.pageTitle,
+                    pageLink: productFormState.data.pageLink,
+                    desc: productFormState.data.desc,
+                    keywords: productFormState.data.keywords,
+                    tags: productFormState.data.tags,
+
+                    size: productFormState.data.size,
+                    price: productFormState.data.price,
+                    purchasePrice: productFormState.data.purchasePrice,
+                    weight: productFormState.data.weight,
+                    stock: productFormState.data.stock,
+                    colors: productFormState.data.colors,
+
+                    createdAt: "",
+               };
+               try {
+                    editorRef.current?.setContents("");
+                    dispatch(submitAddProductAction(entity));
+               } catch (err) {
+                    console.log("rrrr");
+               }
+          } else {
+               ToastFail("لطفا مقادیر فیلد ها را با دقت وارد کنید");
+          }
      }
      return (
           <div className="w-full sm:w-11/12 mr-0 sm:mr-16">
+               {productFormState.isLoading && (
+                    <Loading />
+               )}
                <div className="w-full flex flex-col p-4 bg-[#f8f9fa]">
                     <BoxTitleLgComponent title="محصول جدید" />
                     <div className="flex flex-col sm:flex-row w-full gap-4 ">
@@ -434,35 +597,57 @@ export default function ProductAddComponent() {
 
                                                   <select id="countries" className="bg-gray-100 border
                                                        border-gray-100 text-gray-900 text-sm rounded-lg  block  p-2.5
-                                                       w-full    outline-non">
-                                                       <option value="0">همه دسته ها</option>
-                                                       <option value="1">الکترونیک</option>
-                                                       <option value="2">لباس</option>
-                                                       <option value="3">خودرو</option>
+                                                       w-full    outline-non" onChange={selectProductCategoryId}>
+                                                       <option value="11">همه دسته ها</option>
+                                                       <option value="66ca18cb8e6d2287688b9f28">الکترونیک</option>
+                                                       <option value="66ca18cb8e6d2287688b9f28">لباس</option>
+                                                       <option value="66ca18cb8e6d2287688b9f28">خودرو</option>
                                                   </select>
 
-                                             </div>      </div>
+                                             </div>
+                                             <ErrComponent text={productFormState.data.categoryIdErr} />
+                                        </div>
 
                                         <div className="mb-4">
                                              <LabelComponent title="برند" />
                                              <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
 
-                                                  <select id="countries" className="bg-gray-100 border
+                                                  <select id="brand" name="brand" className="bg-gray-100 border
                                               border-gray-100 text-gray-900 text-sm rounded-lg  block  p-2.5
-                                              w-full    outline-non">
-                                                       <option value="0">همه دسته ها</option>
-                                                       <option value="1">الکترونیک</option>
-                                                       <option value="2">لباس</option>
-                                                       <option value="3">خودرو</option>
+                                              w-full    outline-non"   onChange={selectProductBrand}>
+                                                       <option value="11">همه دسته ها</option>
+                                                       <option value="66ca18cb8e6d2287688b9f28">الکترونیک</option>
+                                                       <option value="66ca18cb8e6d2287688b9f28">لباس</option>
+                                                       <option value="66ca18cb8e6d2287688b9f28">خودرو</option>
                                                   </select>
-
                                              </div>
+                                             <ErrComponent text={productFormState.data.brandErr} />
                                         </div>
                                         <div className="mb-4">
                                              <LabelComponent title="تصاویر محصول" />
 
-                                             <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                                  <input type="text" className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
+                                             <div className="flex flex-col gap-2 justify-start items-start bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                                  <input
+                                                       id="files2"
+                                                       name="files2"
+                                                       type="file"
+                                                       accept=".png,.jpg"
+                                                       multiple
+                                                       onChange={fillProductImages}
+                                                  />
+                                                  <div className="flex flex-row gap-2 m-2">
+                                                       {productFormState.data.images.map((item: any) => (
+                                                            <img
+                                                                 src={getDefaultImageAvator(
+                                                                      item
+                                                                 )}
+                                                                 className="w-full h-20"
+                                                                 alt="store logo"
+                                                                 crossOrigin="anonymous"
+                                                            />
+
+                                                       ))}
+                                                  </div>
                                              </div>
                                         </div>
                                         <div className="mb-4">
@@ -615,6 +800,14 @@ export default function ProductAddComponent() {
                                              <ErrComponent text={productFormState.data.sizeErr} />
                                         </div>
                                         <div className="mb-4">
+                                             <LabelComponent title="وزن" required="true" />
+                                             <InputBox1Component
+                                                  name="weight"
+                                                  value={productFormState.data.weight}
+                                                  onchangeFunc={fillProductWeight}
+                                             />
+                                             <ErrComponent text={productFormState.data.weightErr} /> </div>
+                                        <div className="mb-4">
                                              <LabelComponent title="موجودی" required="true" />
                                              <InputBox1Component
                                                   name="stock"
@@ -637,14 +830,11 @@ export default function ProductAddComponent() {
                                    </div>
                               </div>
                          </div>
-
-
                     </div>
 
-
-
                     <div className="flex flex-col justify-start items-end">
-                         <button title="ثبت دسته بندی" onClick={submit}>vv</button>
+                         <LgSubmitbtnComponent title="ثبت  محصول" onClickFunc={submit}>
+                         </LgSubmitbtnComponent>
                     </div>
                </div>
           </div >

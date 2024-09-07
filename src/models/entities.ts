@@ -4,7 +4,7 @@ export class ProductEntity {
      //info
      name: string = "";
      subCategories: string[] = [];
-     mainCategory: string = "";
+     categoryId: string = "";
      brand: string = "";
      images: string[] = [];
      shortDesc: string = "";
