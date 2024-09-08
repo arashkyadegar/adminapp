@@ -135,16 +135,7 @@ export default function ProductAddComponent() {
 
      function fillProductPageTitle(event: any) {
           let text: string = event.target.value;
-          if (validator.isEmpty(text)) {
-               dispatch(
-                    productFormFilled({
-                         ...productFormState.data,
-                         pageTitleErr: "لطفا  عنوان در صفحه را وارد کنید",
-                         formIsValid: false,
-                         pageTitle: text,
-                    })
-               );
-          } else if (validator.matches(text, rgx_insecure)) {
+          if (validator.matches(text, rgx_insecure)) {
                dispatch(
                     productFormFilled({
                          ...productFormState.data,
@@ -198,16 +189,7 @@ export default function ProductAddComponent() {
 
      function fillProductPageLink(event: any) {
           let text: string = event.target.value;
-          if (validator.isEmpty(text)) {
-               dispatch(
-                    productFormFilled({
-                         ...productFormState.data,
-                         pageLinkErr: "لطفا عنوان لینک را وارد کنید",
-                         formIsValid: false,
-                         pageLink: text,
-                    })
-               );
-          } else if (validator.matches(text, rgx_insecure)) {
+          if (validator.matches(text, rgx_insecure)) {
                dispatch(
                     productFormFilled({
                          ...productFormState.data,
@@ -230,16 +212,7 @@ export default function ProductAddComponent() {
      }
      function fillProductDesc(event: any) {
           let text: string = event.target.value;
-          if (validator.isEmpty(text)) {
-               dispatch(
-                    productFormFilled({
-                         ...productFormState.data,
-                         descErr: "لطفا توضیحات محصول را وارد کنید",
-                         formIsValid: false,
-                         desc: text,
-                    })
-               );
-          } else if (validator.matches(text, rgx_insecure)) {
+          if (validator.matches(text, rgx_insecure)) {
                dispatch(
                     productFormFilled({
                          ...productFormState.data,
@@ -261,16 +234,7 @@ export default function ProductAddComponent() {
      }
      function fillProductShortDesc(event: any) {
           let text: string = event.target.value;
-          if (validator.isEmpty(text)) {
-               dispatch(
-                    productFormFilled({
-                         ...productFormState.data,
-                         shortDescErr: "لطفا توضیحات کوتاه محصول را وارد کنید",
-                         formIsValid: false,
-                         shortDesc: text,
-                    })
-               );
-          } else if (validator.matches(text, rgx_insecure)) {
+          if (validator.matches(text, rgx_insecure)) {
                dispatch(
                     productFormFilled({
                          ...productFormState.data,
@@ -293,16 +257,7 @@ export default function ProductAddComponent() {
 
      function fillProductPrice(event: any) {
           let text: string = event.target.value;
-          if (validator.isEmpty(text)) {
-               dispatch(
-                    productFormFilled({
-                         ...productFormState.data,
-                         priceErr: "لطفا قیمت کالا را وارد کنید",
-                         formIsValid: false,
-                         price: text,
-                    })
-               );
-          } else if (validator.isNumeric(text)) {
+          if (validator.isNumeric(text)) {
                dispatch(
                     productFormFilled({
                          ...productFormState.data,
@@ -326,16 +281,7 @@ export default function ProductAddComponent() {
 
      function fillProductPurchasePrice(event: any) {
           let text: string = event.target.value;
-          if (validator.isEmpty(text)) {
-               dispatch(
-                    productFormFilled({
-                         ...productFormState.data,
-                         purchasePriceErr: "لطفا قیمت فروش را وارد کنید",
-                         formIsValid: false,
-                         purchasePrice: text,
-                    })
-               );
-          } else if (validator.isNumeric(text)) {
+          if (validator.isNumeric(text)) {
                dispatch(
                     productFormFilled({
                          ...productFormState.data,
@@ -358,16 +304,7 @@ export default function ProductAddComponent() {
      }
      function fillProductWeight(event: any) {
           let text: string = event.target.value;
-          if (validator.isEmpty(text)) {
-               dispatch(
-                    productFormFilled({
-                         ...productFormState.data,
-                         weightErr: "لطفا وزن محصول را وارد کنید",
-                         formIsValid: false,
-                         weight: text,
-                    })
-               );
-          } else if (validator.matches(text, rgx_insecure)) {
+          if (validator.matches(text, rgx_insecure)) {
                dispatch(
                     productFormFilled({
                          ...productFormState.data,
@@ -389,16 +326,7 @@ export default function ProductAddComponent() {
      }
      function fillProductStock(event: any) {
           let text: string = event.target.value;
-          if (validator.isEmpty(text)) {
-               dispatch(
-                    productFormFilled({
-                         ...productFormState.data,
-                         stockErr: "لطفا موجودی محصول را وارد کنید",
-                         formIsValid: false,
-                         stock: text,
-                    })
-               );
-          } else if (validator.matches(text, rgx_insecure)) {
+          if (validator.matches(text, rgx_insecure)) {
                dispatch(
                     productFormFilled({
                          ...productFormState.data,
@@ -420,16 +348,7 @@ export default function ProductAddComponent() {
      }
      function fillProductSize(event: any) {
           let text: string = event.target.value;
-          if (validator.isEmpty(text)) {
-               dispatch(
-                    productFormFilled({
-                         ...productFormState.data,
-                         sizeErr: "لطفا سایز محصول را وارد کنید",
-                         formIsValid: false,
-                         size: text,
-                    })
-               );
-          } else if (validator.matches(text, rgx_insecure)) {
+          if (validator.matches(text, rgx_insecure)) {
                dispatch(
                     productFormFilled({
                          ...productFormState.data,
@@ -475,51 +394,27 @@ export default function ProductAddComponent() {
      }
      function selectProductStatus(event: any) {
           const text = event.target.value
-          if (text == 11) {
-               dispatch(
-                    productFormFilled({
-                         ...productFormState.data,
-                         statusErr: "لطفا وضعیت کالا را انتخاب کنید",
-                         formIsValid: false,
-                         status: text,
-                    })
-               );
+          dispatch(
+               productFormFilled({
+                    ...productFormState.data,
+                    statusErr: "",
+                    status: text,
+                    formIsValid: true,
+               })
+          );
 
-
-          } else {
-               dispatch(
-                    productFormFilled({
-                         ...productFormState.data,
-                         statusErr: "",
-                         status: text,
-                         formIsValid: true,
-                    })
-               );
-          }
      }
      function selectProductBrand(event: any) {
           const text = event.target.value
-          if (text == 11) {
-               dispatch(
-                    productFormFilled({
-                         ...productFormState.data,
-                         brandErr: "لطفا برند کالا را انتخاب کنید",
-                         formIsValid: false,
-                         brand: text,
-                    })
-               );
+          dispatch(
+               productFormFilled({
+                    ...productFormState.data,
+                    brandErr: "",
+                    brand: text,
+                    formIsValid: true,
+               })
+          );
 
-
-          } else {
-               dispatch(
-                    productFormFilled({
-                         ...productFormState.data,
-                         brandErr: "",
-                         brand: text,
-                         formIsValid: true,
-                    })
-               );
-          }
      }
      async function fillProductImages(event: any) {
           let count = event.target.files.length;
@@ -595,7 +490,7 @@ export default function ProductAddComponent() {
                     console.log("rrrr");
                }
           } else {
-               ToastFail("لطفا مقادیر فیلد ها را با دقت وارد کنید");
+               ToastFail("لطفا مقادیر فیلدهای الزامی را با دقت وارد کنید");
           }
      }
      return (
@@ -620,7 +515,7 @@ export default function ProductAddComponent() {
                                              <ErrComponent text={productFormState.data.nameErr} />
                                         </div>
                                         <div className="mb-4">
-                                             <LabelComponent title="زیر مجموعه" />
+                                             <LabelComponent title="زیر مجموعه" required="true" />
 
                                              <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
                                                   <div className="w-full">
@@ -655,8 +550,8 @@ export default function ProductAddComponent() {
 
                                         <div className="mb-4">
                                              <LabelComponent title="برند" />
-                                             <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-
+                                             <div className="flex flex-row gap-2 justify-end items-center bg-gray-100  
+                                              text-gray-900 text-sm rounded-lg  px-1">
                                                   <select id="brand" name="brand" className="bg-gray-100 border
                                               border-gray-100 text-gray-900 text-sm rounded-lg  block  p-2.5
                                               w-full    outline-non"   onChange={selectProductBrand}>
@@ -666,7 +561,7 @@ export default function ProductAddComponent() {
                                                        <option value="66ca18cb8e6d2287688b9f28">خودرو</option>
                                                   </select>
                                              </div>
-                                             <ErrComponent text={productFormState.data.brandErr} />
+
                                         </div>
                                         <div className="mb-4">
                                              <LabelComponent title="تصاویر محصول" />
@@ -696,7 +591,7 @@ export default function ProductAddComponent() {
                                              </div>
                                         </div>
                                         <div className="mb-4">
-                                             <LabelComponent title="توضیح کوتاه" required="true" />
+                                             <LabelComponent title="توضیح کوتاه" />
 
                                              <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
                                                   <textarea name="desc" rows={5} id="desc"
@@ -707,7 +602,7 @@ export default function ProductAddComponent() {
                                              <ErrComponent text={productFormState.data.shortDescErr} />
 
                                         </div>
-                                        <div className="mb-4">
+                                        {/* <div className="mb-4">
                                              <LabelComponent title="نقاط قوت" required="true" />
 
                                              <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
@@ -734,16 +629,12 @@ export default function ProductAddComponent() {
                                                        ))}
                                                   </div>
                                              </div>
-                                        </div>
+                                        </div> */}
                                         <div className="mb-4">
                                              <LabelComponent title="توضیحات محصول" />
                                              <SunEditor getSunEditorInstance={getSunEditorInstance} />
                                         </div>
                                    </div>
-                                   <div className="flex w-full flex-col  gap-4  border border-gray-200">
-
-                                   </div>
-
                               </div>
 
                          </div>
@@ -752,7 +643,7 @@ export default function ProductAddComponent() {
                                    <BoxTitleUnderlineComponent title="Seo" />
                                    <div className="p-4">
                                         <div className="mb-4">
-                                             <LabelComponent title="عنوان در صفحه" required="true" />
+                                             <LabelComponent title="عنوان در صفحه" />
                                              <InputBox1Component
                                                   name="pageTitle"
                                                   value={productFormState.data.pageTitle}
@@ -763,7 +654,7 @@ export default function ProductAddComponent() {
 
 
                                         <div className="mb-4">
-                                             <LabelComponent title="عنوان لینک" required="true" />
+                                             <LabelComponent title="عنوان لینک" />
                                              <InputBox1Component
                                                   name="pageLink"
                                                   value={productFormState.data.pageLink}
@@ -773,7 +664,7 @@ export default function ProductAddComponent() {
                                         </div>
 
                                         <div className="mb-4">
-                                             <LabelComponent title="توضیحات" required="true" />
+                                             <LabelComponent title="توضیحات" />
                                              <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
                                                   <textarea name="desc" rows={5} id="desc"
                                                        onChange={fillProductDesc}
@@ -798,7 +689,7 @@ export default function ProductAddComponent() {
                                              </div>
                                         </div>
                                         <div className="mb-4">
-                                             <LabelComponent title="وضعیت" required="true" />
+                                             <LabelComponent title="وضعیت" />
 
                                              <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
 
@@ -835,7 +726,7 @@ export default function ProductAddComponent() {
                                    <BoxTitleUnderlineComponent title="فروش" />
                                    <div className="p-4">
                                         <div className="mb-4">
-                                             <LabelComponent title="قیمت" required="true" />
+                                             <LabelComponent title="قیمت" />
                                              <InputBox1Component
                                                   name="price"
                                                   value={productFormState.data.price}
@@ -844,7 +735,7 @@ export default function ProductAddComponent() {
                                              <ErrComponent text={productFormState.data.priceErr} />
                                         </div>
                                         <div className="mb-4">
-                                             <LabelComponent title="قیمت فروش" required="true" />
+                                             <LabelComponent title="قیمت فروش" />
                                              <InputBox1Component
                                                   name="purchasePrice"
                                                   value={productFormState.data.purchasePrice}
@@ -853,7 +744,7 @@ export default function ProductAddComponent() {
                                              <ErrComponent text={productFormState.data.purchasePriceErr} />
                                         </div>
                                         <div className="mb-4">
-                                             <LabelComponent title="سایز" required="true" />
+                                             <LabelComponent title="سایز" />
                                              <InputBox1Component
                                                   name="size"
                                                   value={productFormState.data.size}
@@ -862,7 +753,7 @@ export default function ProductAddComponent() {
                                              <ErrComponent text={productFormState.data.sizeErr} />
                                         </div>
                                         <div className="mb-4">
-                                             <LabelComponent title="وزن" required="true" />
+                                             <LabelComponent title="وزن" />
                                              <InputBox1Component
                                                   name="weight"
                                                   value={productFormState.data.weight}
@@ -870,7 +761,7 @@ export default function ProductAddComponent() {
                                              />
                                              <ErrComponent text={productFormState.data.weightErr} /> </div>
                                         <div className="mb-4">
-                                             <LabelComponent title="موجودی" required="true" />
+                                             <LabelComponent title="موجودی" />
                                              <InputBox1Component
                                                   name="stock"
                                                   value={productFormState.data.stock}
