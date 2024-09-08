@@ -35,10 +35,21 @@ function App() {
   const [storeUserLinkDlgShow, setStoreUserLinkDlgShow] = useState(false);
   const [navbarShow, setNavbarShow] = useState(false);
 
+
+  const [generalTabToggle, setGeneralTabToggle] = useState(true);
+  const [seoTabToggle, setSeoTabToggle] = useState(false);
+  const [sellTabToggle, setSellTabToggle] = useState(false);
+
   const store = makeStore();
   return (
     <myAppContext.Provider
       value={{
+        generalTabToggle,
+        setGeneralTabToggle,
+        seoTabToggle,
+        setSeoTabToggle,
+        sellTabToggle,
+        setSellTabToggle,
         loginForm,
         setLoginForm,
         languageDrpDwnIsOpen,

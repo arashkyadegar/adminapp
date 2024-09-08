@@ -5,6 +5,7 @@ import { getProductsAction, searchProductsAction, submitDeleteProductAction } fr
 import { getDefaultImageAvator } from "../../utility/imageUtility";
 import StatusComponent from "../share/status";
 import { turnToFa } from "../../utility/regex";
+import Loading from "../share/loading";
 
 export default function ProductListComponent() {
      const productsState = useAppSelector((state) => state.entities.products);
@@ -32,6 +33,9 @@ export default function ProductListComponent() {
 
      return (
           <div className="w-full sm:w-11/12 mr-0 sm:mr-16">
+               {productsState.isLoading && (
+                    <Loading />
+               )}
                <div className=" flex flex-col p-4 bg-[#f8f9fa] ">
                     <BoxTitleLgComponent title="لیست محصولات" />
                     <div className="flex flex-col w-full gap-4 ">
