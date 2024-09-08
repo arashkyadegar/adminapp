@@ -14,7 +14,7 @@ import { productFormFilled } from "../../redux/store/product/product-form";
 import SunEditor from 'suneditor-react';
 import SunEditorCore from "suneditor/src/lib/core";
 import 'suneditor/dist/css/suneditor.min.css';
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { getDefaultImageAvator } from "../../utility/imageUtility";
 import ResponseStatus from "../../utility/responseStatus";
 import { ToastAuthFail, ToastFail, ToastSuccess } from "../../utility/tostify";
@@ -22,9 +22,16 @@ import { FileService } from "../../services/fileService";
 import LgSubmitbtnComponent from "../share/btn/lg-submit-btn";
 import { submitAddProductAction } from "../../redux/store/product/product-action";
 import Loading from "../share/loading";
+import { getCategoriesAction } from "../../redux/store/category/category-action";
 
 export default function ProductAddComponent() {
      const formdata2 = new FormData();
+     const strongPointsRef = useRef<any>();
+     const weakPointsRef = useRef<any>();
+     const subCategoriesRef = useRef<any>();
+     const colorsRef = useRef<any>();
+     const tagsRef = useRef<any>();
+     const KeywordsRef = useRef<any>();
      const editorRef = useRef<SunEditorCore>();
      // The sunEditor parameter will be set to the core suneditor instance when this function is called
      const getSunEditorInstance = (sunEditor: SunEditorCore) => {
@@ -32,6 +39,12 @@ export default function ProductAddComponent() {
      };
      const dispatch = useAppDispatch();
      const productFormState = useAppSelector((state) => state.entities.productForm);
+     const categoriesState = useAppSelector((state) => state.entities.categories);
+
+     useEffect(() => {
+          dispatch(getCategoriesAction());
+     }, []);
+
      function onColorsKeyDown(event: any) {
           let text: string = event.target.value;
           if (!validator.isEmpty(text.trim())) {
@@ -42,6 +55,7 @@ export default function ProductAddComponent() {
                               ...productFormState.data,
                               colors: [...productFormState.data.colors, text]
                          }))
+                    colorsRef.current.value = "";
                }
           }
      }
@@ -55,6 +69,7 @@ export default function ProductAddComponent() {
                               ...productFormState.data,
                               tags: [...productFormState.data.tags, text]
                          }))
+                    tagsRef.current.value = "";
                }
           }
      }
@@ -68,6 +83,7 @@ export default function ProductAddComponent() {
                               ...productFormState.data,
                               keywords: [...productFormState.data.keywords, text]
                          }))
+                    KeywordsRef.current.value = "";
                }
           }
      }
@@ -81,6 +97,7 @@ export default function ProductAddComponent() {
                               ...productFormState.data,
                               weakPoints: [...productFormState.data.weakPoints, text]
                          }))
+                    weakPointsRef.current.value = "";
                }
           }
      }
@@ -94,6 +111,7 @@ export default function ProductAddComponent() {
                               ...productFormState.data,
                               strongPoints: [...productFormState.data.strongPoints, text]
                          }))
+                    strongPointsRef.current.value = "";
                }
           }
      }
@@ -109,6 +127,7 @@ export default function ProductAddComponent() {
                               ...productFormState.data,
                               subCategories: [...productFormState.data.subCategories, text]
                          }))
+                    subCategoriesRef.current.value = "";
                }
           }
      }
@@ -454,6 +473,30 @@ export default function ProductAddComponent() {
                );
           }
      }
+     function selectProductStatus(event: any) {
+          const text = event.target.value
+          if (text == 11) {
+               dispatch(
+                    productFormFilled({
+                         ...productFormState.data,
+                         statusErr: "لطفا وضعیت کالا را انتخاب کنید",
+                         formIsValid: false,
+                         status: text,
+                    })
+               );
+
+
+          } else {
+               dispatch(
+                    productFormFilled({
+                         ...productFormState.data,
+                         statusErr: "",
+                         status: text,
+                         formIsValid: true,
+                    })
+               );
+          }
+     }
      function selectProductBrand(event: any) {
           const text = event.target.value
           if (text == 11) {
@@ -535,6 +578,7 @@ export default function ProductAddComponent() {
                     keywords: productFormState.data.keywords,
                     tags: productFormState.data.tags,
 
+                    status: productFormState.data.status,
                     size: productFormState.data.size,
                     price: productFormState.data.price,
                     purchasePrice: productFormState.data.purchasePrice,
@@ -580,7 +624,7 @@ export default function ProductAddComponent() {
 
                                              <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
                                                   <div className="w-full">
-                                                       <input type="text" onKeyDown={onSubCategoriesKeyDown} className=" w-full  bg-gray-100  text-gray-900 text-sm  block  p-2.5     outline-none" />
+                                                       <input type="text" ref={subCategoriesRef} onKeyDown={onSubCategoriesKeyDown} className=" w-full  bg-gray-100  text-gray-900 text-sm  block  p-2.5     outline-none" />
                                                   </div>
                                                   <div className="grid grid-cols-4 w-full justify-start items-start">
                                                        {productFormState.data.subCategories.map((item: any) => (
@@ -598,10 +642,11 @@ export default function ProductAddComponent() {
                                                   <select id="countries" className="bg-gray-100 border
                                                        border-gray-100 text-gray-900 text-sm rounded-lg  block  p-2.5
                                                        w-full    outline-non" onChange={selectProductCategoryId}>
-                                                       <option value="11">همه دسته ها</option>
-                                                       <option value="66ca18cb8e6d2287688b9f28">الکترونیک</option>
-                                                       <option value="66ca18cb8e6d2287688b9f28">لباس</option>
-                                                       <option value="66ca18cb8e6d2287688b9f28">خودرو</option>
+
+                                                       <option value="11"> انتخاب کنید</option>
+                                                       {categoriesState.list.map((item: any) => (
+                                                            <option value={item._id}>{item.name}</option>
+                                                       ))}
                                                   </select>
 
                                              </div>
@@ -667,7 +712,7 @@ export default function ProductAddComponent() {
 
                                              <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
                                                   <div className="w-full">
-                                                       <input type="text" onKeyDown={onStrongPointsKeyDown} className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
+                                                       <input type="text" ref={strongPointsRef} onKeyDown={onStrongPointsKeyDown} className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
                                                   </div>
                                                   <div className="grid grid-cols-4 justify-start items-start w-full">
                                                        {productFormState.data.strongPoints.map((item: any) => (
@@ -681,7 +726,7 @@ export default function ProductAddComponent() {
 
                                              <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
                                                   <div className="w-full">
-                                                       <input type="text" onKeyDown={onWeakPointsKeyDown} className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
+                                                       <input type="text" ref={weakPointsRef} onKeyDown={onWeakPointsKeyDown} className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
                                                   </div>
                                                   <div className="grid grid-cols-4 justify-start items-start w-full">
                                                        {productFormState.data.weakPoints.map((item: any) => (
@@ -743,7 +788,7 @@ export default function ProductAddComponent() {
                                              <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
 
                                                   <div className="w-full">
-                                                       <input type="text" onKeyDown={onKeywordsKeyDown} className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
+                                                       <input type="text" ref={KeywordsRef} onKeyDown={onKeywordsKeyDown} className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
                                                   </div>
                                                   <div className="grid grid-cols-4 justify-start items-start w-full">
                                                        {productFormState.data.keywords.map((item: any) => (
@@ -752,12 +797,29 @@ export default function ProductAddComponent() {
                                                   </div>
                                              </div>
                                         </div>
+                                        <div className="mb-4">
+                                             <LabelComponent title="وضعیت" required="true" />
 
+                                             <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+
+                                                  <select id="countries" className="bg-gray-100 border
+                                                       border-gray-100 text-gray-900 text-sm rounded-lg  block  p-2.5
+                                                       w-full    outline-non" onChange={selectProductStatus}>
+                                                       <option value="11">انتخاب کنید...</option>
+                                                       <option value="1">فعال</option>
+                                                       <option value="2">غیرفعال</option>
+                                                       <option value="3">بایگانی شده</option>
+
+                                                  </select>
+
+                                             </div>
+                                             <ErrComponent text={productFormState.data.statusErr} />
+                                        </div>
                                         <div className="mb-4">
                                              <LabelComponent title="برچسب ها" />
                                              <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
                                                   <div className="w-full">
-                                                       <input type="text" onKeyDown={onTagsKeyDown} className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
+                                                       <input type="text" ref={tagsRef} onKeyDown={onTagsKeyDown} className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
                                                   </div>
                                                   <div className="grid grid-cols-4 justify-start items-start w-full">
                                                        {productFormState.data.tags.map((item: any) => (
@@ -819,7 +881,7 @@ export default function ProductAddComponent() {
                                              <LabelComponent title="رنگ" />
                                              <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
                                                   <div className="w-full">
-                                                       <input type="text" onKeyDown={onColorsKeyDown} className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
+                                                       <input type="text" ref={colorsRef} onKeyDown={onColorsKeyDown} className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
                                                   </div>
                                                   <div className="grid grid-cols-4 justify-start items-start w-full">
                                                        {productFormState.data.colors.map((item: any) => (

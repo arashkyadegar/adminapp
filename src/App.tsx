@@ -17,10 +17,11 @@ import { makeStore } from "./redux/store/store";
 import { Provider } from 'react-redux';
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from 'react-toastify';
+import { LoginForm } from './models/entities';
 
 function App() {
 
-
+  const [loginForm, setLoginForm] = useState(new LoginForm());
   const [languageDrpDwnIsOpen, setLanguageDrpDwnIsOpen] = useState(false);
   const [userDrpDwnIsOpen, setUserDrpDwnIsOpen] = useState(false);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
@@ -38,7 +39,8 @@ function App() {
   return (
     <myAppContext.Provider
       value={{
-
+        loginForm,
+        setLoginForm,
         languageDrpDwnIsOpen,
         setLanguageDrpDwnIsOpen,
         userDrpDwnIsOpen,
@@ -70,7 +72,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" >
-              <Route path="/login" element={<LoginComponent />} />
+              <Route path="/" element={<LoginComponent />} />
             </Route>
             <Route path="/" element={<Layout />}>
               {/* <Route index element={<LandingPageComponent />} /> */}

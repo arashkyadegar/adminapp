@@ -1,5 +1,6 @@
 "use client"
 import { createContext } from "react";
+import { LoginForm } from "../../models/entities";
 
 const myAppContext = createContext({
      languageDrpDwnIsOpen: false,
@@ -26,14 +27,14 @@ const myAppContext = createContext({
      setAsideCellarDrpToggle: (asideCellarDrpToggle: boolean) => { },
      passwordVisibility: false,
      setPasswordVisibility: (passwordVisibility: boolean) => { },
-     // loginForm: {
-     //      email: "",
-     //      password: "",
-     //      emailError: "",
-     //      passwordError: "",
-     //      formIsValid: false,
-     // },
-     // setLoginForm: (loginForm: LoginForm) => { },
+     loginForm: {
+          email: "",
+          password: "",
+          emailError: "",
+          passwordError: "",
+          formIsValid: false,
+     },
+     setLoginForm: (loginForm: LoginForm) => { },
 });
 
 export default myAppContext;

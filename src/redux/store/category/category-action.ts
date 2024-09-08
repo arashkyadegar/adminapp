@@ -1,0 +1,85 @@
+import { apiCallBegan } from "../api";
+
+export const submitAddCategoryAction = (category: any) =>
+  apiCallBegan({
+    url: "/categories/",
+    onSuccess: "categoryForm/categoryFormCleared",
+    onError: "categoryForm/categoryFormLoadingStoped",
+    onStart: "categoryForm/categoryFormRequested",
+    credentials: "include",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(category),
+  });
+
+export const getCategoryAction = (id: any) =>
+  apiCallBegan({
+    url: "/categories/" + id,
+    onSuccess: "categoryForm/categoryFormFetched",
+    onError: "categoryForm/categoryFormFaild",
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+export const getCategoriesAction = () =>
+  apiCallBegan({
+    url: `/categories`,
+    onSuccess: "categories/categoriesFetched",
+    onError: "categories/categoriesLoadingStoped",
+    onStart: "categories/categoriesRequested",
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    //body: JSON.stringify(product),
+  });
+
+
+export const searchCategoriesAction = (name: string) =>
+  apiCallBegan({
+    url: `/categories/search?name=${name}`,
+    onSuccess: "categories/categoriesFetched",
+    onError: "categories/categoriesLoadingStoped",
+    onStart: "categories/categoriesRequested",
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    //body: JSON.stringify(product),
+  });
+
+
+export const submitDeleteCategoryAction = (id: any) =>
+  apiCallBegan({
+    url: "/categories/" + id,
+    onSuccess: "categories/categoriesLoadingStoped",
+    onError: "categories/categoriesLoadingStoped",
+    onStart: "categories/categoriesRequested",
+    method: "DELETE",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    //body: JSON.stringify(product),
+  });
+
+export const submitEditCategoryAction = (category: any) =>
+  apiCallBegan({
+    url: "/categories/" + category._id,
+    onSuccess: "categoryForm/categoryFormLoadingStoped",
+    onError: "categoryForm/categoryFormLoadingStoped",
+    onStart: "categoryForm/categoryFormRequested",
+    credentials: "include",
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(category),
+  });

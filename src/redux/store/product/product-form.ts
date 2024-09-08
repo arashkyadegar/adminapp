@@ -38,7 +38,9 @@ export const productFormSlice = createSlice({
                descErr: "",
                keywordsErr: "",
                tagsErr: "",
-
+               
+               status: 0,
+               statusErr: "",
                size: "",
                price: 0,
                purchasePrice: 0,
@@ -99,6 +101,7 @@ export const productFormSlice = createSlice({
                     keywordsErr: "",
                     tagsErr: "",
 
+                    status: 0,
                     size: "",
                     price: 0,
                     purchasePrice: 0,
@@ -106,6 +109,7 @@ export const productFormSlice = createSlice({
                     stock: "",
                     colors: [],
 
+                    statusErr: "",
                     sizeErr: "",
                     priceErr: "",
                     purchasePriceErr: "",

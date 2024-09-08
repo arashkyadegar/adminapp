@@ -35,7 +35,7 @@ const api =
         case ResponseStatus.OK: {
           const x = JSON.parse(result);
           dispatch({ type: onSuccess, payload: x });
-          ToastSuccess();
+          if (method != "GET") ToastSuccess(); 
           break;
         }
         case ResponseStatus.BAD_REQUEST: {

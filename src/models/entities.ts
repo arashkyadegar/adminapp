@@ -1,3 +1,11 @@
+export class LoginForm {
+     email: string = "";
+     password: string = "";
+     emailError: string = "";
+     passwordError: string = "";
+     formIsValid: boolean = false;
+   }
+
 export class ProductEntity {
      _id: string = "";
 

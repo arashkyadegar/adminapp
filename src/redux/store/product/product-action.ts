@@ -27,7 +27,7 @@ export const getProductAction = (id: any) =>
     },
   });
 
-export const getProductsAction = (storeId: string) =>
+export const getProductsAction = () =>
   apiCallBegan({
     url: `/products`,
     onSuccess: "products/productsFetched",
