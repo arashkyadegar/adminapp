@@ -53,22 +53,23 @@ export default function PcSidebarComponent() {
 
                {/* کالا و انبار */}
                <div className="relative flex cursor-pointer rounded-md hover:bg-gray-400 hover:text-white border border-gray-200  text-gray-500 duration-150 flex-col  m-2 h-10 items-center justify-center">
-                    <svg onClick={toggleCellarMenu} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
-                         <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 0 0 2.25-2.25V6a2.25 2.25 0 0 0-2.25-2.25H6A2.25 2.25 0 0 0 3.75 6v2.25A2.25 2.25 0 0 0 6 10.5Zm0 9.75h2.25A2.25 2.25 0 0 0 10.5 18v-2.25a2.25 2.25 0 0 0-2.25-2.25H6a2.25 2.25 0 0 0-2.25 2.25V18A2.25 2.25 0 0 0 6 20.25Zm9.75-9.75H18a2.25 2.25 0 0 0 2.25-2.25V6A2.25 2.25 0 0 0 18 3.75h-2.25A2.25 2.25 0 0 0 13.5 6v2.25a2.25 2.25 0 0 0 2.25 2.25Z" />
+                    <svg onClick={toggleCellarMenu}  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
+                         <path fillRule="evenodd" d="M3 6a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3V6ZM3 15.75a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-2.25Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3v-2.25Z" clip-rule="evenodd" />
                     </svg>
+
                     {asideCellarDrpToggle && (
-                         <ul className="absolute  right-16 top-0 w-40 bg-white border border-gray-400 rounded-lg p-4 flex flex-col gap-2" >
-                              <li className="cursor-pointer flex items-center  w-full  text-gray-900 ">
+                         <ul className="absolute  right-16 top-0 w-40 bg-white border border-gray-400 rounded-lg flex flex-col gap-2" >
+                              <li className="cursor-pointer flex items-center  w-full  text-gray-900 p-2 hover:bg-teal-300 hover:text-white  ">
                                    <button onClick={() => navigateToUrl("/category/category-list")}>لیست دسته ها</button>
                               </li>
-                              <li className="cursor-pointer flex items-center  w-full  text-gray-900 ">
+                              <li className="cursor-pointer flex items-center  w-full  text-gray-900  p-2 hover:bg-teal-300 hover:text-white">
                                    <button onClick={() => navigateToUrl("/category/category-add")}>ثبت دسته</button>
 
                               </li>
-                              <li className="cursor-pointer flex items-center  w-full  text-gray-900 ">
+                              <li className="cursor-pointer flex items-center  w-full  text-gray-900  p-2 hover:bg-teal-300 hover:text-white">
                                    <button onClick={() => navigateToUrl("/product/product-list")}>لیست کالاها</button>
                               </li>
-                              <li className="cursor-pointer flex items-center  w-full  text-gray-900 ">
+                              <li className="cursor-pointer flex items-center  w-full  text-gray-900  p-2 hover:bg-teal-300 hover:text-white">
                                    <button onClick={() => navigateToUrl("/product/product-add")}>ثبت کالا</button>
                               </li>
                          </ul>
@@ -82,11 +83,11 @@ export default function PcSidebarComponent() {
                          <path d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z" />
                     </svg>
                     {asideOrderDrpToggle && (
-                         <ul className="absolute  right-16 top-0 w-40 bg-white border border-gray-400 rounded-lg p-4 flex flex-col gap-2" >
-                              <li className="cursor-pointer flex items-center  w-full  text-gray-900 ">
+                         <ul className="absolute  right-16 top-0 w-40 bg-white border border-gray-400 rounded-lg flex flex-col gap-2" >
+                              <li className="cursor-pointer flex items-center  w-full  text-gray-900  p-2 hover:bg-teal-300 hover:text-white  ">
                                    <Link to="/order/order-list">لیست سفارشات</Link>
                               </li>
-                              <li className="cursor-pointer flex items-center  w-full  text-gray-900 ">
+                              <li className="cursor-pointer flex items-center  w-full  text-gray-900  p-2 hover:bg-teal-300 hover:text-white  ">
                                    <a href="#"> گزارشات</a>
                               </li>
                          </ul>
@@ -96,17 +97,19 @@ export default function PcSidebarComponent() {
 
                {/* کاربران */}
                <div className="relative flex cursor-pointer rounded-md hover:text-white hover:bg-gray-400 border border-gray-200  text-gray-500 duration-150 flex-col  m-2 h-10 items-center justify-center">
-                    <svg onClick={toggleUserMenu} className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
-                         <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
-                    </svg>
-                    {asideUserDrpToggle && (
-                         <ul className="absolute  right-16 top-0 w-40 bg-white border border-gray-400 rounded-lg p-4 flex flex-col gap-2" >
 
-                              <li className="cursor-pointer flex items-center  w-full  text-gray-900 ">
+                    <svg onClick={toggleUserMenu} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
+                         <path d="M4.5 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM14.25 8.625a3.375 3.375 0 1 1 6.75 0 3.375 3.375 0 0 1-6.75 0ZM1.5 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM17.25 19.128l-.001.144a2.25 2.25 0 0 1-.233.96 10.088 10.088 0 0 0 5.06-1.01.75.75 0 0 0 .42-.643 4.875 4.875 0 0 0-6.957-4.611 8.586 8.586 0 0 1 1.71 5.157v.003Z" />
+                    </svg>
+
+                    {asideUserDrpToggle && (
+                         <ul className="absolute  right-16 top-0 w-40 bg-white border border-gray-400 rounded-lg  flex flex-col gap-2" >
+
+                              <li className="cursor-pointer flex items-center  w-full  text-gray-900  p-2 hover:bg-teal-300 hover:text-white  ">
                                    <a href="#">ثبت کاربر</a>
 
                               </li>
-                              <li className="cursor-pointer flex items-center  w-full  text-gray-900 ">
+                              <li className="cursor-pointer flex items-center  w-full  text-gray-900  p-2 hover:bg-teal-300 hover:text-white  ">
                                    <a href="#">لیست کاربران</a>
 
                               </li>
@@ -122,11 +125,11 @@ export default function PcSidebarComponent() {
                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     </svg>
                     {asideFinancialDrpToggle && (
-                         <ul className="absolute  right-16 top-0 w-40 bg-white border border-gray-400 rounded-lg p-4 flex flex-col gap-2" >
-                              <li className="cursor-pointer flex items-center  w-full  text-gray-900 ">
+                         <ul className="absolute  right-16 top-0 w-40 bg-white border border-gray-400 rounded-lg flex flex-col gap-2" >
+                              <li className="cursor-pointer flex items-center  w-full  text-gray-900  p-2 hover:bg-teal-300 hover:text-white  ">
                                    <a href="#">شارژ کیف پول</a>
                               </li>
-                              <li className="cursor-pointer flex items-center  w-full  text-gray-900 ">
+                              <li className="cursor-pointer flex items-center  w-full  text-gray-900  p-2 hover:bg-teal-300 hover:text-white  ">
                                    <a href="#">گزارش شارژ</a>
 
                               </li>
