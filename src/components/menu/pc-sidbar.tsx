@@ -1,8 +1,10 @@
 import React from "react";
 import myAppContext from "../context/context";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function PcSidebarComponent() {
+     const navigate = useNavigate();
      const { asideOrderDrpToggle, setAsideOrderDrpToggle } = React.useContext(myAppContext);
      const { asideUserDrpToggle, setAsideUserDrpToggle } = React.useContext(myAppContext);
      const { asideCellarDrpToggle, setAsideCellarDrpToggle } = React.useContext(myAppContext);
@@ -14,26 +16,31 @@ export default function PcSidebarComponent() {
           setAsideOrderDrpToggle(false);
      }
      function toggleOrderMenu(event: any) {
-          // hideAll();
+          hideAll();
           setAsideOrderDrpToggle(!asideOrderDrpToggle);
 
      }
      function toggleUserMenu(event: any) {
-          // hideAll();
+          hideAll();
           setAsideUserDrpToggle(!asideUserDrpToggle);
      }
      function toggleCellarMenu(event: any) {
-          // hideAll();
+          hideAll();
           setAsideCellarDrpToggle(!asideCellarDrpToggle);
      }
 
      function toggleFinancialMenu(event: any) {
-          // hideAll();
+          hideAll();
           setAsideFinancialDrpToggle(!asideFinancialDrpToggle);
+     }
+
+     function navigateToUrl(link: string) {
+          hideAll();
+          navigate(link);
      }
      return (
           <div className="border-gray-200 border text-sm  z-40 w-16 absolute h-screen hidden sm:inline-block bg-white  flex-col justify-start  m-1 right-0 ">
-               <img src="/imgs/brands/brand-1.jpg"  />
+               <img src="/imgs/brands/brand-1.jpg" />
                {/* صفحه اصلی */}
                <div className="relative flex cursor-pointer hover:text-white rounded-md hover:bg-gray-400 border border-gray-200  text-gray-500 duration-150 flex-col  m-2 h-10 items-center justify-center">
                     <Link to="/dashboard">
@@ -52,16 +59,17 @@ export default function PcSidebarComponent() {
                     {asideCellarDrpToggle && (
                          <ul className="absolute  right-16 top-0 w-40 bg-white border border-gray-400 rounded-lg p-4 flex flex-col gap-2" >
                               <li className="cursor-pointer flex items-center  w-full  text-gray-900 ">
-                                   <Link to="/category/category-list">لیست دسته ها</Link>
+                                   <button onClick={() => navigateToUrl("/category/category-list")}>لیست دسته ها</button>
                               </li>
                               <li className="cursor-pointer flex items-center  w-full  text-gray-900 ">
-                                   <Link to="/category/category-add">ثبت دسته</Link>
+                                   <button onClick={() => navigateToUrl("/category/category-add")}>ثبت دسته</button>
+
                               </li>
                               <li className="cursor-pointer flex items-center  w-full  text-gray-900 ">
-                                   <Link to="/product/product-list">لیست کالاها</Link>
+                                   <button onClick={() => navigateToUrl("/product/product-list")}>لیست کالاها</button>
                               </li>
                               <li className="cursor-pointer flex items-center  w-full  text-gray-900 ">
-                                   <Link to="/product/product-add"> ثبت کالا</Link>
+                                   <button onClick={() => navigateToUrl("/product/product-add")}>ثبت کالا</button>
                               </li>
                          </ul>
                     )}

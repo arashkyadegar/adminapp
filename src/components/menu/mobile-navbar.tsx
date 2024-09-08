@@ -1,6 +1,7 @@
 import React from "react";
 import myAppContext from "../context/context";
 import PcSidebarComponent from "./pc-sidbar";
+import { Link } from "react-router-dom";
 
 export default function MobileNavbarComponent() {
   const { asideToggle, setAsideToggle } = React.useContext(myAppContext);
@@ -55,20 +56,20 @@ export default function MobileNavbarComponent() {
                 <ul id="dropdown-example" className="text-sm  py-2 space-y-2 flex-col justify-end">
                   <li className="flex items-center  w-full p-2 px-10 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-teal-200 dark:text-white dark:hover:bg-gray-700">
 
-                    لیست دسته
+                  <Link to="/category/category-list">لیست دسته ها</Link>
                   </li>
                   <li className="flex items-center  w-full p-2 px-10 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-teal-200 dark:text-white dark:hover:bg-gray-700">
 
-                    ثبت دسته
+                  <Link to="/category/category-add">ثبت دسته</Link>
                   </li>
                   <li className="flex items-center  w-full p-2 px-10 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-teal-200 dark:text-white dark:hover:bg-gray-700">
 
-                    لیست کالاها
+                  <Link to="/product/product-list">لیست کالاها</Link>
                   </li>
 
                   <li className="flex items-center  w-full p-2 px-10 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-teal-200 dark:text-white dark:hover:bg-gray-700">
 
-                    ثبت کالا
+                  <Link to="/product/product-add"> ثبت کالا</Link>
                   </li>
 
                 </ul>
