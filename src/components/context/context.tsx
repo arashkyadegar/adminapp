@@ -16,12 +16,12 @@ const myAppContext = createContext({
      navbarW: false,
      setNavbarW: (navbarW: boolean) => { },
 
-     generalTabToggle: true,
-     setGeneralTabToggle: (generalTabToggle: boolean) => { },
-     seoTabToggle: false,
-     setSeoTabToggle: (seoTabToggle: boolean) => { },
-     sellTabToggle: false,
-     setSellTabToggle: (sellTabToggle: boolean) => { },
+     // generalTabToggle: true,
+     // setGeneralTabToggle: (generalTabToggle: boolean) => { },
+     // seoTabToggle: false,
+     // setSeoTabToggle: (seoTabToggle: boolean) => { },
+     // sellTabToggle: false,
+     // setSellTabToggle: (sellTabToggle: boolean) => { },
 
      asideToggle: true,
      setAsideToggle: (asideToggle: boolean) => { },

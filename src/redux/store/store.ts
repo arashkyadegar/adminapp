@@ -1,19 +1,37 @@
-import {
-  Action,
-  ThunkAction,
-  configureStore,
-} from "@reduxjs/toolkit";
-import reducer from "../store/reducer";
 
-import reduxLogger from "./middleware/reduxLogger";
+
+import reducer from "../store/reducer";
+import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  PERSIST,
+  REGISTER,
+  PAUSE,
+  PURGE,
+  REHYDRATE,
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
 import api from "./middleware/api";
 
+
+const persistConfig = {
+  key: "root",
+  storage,
+};
+
+export const persistedReducer = persistReducer(persistConfig, reducer);
 export const makeStore = () =>
+
   configureStore({
-    reducer: reducer,
+    reducer: persistedReducer,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(reduxLogger, api),
+      getDefaultMiddleware().concat(api),
   });
+
+
+
 
 
 type Store = ReturnType<typeof makeStore>;
@@ -27,4 +45,5 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   Action<string>
 >;
 
-
+export const mstore = makeStore();
+export const persistor = persistStore(mstore);

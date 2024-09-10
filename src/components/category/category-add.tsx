@@ -1,5 +1,3 @@
-'use client'
-
 import BoxTitleUnderlineComponent from "../share/box-title-underline";
 import LabelComponent from "../share/label";
 import BoxTitleLgComponent from "../share/lg-box-title";

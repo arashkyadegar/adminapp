@@ -2,19 +2,17 @@ import BoxTitleUnderlineComponent from "../share/box-title-underline";
 import LabelComponent from "../share/label";
 import BoxTitleLgComponent from "../share/lg-box-title";
 import 'suneditor/dist/css/suneditor.min.css'
-import Editor from "../share/MyEditor";
 import validator from "validator";
-import LargSubmitbtnComponent from "../share/btn/lg-submit-btn";
 import TagComponent from "../share/tag";
 import ErrComponent from "../share/err";
-import InputBox1Component from "../share/inputBox1";
+
 import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
 import { rgx_insecure } from "../../utility/regex";
 import { productFormFilled } from "../../redux/store/product/product-form";
 import SunEditor from 'suneditor-react';
 import SunEditorCore from "suneditor/src/lib/core";
 import 'suneditor/dist/css/suneditor.min.css';
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getDefaultImageAvator } from "../../utility/imageUtility";
 import ResponseStatus from "../../utility/responseStatus";
 import { ToastAuthFail, ToastFail, ToastSuccess } from "../../utility/tostify";
@@ -23,11 +21,28 @@ import LgSubmitbtnComponent from "../share/btn/lg-submit-btn";
 import { submitAddProductAction } from "../../redux/store/product/product-action";
 import Loading from "../share/loading";
 import { getCategoriesAction } from "../../redux/store/category/category-action";
-import myAppContext from "../context/context";
-import React from "react";
+
+import React, { createContext, useContext } from 'react';
+import { addTabToggle } from "../../redux/store/productTab/productAddTab";
+
 
 export default function ProductAddComponent() {
      const formdata2 = new FormData();
+
+     const nameRef = useRef<any>();
+     const categoryIdRef = useRef<any>();
+     const brandRef = useRef<any>();
+     const descRef = useRef<any>();
+     const pageTitleRef = useRef<any>();
+     const pageLinkRef = useRef<any>();
+     const statusRef = useRef<any>();
+     const shortDescRef = useRef<any>();
+
+     const priceRef = useRef<any>();
+     const purchasePriceRef = useRef<any>();
+     const sizeRef = useRef<any>();
+     const weightRef = useRef<any>();
+     const stockRef = useRef<any>();
      const strongPointsRef = useRef<any>();
      const weakPointsRef = useRef<any>();
      const subCategoriesRef = useRef<any>();
@@ -36,9 +51,7 @@ export default function ProductAddComponent() {
      const KeywordsRef = useRef<any>();
      const editorRef = useRef<SunEditorCore>();
 
-     const { generalTabToggle, setGeneralTabToggle } = React.useContext(myAppContext);
-     const { seoTabToggle, setSeoTabToggle } = React.useContext(myAppContext);
-     const { sellTabToggle, setSellTabToggle } = React.useContext(myAppContext);
+
      // The sunEditor parameter will be set to the core suneditor instance when this function is called
      const getSunEditorInstance = (sunEditor: SunEditorCore) => {
           editorRef.current = sunEditor;
@@ -46,29 +59,10 @@ export default function ProductAddComponent() {
      const dispatch = useAppDispatch();
      const productFormState = useAppSelector((state) => state.entities.productForm);
      const categoriesState = useAppSelector((state) => state.entities.categories);
-
+     const productAddTabState = useAppSelector((state) => state.entities.addTab);
      useEffect(() => {
           dispatch(getCategoriesAction());
      }, []);
-
-     function hideAllTab() {
-          setGeneralTabToggle(false);
-          setSeoTabToggle(false);
-          setSellTabToggle(false);
-     }
-     function toggleGeneralTab(event: any) {
-          hideAllTab();
-          setGeneralTabToggle(true);
-     }
-     function toggleSeoTab(event: any) {
-          hideAllTab();
-          setSeoTabToggle(true);
-     }
-     function toggleSellTab(event: any) {
-          hideAllTab();
-          setSellTabToggle(true);
-     }
-
 
      function onColorsKeyDown(event: any) {
           let text: string = event.target.value;
@@ -201,14 +195,14 @@ export default function ProductAddComponent() {
                     })
                );
           } else {
-               dispatch(
-                    productFormFilled({
-                         ...productFormState.data,
-                         nameErr: "",
-                         name: text,
-                         formIsValid: true,
-                    })
-               );
+          dispatch(
+               productFormFilled({
+                    ...productFormState.data,
+                    nameErr: "",
+                    name: text,
+                    formIsValid: true,
+               })
+          );
           }
      }
 
@@ -481,8 +475,7 @@ export default function ProductAddComponent() {
           if (productFormState.data.formIsValid) {
                const entity = {
                     _id: "",
-
-                    name: productFormState.data.name,
+                    name: nameRef.current.value,
                     subCategories: productFormState.data.subCategories,
                     categoryId: productFormState.data.categoryId,
                     brand: productFormState.data.brand,
@@ -518,6 +511,38 @@ export default function ProductAddComponent() {
                ToastFail("لطفا مقادیر فیلدهای الزامی را با دقت وارد کنید");
           }
      }
+
+     function toggleGeneralTab(event: any): void {
+          dispatch(
+               addTabToggle({
+                    ...productAddTabState.data,
+                    generalTabToggle: true,
+                    seoTabToggle: false,
+                    sellTabToggle: false,
+               })
+          );
+     }
+
+     function toggleSeoTab(event: any): void {
+          dispatch(
+               addTabToggle({
+                    ...productAddTabState.data,
+                    generalTabToggle: false,
+                    seoTabToggle: true,
+                    sellTabToggle: false,
+               })
+          );
+     }
+     function toggleSellTab(event: any) {
+          dispatch(
+               addTabToggle({
+                    ...productAddTabState.data,
+                    generalTabToggle: false,
+                    seoTabToggle: false,
+                    sellTabToggle: true,
+               })
+          );
+     }
      return (
           <div className="w-full sm:w-11/12 mr-0 sm:mr-16">
                {productFormState.isLoading && (
@@ -529,181 +554,200 @@ export default function ProductAddComponent() {
                          <ul className="w-1/4 flex flex-row sm:flex-col bg-transparent text-gray-500 h-fit rounded-md">
                               <li onClick={toggleGeneralTab}
                                    className={
-                                        generalTabToggle ? "bg-teal-300 text-teal-900 p-2 rounded-md cursor-pointer font-bold" :
+                                        productAddTabState.data.generalTabToggle ? "bg-teal-300 text-teal-900 p-2 rounded-md cursor-pointer font-bold" :
                                              "p-2 rounded-md cursor-pointer hover:font-bold"} >عمومی</li>
                               <li onClick={toggleSeoTab} className={
-                                   seoTabToggle ? "bg-teal-300 text-teal-900 p-2 rounded-md cursor-pointer font-bold" :
+                                   productAddTabState.data.seoTabToggle ? "bg-teal-300 text-teal-900 p-2 rounded-md cursor-pointer font-bold" :
                                         "p-2 rounded-md cursor-pointer hover:font-bold"}>Seo</li>
                               <li onClick={toggleSellTab} className={
-                                   sellTabToggle ? "bg-teal-300 text-teal-900 p-2 rounded-md cursor-pointer font-bold" :
+                                   productAddTabState.data.sellTabToggle ? "bg-teal-300 text-teal-900 p-2 rounded-md cursor-pointer font-bold" :
                                         "p-2 rounded-md cursor-pointer hover:font-bold"}>فروش</li>
                          </ul>
 
                          <div className="flex flex-col w-full gap-4 ">
                               {/* general info */}
-                              {generalTabToggle && (
+
+                              {productAddTabState.data.generalTabToggle && (
                                    <div className="flex flex-col w-full bg-white  border border-gray-200">
                                         {/* <div className="flex flex-col w-full bg-white  border border-gray-200"> */}
-                                             <BoxTitleUnderlineComponent title="اطلاعات اصلی" />
-                                             <div className="p-4">
-                                                  <div className="mb-4">
-                                                       <LabelComponent name="name" title="عنوان محصول" required="true" />
-                                                       <InputBox1Component
+                                        <BoxTitleUnderlineComponent title="اطلاعات اصلی" />
+                                        <div className="p-4">
+                                             <div className="mb-4">
+                                                  {/* <LabelComponent name="name" title="عنوان محصول" required="true" /> */}
+                                                  <div className="flex w-full flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                                       <input type="text"
                                                             name="name"
+                                                            id="name"
                                                             value={productFormState.data.name}
-                                                            onchangeFunc={fillProductName}
-                                                       />
-                                                       <ErrComponent text={productFormState.data.nameErr} />
+                                                            onChange={fillProductName}
+                                                            className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
                                                   </div>
-                                                  <div className="mb-4">
-                                                       <LabelComponent title="زیر مجموعه" required="true" />
+                                                  <ErrComponent text={productFormState.data.nameErr} />
+                                             </div>
+                                             <div className="mb-4">
+                                                  <LabelComponent name="subCategories" title="زیر مجموعه" required="true" />
 
-                                                       <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                                            <div className="w-full">
-                                                                 <input type="text" ref={subCategoriesRef} onKeyDown={onSubCategoriesKeyDown} className=" w-full  bg-gray-100  text-gray-900 text-sm  block  p-2.5     outline-none" />
-                                                            </div>
-                                                            <div className="grid grid-cols-4 w-full justify-start items-start">
-                                                                 {productFormState.data.subCategories.map((item: any) => (
-                                                                      <TagComponent title={item} />
-                                                                 ))}
-                                                            </div>
-
+                                                  <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                                       <div className="w-full">
+                                                            <input type="text" id="subCategories" name="subCategories" ref={subCategoriesRef} onKeyDown={onSubCategoriesKeyDown} className=" w-full  bg-gray-100  text-gray-900 text-sm  block  p-2.5     outline-none" />
                                                        </div>
-                                                  </div>
-                                                  <div className="mb-4">
-                                                       <LabelComponent title="زیر مجموعه اصلی" required="true" />
-
-                                                       <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-
-                                                            <select id="countries" className="bg-gray-100 border
-                         border-gray-100 text-gray-900 text-sm rounded-lg  block  p-2.5
-                         w-full    outline-non" onChange={selectProductCategoryId}>
-
-                                                                 <option value="11"> انتخاب کنید</option>
-                                                                 {categoriesState.list.map((item: any) => (
-                                                                      <option value={item._id}>{item.name}</option>
-                                                                 ))}
-                                                            </select>
-
-                                                       </div>
-                                                       <ErrComponent text={productFormState.data.categoryIdErr} />
-                                                  </div>
-
-                                                  <div className="mb-4">
-                                                       <LabelComponent title="برند" />
-                                                       <div className="flex flex-row gap-2 justify-end items-center bg-gray-100  
-                text-gray-900 text-sm rounded-lg  px-1">
-                                                            <select id="brand" name="brand" className="bg-gray-100 border
-                border-gray-100 text-gray-900 text-sm rounded-lg  block  p-2.5
-                w-full    outline-non"   onChange={selectProductBrand}>
-                                                                 <option value="11">همه دسته ها</option>
-                                                                 <option value="66ca18cb8e6d2287688b9f28">الکترونیک</option>
-                                                                 <option value="66ca18cb8e6d2287688b9f28">لباس</option>
-                                                                 <option value="66ca18cb8e6d2287688b9f28">خودرو</option>
-                                                            </select>
+                                                       <div className="grid grid-cols-4 w-full justify-start items-start">
+                                                            {/* {productFormState.data.subCategories.map((item: any) => (
+                                       <TagComponent title={item} />
+                                  ))} */}
                                                        </div>
 
-                                                  </div>
-                                                  <div className="mb-4">
-                                                       <LabelComponent title="تصاویر محصول" />
-
-                                                       <div className="flex flex-col gap-2 justify-start items-start bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                                            <input
-                                                                 id="files2"
-                                                                 name="files2"
-                                                                 type="file"
-                                                                 accept=".png,.jpg"
-                                                                 multiple
-                                                                 onChange={fillProductImages}
-                                                            />
-                                                            <div className="flex flex-row gap-2 m-2">
-                                                                 {productFormState.data.images.map((item: any) => (
-                                                                      <img
-                                                                           src={getDefaultImageAvator(
-                                                                                item
-                                                                           )}
-                                                                           className="w-full h-20"
-                                                                           alt="store logo"
-                                                                           crossOrigin="anonymous"
-                                                                      />
-
-                                                                 ))}
-                                                            </div>
-                                                       </div>
-                                                  </div>
-                                                  <div className="mb-4">
-                                                       <LabelComponent title="توضیح کوتاه" />
-
-                                                       <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                                            <textarea name="desc" rows={5} id="desc"
-                                                                 onChange={fillProductShortDesc}
-                                                                 value={productFormState.data.shortDesc}
-                                                                 className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none"></textarea>
-                                                       </div>
-                                                       <ErrComponent text={productFormState.data.shortDescErr} />
-
-                                                  </div>
-                                                  {/* <div className="mb-4">
-               <LabelComponent title="نقاط قوت" required="true" />
-
-               <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                    <div className="w-full">
-                         <input type="text" ref={strongPointsRef} onKeyDown={onStrongPointsKeyDown} className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
-                    </div>
-                    <div className="grid grid-cols-4 justify-start items-start w-full">
-                         {productFormState.data.strongPoints.map((item: any) => (
-                              <TagComponent title={item} />
-                         ))}
-                    </div>
-               </div>
-          </div>
-          <div className="mb-4">
-               <LabelComponent title="نقاط ضعف" required="true" />
-
-               <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                    <div className="w-full">
-                         <input type="text" ref={weakPointsRef} onKeyDown={onWeakPointsKeyDown} className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
-                    </div>
-                    <div className="grid grid-cols-4 justify-start items-start w-full">
-                         {productFormState.data.weakPoints.map((item: any) => (
-                              <TagComponent title={item} />
-                         ))}
-                    </div>
-               </div>
-          </div> */}
-                                                  <div className="mb-4">
-                                                       <LabelComponent title="توضیحات محصول" />
-                                                       <SunEditor getSunEditorInstance={getSunEditorInstance} />
                                                   </div>
                                              </div>
+                                             <div className="mb-4">
+                                                  <LabelComponent title="زیر مجموعه اصلی" name="CategoryId" required="true" />
+
+                                                  <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+
+                                                       <select id="CategoryId"
+                                                            ref={categoryIdRef}
+                                                            name="CategoryId"
+                                                            className="bg-gray-100 border
+                                  border-gray-100 text-gray-900 text-sm rounded-lg  block  p-2.5
+                                  w-full    outline-non" >
+
+                                                            <option value="11"> انتخاب کنید</option>
+                                                            {/* {categoriesState.list.map((item: any) => (
+                                       <option key={item._id} value={item._id}>{item.name}</option>
+                                  ))} */}
+                                                       </select>
+
+                                                  </div>
+                                                  <ErrComponent text={productFormState.data.categoryIdErr} />
+                                             </div>
+
+                                             <div className="mb-4">
+                                                  <LabelComponent title="برند" name="brand" />
+                                                  <div className="flex flex-row gap-2 justify-end items-center bg-gray-100  
+                    text-gray-900 text-sm rounded-lg  px-1">
+                                                       <select
+                                                            id="brand"
+                                                            name="brand"
+                                                            ref={brandRef}
+                                                            className="bg-gray-100 border
+                        border-gray-100 text-gray-900 text-sm rounded-lg  block  p-2.5
+                        w-full    outline-non"   >
+                                                            <option value="11">همه دسته ها</option>
+                                                            <option value="66ca18cb8e6d2287688b9f28">الکترونیک</option>
+                                                            <option value="66ca18cb8e6d2287688b9f28">لباس</option>
+                                                            <option value="66ca18cb8e6d2287688b9f28">خودرو</option>
+                                                       </select>
+                                                  </div>
+
+                                             </div>
+                                             <div className="mb-4">
+                                                  <LabelComponent title="تصاویر محصول" name="images" />
+
+                                                  <div className="flex flex-col gap-2 justify-start items-start bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                                       <input
+                                                            id="files2"
+                                                            name="files2"
+                                                            type="file"
+                                                            accept=".png,.jpg"
+                                                            multiple
+                                                            onChange={fillProductImages}
+                                                       />
+                                                       <div className="flex flex-row gap-2 m-2">
+                                                            {/* {productFormState.data.images.map((item: any) => (
+                                       <img key={item}
+                                            src={getDefaultImageAvator(
+                                                 item
+                                            )}
+                                            className="w-full h-20"
+                                            alt="store logo"
+                                            crossOrigin="anonymous"
+                                       />
+
+                                  ))} */}
+                                                       </div>
+                                                  </div>
+                                             </div>
+                                             <div className="mb-4">
+                                                  <LabelComponent title="توضیح کوتاه" name="desc" />
+
+                                                  <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                                       <textarea
+                                                            name="shortDesc"
+                                                            id="shortDesc"
+                                                            ref={shortDescRef}
+                                                            rows={5}
+                                                            className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none"></textarea>
+                                                  </div>
+                                                  <ErrComponent text={productFormState.data.shortDescErr} />
+
+                                             </div>
+                                             {/* <div className="mb-4">
+<LabelComponent title="نقاط قوت" required="true" />
+
+<div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+<div className="w-full">
+<input type="text" ref={strongPointsRef} onKeyDown={onStrongPointsKeyDown} className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
+</div>
+<div className="grid grid-cols-4 justify-start items-start w-full">
+{productFormState.data.strongPoints.map((item: any) => (
+<TagComponent title={item} />
+))}
+</div>
+</div>
+</div>
+<div className="mb-4">
+<LabelComponent title="نقاط ضعف" required="true" />
+
+<div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+<div className="w-full">
+<input type="text" ref={weakPointsRef} onKeyDown={onWeakPointsKeyDown} className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
+</div>
+<div className="grid grid-cols-4 justify-start items-start w-full">
+{productFormState.data.weakPoints.map((item: any) => (
+<TagComponent title={item} />
+))}
+</div>
+</div>
+</div> */}
+                                             <div className="mb-4">
+                                                  <LabelComponent name="SunEditor" title="توضیحات محصول" />
+                                                  <SunEditor getSunEditorInstance={getSunEditorInstance} />
+                                             </div>
+                                        </div>
                                         {/* </div> */}
 
                                    </div>
                               )}
 
+
+
                               {/* seo */}
-                              {seoTabToggle && (
+                              {productAddTabState.data.seoTabToggle && (
                                    <div className="flex flex-col w-full bg-white  border border-gray-200">
                                         <BoxTitleUnderlineComponent title="Seo" />
                                         <div className="p-4">
                                              <div className="mb-4">
                                                   <LabelComponent title="عنوان در صفحه" />
-                                                  <InputBox1Component
-                                                       name="pageTitle"
-                                                       value={productFormState.data.pageTitle}
-                                                       onchangeFunc={fillProductPageTitle}
-                                                  />
+                                                  <div className="flex w-full flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                                       <input type="text"
+                                                            name="pageTitle"
+                                                            id="pageTitle"
+                                                            ref={pageTitleRef}
+                                                            className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
+                                                  </div>
                                                   <ErrComponent text={productFormState.data.pageTitleErr} />
                                              </div>
 
 
                                              <div className="mb-4">
                                                   <LabelComponent title="عنوان لینک" />
-                                                  <InputBox1Component
-                                                       name="pageLink"
-                                                       value={productFormState.data.pageLink}
-                                                       onchangeFunc={fillProductPageLink}
-                                                  />
+                                                  <div className="flex w-full flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                                       <input type="text"
+                                                            name="pageLink"
+                                                            id="pageLink"
+                                                            ref={pageLinkRef}
+                                                            className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
+                                                  </div>
                                                   <ErrComponent text={productFormState.data.pageLinkErr} />
                                              </div>
 
@@ -711,8 +755,7 @@ export default function ProductAddComponent() {
                                                   <LabelComponent title="توضیحات" />
                                                   <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
                                                        <textarea name="desc" rows={5} id="desc"
-                                                            onChange={fillProductDesc}
-                                                            value={productFormState.data.desc}
+                                                            ref={descRef}
                                                             className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none"></textarea>
                                                   </div>
                                                   <ErrComponent text={productFormState.data.descErr} />
@@ -726,9 +769,9 @@ export default function ProductAddComponent() {
                                                             <input type="text" ref={KeywordsRef} onKeyDown={onKeywordsKeyDown} className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
                                                        </div>
                                                        <div className="grid grid-cols-4 justify-start items-start w-full">
-                                                            {productFormState.data.keywords.map((item: any) => (
-                                                                 <TagComponent title={item} />
-                                                            ))}
+                                                            {/* {productFormState.data.keywords.map((item: any) => (
+                                                                      <TagComponent title={item} />
+                                                                 ))} */}
                                                        </div>
                                                   </div>
                                              </div>
@@ -737,9 +780,12 @@ export default function ProductAddComponent() {
 
                                                   <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
 
-                                                       <select id="countries" className="bg-gray-100 border
+                                                       <select id="status"
+                                                            name="status"
+                                                            ref={statusRef}
+                                                            className="bg-gray-100 border
                                                        border-gray-100 text-gray-900 text-sm rounded-lg  block  p-2.5
-                                                       w-full    outline-non" onChange={selectProductStatus}>
+                                                       w-full outline-non" >
                                                             <option value="11">انتخاب کنید...</option>
                                                             <option value="1">فعال</option>
                                                             <option value="2">غیرفعال</option>
@@ -754,12 +800,12 @@ export default function ProductAddComponent() {
                                                   <LabelComponent title="برچسب ها" />
                                                   <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
                                                        <div className="w-full">
-                                                            <input type="text" ref={tagsRef} onKeyDown={onTagsKeyDown} className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
+                                                            <input type="text" id="tags" name="tags" ref={tagsRef} onKeyDown={onTagsKeyDown} className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
                                                        </div>
                                                        <div className="grid grid-cols-4 justify-start items-start w-full">
-                                                            {productFormState.data.tags.map((item: any) => (
-                                                                 <TagComponent title={item} />
-                                                            ))}
+                                                            {/* {productFormState.data.tags.map((item: any) => (
+                                                                      <TagComponent title={item} />
+                                                                 ))} */}
                                                        </div>
                                                   </div>
                                              </div>
@@ -768,63 +814,67 @@ export default function ProductAddComponent() {
                               )}
 
                               {/* فروش */}
-                              {sellTabToggle && (
+                              {productAddTabState.data.sellTabToggle && (
                                    <div className="flex flex-col w-full bg-white  border border-gray-200">
                                         <BoxTitleUnderlineComponent title="فروش" />
                                         <div className="p-4">
                                              <div className="mb-4">
                                                   <LabelComponent title="قیمت" />
-                                                  <InputBox1Component
-                                                       name="price"
-                                                       value={productFormState.data.price}
-                                                       onchangeFunc={fillProductPrice}
-                                                  />
+
+                                                  <div className="flex w-full flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                                       <input type="text"
+                                                            name="price"
+                                                            id="price"
+                                                            ref={priceRef}
+                                                            className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
+                                                  </div>
                                                   <ErrComponent text={productFormState.data.priceErr} />
                                              </div>
                                              <div className="mb-4">
                                                   <LabelComponent title="قیمت فروش" />
-                                                  <InputBox1Component
+                                                  <input type="text"
                                                        name="purchasePrice"
-                                                       value={productFormState.data.purchasePrice}
-                                                       onchangeFunc={fillProductPurchasePrice}
-                                                  />
+                                                       id="purchasePrice"
+                                                       ref={purchasePriceRef}
+                                                       className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
                                                   <ErrComponent text={productFormState.data.purchasePriceErr} />
                                              </div>
                                              <div className="mb-4">
                                                   <LabelComponent title="سایز" />
-                                                  <InputBox1Component
+                                                  <input type="text"
                                                        name="size"
-                                                       value={productFormState.data.size}
-                                                       onchangeFunc={fillProductSize}
-                                                  />
+                                                       id="size"
+                                                       ref={sizeRef}
+                                                       className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
                                                   <ErrComponent text={productFormState.data.sizeErr} />
                                              </div>
                                              <div className="mb-4">
                                                   <LabelComponent title="وزن" />
-                                                  <InputBox1Component
+                                                  <input type="text"
                                                        name="weight"
-                                                       value={productFormState.data.weight}
-                                                       onchangeFunc={fillProductWeight}
-                                                  />
+                                                       id="weight"
+                                                       ref={weightRef}
+                                                       className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
                                                   <ErrComponent text={productFormState.data.weightErr} /> </div>
                                              <div className="mb-4">
                                                   <LabelComponent title="موجودی" />
-                                                  <InputBox1Component
+                                                  <input type="text"
                                                        name="stock"
-                                                       value={productFormState.data.stock}
-                                                       onchangeFunc={fillProductStock}
-                                                  />
+                                                       id="stock"
+                                                       ref={stockRef}
+                                                       className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
                                                   <ErrComponent text={productFormState.data.stockErr} /> </div>
                                              <div className="mb-4">
                                                   <LabelComponent title="رنگ" />
                                                   <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
                                                        <div className="w-full">
-                                                            <input type="text" ref={colorsRef} onKeyDown={onColorsKeyDown} className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
+                                                            <input type="text" name="colors"
+                                                                 id="colors" ref={colorsRef} onKeyDown={onColorsKeyDown} className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
                                                        </div>
                                                        <div className="grid grid-cols-4 justify-start items-start w-full">
-                                                            {productFormState.data.colors.map((item: any) => (
-                                                                 <TagComponent title={item} />
-                                                            ))}
+                                                            {/* {productFormState.data.colors.map((item: any) => (
+                                                                      <TagComponent title={item} />
+                                                                 ))} */}
                                                        </div>
                                                   </div>    </div>
                                         </div>
@@ -841,5 +891,6 @@ export default function ProductAddComponent() {
                </div>
 
           </div >
+
      )
 }

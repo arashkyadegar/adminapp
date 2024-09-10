@@ -4,10 +4,11 @@ import productFormReducer from "./product/product-form";
 import productsReducer from "./product/products";
 import categoryFormReducer from "./category/category-form";
 import categoriesReducer from "./category/categories";
-
+import addTabReducer from "./productTab/productAddTab";
 export default combineReducers({
   categoryForm: categoryFormReducer,
   categories: categoriesReducer,
   productForm: productFormReducer,
-  products: productsReducer
+  products: productsReducer,
+  addTab: addTabReducer
 });

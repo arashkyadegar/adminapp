@@ -53,12 +53,13 @@ export default function PcSidebarComponent() {
 
                {/* کالا و انبار */}
                <div className="relative flex cursor-pointer rounded-md hover:bg-gray-400 hover:text-white border border-gray-200  text-gray-500 duration-150 flex-col  m-2 h-10 items-center justify-center">
-                    <svg onClick={toggleCellarMenu}  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
-                         <path fillRule="evenodd" d="M3 6a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3V6ZM3 15.75a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-2.25Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3v-2.25Z" clip-rule="evenodd" />
+
+                    <svg onClick={toggleCellarMenu} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
+                         <path fillRule="evenodd" d="M3 6a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3V6ZM3 15.75a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-2.25Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3v-2.25Z" clipRule="evenodd" />
                     </svg>
 
                     {asideCellarDrpToggle && (
-                         <ul className="absolute  right-16 top-0 w-40 bg-white border border-gray-400 rounded-lg flex flex-col gap-2" >
+                         <ul className="absolute rounded-md overflow-hidden right-16 top-0 w-40 bg-white border border-gray-200 flex flex-col gap-2" >
                               <li className="cursor-pointer flex items-center  w-full  text-gray-900 p-2 hover:bg-teal-300 hover:text-white  ">
                                    <button onClick={() => navigateToUrl("/category/category-list")}>لیست دسته ها</button>
                               </li>
@@ -69,7 +70,7 @@ export default function PcSidebarComponent() {
                               <li className="cursor-pointer flex items-center  w-full  text-gray-900  p-2 hover:bg-teal-300 hover:text-white">
                                    <button onClick={() => navigateToUrl("/product/product-list")}>لیست کالاها</button>
                               </li>
-                              <li className="cursor-pointer flex items-center  w-full  text-gray-900  p-2 hover:bg-teal-300 hover:text-white">
+                              <li className="cursor-pointer  rounded-b-md flex items-center  w-full  text-gray-900  p-2 hover:bg-teal-300 hover:text-white">
                                    <button onClick={() => navigateToUrl("/product/product-add")}>ثبت کالا</button>
                               </li>
                          </ul>
@@ -83,11 +84,11 @@ export default function PcSidebarComponent() {
                          <path d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z" />
                     </svg>
                     {asideOrderDrpToggle && (
-                         <ul className="absolute  right-16 top-0 w-40 bg-white border border-gray-400 rounded-lg flex flex-col gap-2" >
+                         <ul className="absolute rounded-md overflow-hidden right-16 top-0 w-40 bg-white border border-gray-200 flex flex-col gap-2" >
                               <li className="cursor-pointer flex items-center  w-full  text-gray-900  p-2 hover:bg-teal-300 hover:text-white  ">
                                    <Link to="/order/order-list">لیست سفارشات</Link>
                               </li>
-                              <li className="cursor-pointer flex items-center  w-full  text-gray-900  p-2 hover:bg-teal-300 hover:text-white  ">
+                              <li className="cursor-pointer rounded-b-md flex items-center  w-full  text-gray-900  p-2 hover:bg-teal-300 hover:text-white  ">
                                    <a href="#"> گزارشات</a>
                               </li>
                          </ul>
@@ -103,13 +104,13 @@ export default function PcSidebarComponent() {
                     </svg>
 
                     {asideUserDrpToggle && (
-                         <ul className="absolute  right-16 top-0 w-40 bg-white border border-gray-400 rounded-lg  flex flex-col gap-2" >
+                         <ul className="absolute rounded-md overflow-hidden right-16 top-0 w-40 bg-white border border-gray-200 flex flex-col gap-2" >
 
                               <li className="cursor-pointer flex items-center  w-full  text-gray-900  p-2 hover:bg-teal-300 hover:text-white  ">
                                    <a href="#">ثبت کاربر</a>
 
                               </li>
-                              <li className="cursor-pointer flex items-center  w-full  text-gray-900  p-2 hover:bg-teal-300 hover:text-white  ">
+                              <li className="cursor-pointer rounded-b-md flex items-center  w-full  text-gray-900  p-2 hover:bg-teal-300 hover:text-white  ">
                                    <a href="#">لیست کاربران</a>
 
                               </li>
@@ -125,11 +126,11 @@ export default function PcSidebarComponent() {
                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     </svg>
                     {asideFinancialDrpToggle && (
-                         <ul className="absolute  right-16 top-0 w-40 bg-white border border-gray-400 rounded-lg flex flex-col gap-2" >
+                         <ul className="absolute  rounded-md overflow-hidden  right-16 top-0 w-40 bg-white border border-gray-200  flex flex-col gap-2" >
                               <li className="cursor-pointer flex items-center  w-full  text-gray-900  p-2 hover:bg-teal-300 hover:text-white  ">
                                    <a href="#">شارژ کیف پول</a>
                               </li>
-                              <li className="cursor-pointer flex items-center  w-full  text-gray-900  p-2 hover:bg-teal-300 hover:text-white  ">
+                              <li className="cursor-pointer rounded-b-md flex items-center  w-full  text-gray-900  p-2 hover:bg-teal-300 hover:text-white  ">
                                    <a href="#">گزارش شارژ</a>
 
                               </li>
