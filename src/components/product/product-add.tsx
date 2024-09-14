@@ -5,10 +5,10 @@ import 'suneditor/dist/css/suneditor.min.css'
 import validator from "validator";
 import TagComponent from "../share/tag";
 import ErrComponent from "../share/err";
-
+import { produce } from "immer";
 import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
 import { rgx_insecure } from "../../utility/regex";
-import { productFormFilled } from "../../redux/store/product/product-form";
+import { productFormFilled, productFormImagesAdded } from "../../redux/store/product/product-form";
 import SunEditor from 'suneditor-react';
 import SunEditorCore from "suneditor/src/lib/core";
 import 'suneditor/dist/css/suneditor.min.css';
@@ -195,14 +195,14 @@ export default function ProductAddComponent() {
                     })
                );
           } else {
-          dispatch(
-               productFormFilled({
-                    ...productFormState.data,
-                    nameErr: "",
-                    name: text,
-                    formIsValid: true,
-               })
-          );
+               dispatch(
+                    productFormFilled({
+                         ...productFormState.data,
+                         nameErr: "",
+                         name: text,
+                         formIsValid: true,
+                    })
+               );
           }
      }
 
@@ -543,6 +543,42 @@ export default function ProductAddComponent() {
                })
           );
      }
+
+     function fillImageStatus(event: any): void {
+          let name = event.target.value;
+          let obj = productFormState.data.images.find((x: any) => x.name == name);
+          if (obj != undefined) {
+               const nextState = produce(productFormState, (draftState) => {
+                    draftState.data.images.map((i: any) => {
+                         if (i.name == name) {
+                              i.status = true;
+                         } else {
+                              i.status = false;
+                         }
+                    });
+               });
+               dispatch(productFormImagesAdded(nextState.data.images));
+          }
+     }
+
+     function fillImageAlt(event: any): void {
+          let element = event.target as HTMLInputElement;
+          let text = element.value;
+          let id = element.getAttribute('id');
+          let obj = productFormState.data.images.find((x: any) => x.name == id);
+          if (obj != undefined) {
+               const nextState = produce(productFormState, (draftState) => {
+                    draftState.data.images.map((i: any) => {
+                         if (i.name == id) {
+                              i.alt = text;
+                         }
+                    });
+               });
+               dispatch(productFormImagesAdded(nextState.data.images));
+          }
+     }
+
+
      return (
           <div className="w-full sm:w-11/12 mr-0 sm:mr-16">
                {productFormState.isLoading && (
@@ -573,7 +609,7 @@ export default function ProductAddComponent() {
                                         <BoxTitleUnderlineComponent title="اطلاعات اصلی" />
                                         <div className="p-4">
                                              <div className="mb-4">
-                                                  {/* <LabelComponent name="name" title="عنوان محصول" required="true" /> */}
+                                                  <LabelComponent name="name" title="عنوان محصول" required="true" />
                                                   <div className="flex w-full flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
                                                        <input type="text"
                                                             name="name"
@@ -586,17 +622,17 @@ export default function ProductAddComponent() {
                                              </div>
                                              <div className="mb-4">
                                                   <LabelComponent name="subCategories" title="زیر مجموعه" required="true" />
-
                                                   <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
                                                        <div className="w-full">
                                                             <input type="text" id="subCategories" name="subCategories" ref={subCategoriesRef} onKeyDown={onSubCategoriesKeyDown} className=" w-full  bg-gray-100  text-gray-900 text-sm  block  p-2.5     outline-none" />
                                                        </div>
-                                                       <div className="grid grid-cols-4 w-full justify-start items-start">
-                                                            {/* {productFormState.data.subCategories.map((item: any) => (
-                                       <TagComponent title={item} />
-                                  ))} */}
-                                                       </div>
-
+                                                       {productFormState.data.subCategories !== undefined && (
+                                                            <div className="grid grid-cols-4 w-full justify-start items-start">
+                                                                 {productFormState.data.subCategories.map((item: any) => (
+                                                                      <TagComponent title={item} />
+                                                                 ))}
+                                                            </div>
+                                                       )}
                                                   </div>
                                              </div>
                                              <div className="mb-4">
@@ -605,20 +641,21 @@ export default function ProductAddComponent() {
                                                   <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
 
                                                        <select id="CategoryId"
-                                                            ref={categoryIdRef}
                                                             name="CategoryId"
+                                                            value={productFormState.data.categoryId}
+                                                            onChange={selectProductCategoryId}
                                                             className="bg-gray-100 border
                                   border-gray-100 text-gray-900 text-sm rounded-lg  block  p-2.5
                                   w-full    outline-non" >
 
                                                             <option value="11"> انتخاب کنید</option>
-                                                            {/* {categoriesState.list.map((item: any) => (
-                                       <option key={item._id} value={item._id}>{item.name}</option>
-                                  ))} */}
+                                                            {categoriesState.list.map((item: any) => (
+                                                                 <option key={item._id} value={item._id}>{item.name}</option>
+                                                            ))}
                                                        </select>
 
                                                   </div>
-                                                  <ErrComponent text={productFormState.data.categoryIdErr} />
+                                                  {/* <ErrComponent text={productFormState.data.categoryIdErr} /> */}
                                              </div>
 
                                              <div className="mb-4">
@@ -628,7 +665,8 @@ export default function ProductAddComponent() {
                                                        <select
                                                             id="brand"
                                                             name="brand"
-                                                            ref={brandRef}
+                                                            value={productFormState.data.brand}
+                                                            onChange={selectProductBrand}
                                                             className="bg-gray-100 border
                         border-gray-100 text-gray-900 text-sm rounded-lg  block  p-2.5
                         w-full    outline-non"   >
@@ -652,18 +690,24 @@ export default function ProductAddComponent() {
                                                             multiple
                                                             onChange={fillProductImages}
                                                        />
-                                                       <div className="flex flex-row gap-2 m-2">
-                                                            {/* {productFormState.data.images.map((item: any) => (
-                                       <img key={item}
-                                            src={getDefaultImageAvator(
-                                                 item
-                                            )}
-                                            className="w-full h-20"
-                                            alt="store logo"
-                                            crossOrigin="anonymous"
-                                       />
+                                                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 m-2">
+                                                            {productFormState.data.images.map((item: any, index: number) => (
 
-                                  ))} */}
+                                                                 <div className="flex flex-col justify-start items-start">
+                                                                      <input type="text" onBlur={fillImageAlt} id={item.name} className=" w-full  bg-white  text-gray-900 text-sm  block  p-2.5     outline-none" />
+                                                                      <input type="radio" name="status" value={item.name} onChange={fillImageStatus} />
+                                                                      <img key={item.name}
+                                                                           src={getDefaultImageAvator(
+                                                                                item.name
+                                                                           )}
+                                                                           className="w-full h-20"
+                                                                           alt="store logo"
+                                                                           crossOrigin="anonymous"
+                                                                      />
+
+                                                                 </div>
+
+                                                            ))}
                                                        </div>
                                                   </div>
                                              </div>
@@ -674,11 +718,12 @@ export default function ProductAddComponent() {
                                                        <textarea
                                                             name="shortDesc"
                                                             id="shortDesc"
-                                                            ref={shortDescRef}
+                                                            value={productFormState.data.shortDesc}
+                                                            onChange={fillProductShortDesc}
                                                             rows={5}
                                                             className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none"></textarea>
                                                   </div>
-                                                  <ErrComponent text={productFormState.data.shortDescErr} />
+                                                  {/* <ErrComponent text={productFormState.data.shortDescErr} /> */}
 
                                              </div>
                                              {/* <div className="mb-4">
@@ -732,10 +777,11 @@ export default function ProductAddComponent() {
                                                        <input type="text"
                                                             name="pageTitle"
                                                             id="pageTitle"
-                                                            ref={pageTitleRef}
+                                                            value={productFormState.data.pageTitle}
+                                                            onChange={fillProductPageTitle}
                                                             className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
                                                   </div>
-                                                  <ErrComponent text={productFormState.data.pageTitleErr} />
+                                                  {/* <ErrComponent text={productFormState.data.pageTitleErr} /> */}
                                              </div>
 
 
@@ -745,7 +791,8 @@ export default function ProductAddComponent() {
                                                        <input type="text"
                                                             name="pageLink"
                                                             id="pageLink"
-                                                            ref={pageLinkRef}
+                                                            value={productFormState.data.pageLink}
+                                                            onChange={fillProductPageLink}
                                                             className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
                                                   </div>
                                                   <ErrComponent text={productFormState.data.pageLinkErr} />
@@ -755,7 +802,8 @@ export default function ProductAddComponent() {
                                                   <LabelComponent title="توضیحات" />
                                                   <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
                                                        <textarea name="desc" rows={5} id="desc"
-                                                            ref={descRef}
+                                                            value={productFormState.data.desc}
+                                                            onChange={fillProductDesc}
                                                             className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none"></textarea>
                                                   </div>
                                                   <ErrComponent text={productFormState.data.descErr} />
@@ -769,9 +817,9 @@ export default function ProductAddComponent() {
                                                             <input type="text" ref={KeywordsRef} onKeyDown={onKeywordsKeyDown} className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
                                                        </div>
                                                        <div className="grid grid-cols-4 justify-start items-start w-full">
-                                                            {/* {productFormState.data.keywords.map((item: any) => (
-                                                                      <TagComponent title={item} />
-                                                                 ))} */}
+                                                            {productFormState.data.keywords.map((item: any) => (
+                                                                 <TagComponent title={item} />
+                                                            ))}
                                                        </div>
                                                   </div>
                                              </div>
@@ -782,7 +830,8 @@ export default function ProductAddComponent() {
 
                                                        <select id="status"
                                                             name="status"
-                                                            ref={statusRef}
+                                                            value={productFormState.data.status}
+                                                            onChange={selectProductStatus}
                                                             className="bg-gray-100 border
                                                        border-gray-100 text-gray-900 text-sm rounded-lg  block  p-2.5
                                                        w-full outline-non" >
@@ -794,7 +843,7 @@ export default function ProductAddComponent() {
                                                        </select>
 
                                                   </div>
-                                                  <ErrComponent text={productFormState.data.statusErr} />
+
                                              </div>
                                              <div className="mb-4">
                                                   <LabelComponent title="برچسب ها" />
@@ -803,9 +852,9 @@ export default function ProductAddComponent() {
                                                             <input type="text" id="tags" name="tags" ref={tagsRef} onKeyDown={onTagsKeyDown} className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
                                                        </div>
                                                        <div className="grid grid-cols-4 justify-start items-start w-full">
-                                                            {/* {productFormState.data.tags.map((item: any) => (
-                                                                      <TagComponent title={item} />
-                                                                 ))} */}
+                                                            {productFormState.data.tags.map((item: any) => (
+                                                                 <TagComponent title={item} />
+                                                            ))}
                                                        </div>
                                                   </div>
                                              </div>
@@ -825,45 +874,48 @@ export default function ProductAddComponent() {
                                                        <input type="text"
                                                             name="price"
                                                             id="price"
-                                                            ref={priceRef}
+                                                            value={productFormState.data.price}
+                                                            onChange={fillProductPrice}
                                                             className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
                                                   </div>
-                                                  <ErrComponent text={productFormState.data.priceErr} />
+
                                              </div>
                                              <div className="mb-4">
                                                   <LabelComponent title="قیمت فروش" />
                                                   <input type="text"
                                                        name="purchasePrice"
                                                        id="purchasePrice"
-                                                       ref={purchasePriceRef}
+                                                       value={productFormState.data.purchasePrice}
+                                                       onChange={fillProductPurchasePrice}
                                                        className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
-                                                  <ErrComponent text={productFormState.data.purchasePriceErr} />
                                              </div>
                                              <div className="mb-4">
                                                   <LabelComponent title="سایز" />
                                                   <input type="text"
                                                        name="size"
                                                        id="size"
-                                                       ref={sizeRef}
+                                                       value={productFormState.data.size}
+                                                       onChange={fillProductSize}
                                                        className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
-                                                  <ErrComponent text={productFormState.data.sizeErr} />
                                              </div>
                                              <div className="mb-4">
                                                   <LabelComponent title="وزن" />
                                                   <input type="text"
                                                        name="weight"
                                                        id="weight"
-                                                       ref={weightRef}
+                                                       value={productFormState.data.weight}
+                                                       onChange={fillProductWeight}
                                                        className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
-                                                  <ErrComponent text={productFormState.data.weightErr} /> </div>
+                                             </div>
                                              <div className="mb-4">
                                                   <LabelComponent title="موجودی" />
                                                   <input type="text"
                                                        name="stock"
                                                        id="stock"
-                                                       ref={stockRef}
+                                                       value={productFormState.data.stock}
+                                                       onChange={fillProductStock}
                                                        className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
-                                                  <ErrComponent text={productFormState.data.stockErr} /> </div>
+                                             </div>
                                              <div className="mb-4">
                                                   <LabelComponent title="رنگ" />
                                                   <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
@@ -872,9 +924,9 @@ export default function ProductAddComponent() {
                                                                  id="colors" ref={colorsRef} onKeyDown={onColorsKeyDown} className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
                                                        </div>
                                                        <div className="grid grid-cols-4 justify-start items-start w-full">
-                                                            {/* {productFormState.data.colors.map((item: any) => (
-                                                                      <TagComponent title={item} />
-                                                                 ))} */}
+                                                            {productFormState.data.colors.map((item: any) => (
+                                                                 <TagComponent title={item} />
+                                                            ))}
                                                        </div>
                                                   </div>    </div>
                                         </div>

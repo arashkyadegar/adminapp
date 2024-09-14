@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-
+import update from 'react-addons-update';
 // Part 2
 export const productFormSlice = createSlice({
      name: "productForm",
@@ -38,7 +37,7 @@ export const productFormSlice = createSlice({
                descErr: "",
                keywordsErr: "",
                tagsErr: "",
-               
+
                status: 0,
                statusErr: "",
                size: "",
@@ -138,6 +137,11 @@ export const productFormSlice = createSlice({
                state.data = action.payload;
                state.lastFetch = "";
           },
+
+          productFormImagesAdded: (state: any, action: PayloadAction<any>) => {
+               state.data.images = action.payload;
+               state.lastFetch = "";
+          },
           productFormSubcategoryAdded: (state: any, action: PayloadAction<any>) => {
                state.data.subCategories = action.payload;
                state.lastFetch = "";
@@ -163,5 +167,6 @@ export const {
      productFormCleared,
      productFormFilled,
      productFormFetched,
+     productFormImagesAdded
 } = productFormSlice.actions
 export default productFormSlice.reducer;

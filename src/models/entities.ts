@@ -4,8 +4,11 @@ export class LoginForm {
      emailError: string = "";
      passwordError: string = "";
      formIsValid: boolean = false;
-   }
-
+}
+export class ImageEntity {
+     name: string = "";
+     statuse: boolean = false;
+}
 export class ProductEntity {
      _id: string = "";
 
@@ -14,7 +17,7 @@ export class ProductEntity {
      subCategories: string[] = [];
      categoryId: string = "";
      brand: string = "";
-     images: string[] = [];
+     images: ImageEntity[] = [];
      shortDesc: string = "";
      longdesc: string = "";
      weakPoints: string[] = [];
