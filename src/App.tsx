@@ -13,7 +13,8 @@ import ProductAddComponent from './components/product/product-add';
 import DashboardComponent from './components/dashboard';
 import OrderAddComponent from './components/order/order-add';
 import OrderListComponent from './components/order/order-list';
-import "react-toastify/dist/ReactToastify.css";
+
+
 import { LoginForm } from './models/entities';
 import { persistStore } from 'redux-persist';
 

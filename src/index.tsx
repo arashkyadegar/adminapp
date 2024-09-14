@@ -6,7 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { persistor, mstore } from './redux/store/store';
 import { PersistGate } from 'redux-persist/integration/react';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -16,6 +17,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <Provider store={mstore}>
     <PersistGate persistor={persistor}>
+      <ToastContainer />
       <App />
     </PersistGate>
   </Provider>

@@ -8,7 +8,7 @@ import ErrComponent from "../share/err";
 import { produce } from "immer";
 import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
 import { rgx_insecure } from "../../utility/regex";
-import { productFormFilled, productFormImagesAdded } from "../../redux/store/product/product-form";
+import { productFormCleared, productFormFilled, productFormImagesAdded } from "../../redux/store/product/product-form";
 import SunEditor from 'suneditor-react';
 import SunEditorCore from "suneditor/src/lib/core";
 import 'suneditor/dist/css/suneditor.min.css';
@@ -61,6 +61,7 @@ export default function ProductAddComponent() {
      const categoriesState = useAppSelector((state) => state.entities.categories);
      const productAddTabState = useAppSelector((state) => state.entities.addTab);
      useEffect(() => {
+          dispatch(productFormCleared());
           dispatch(getCategoriesAction());
      }, []);
 
@@ -475,7 +476,7 @@ export default function ProductAddComponent() {
           if (productFormState.data.formIsValid) {
                const entity = {
                     _id: "",
-                    name: nameRef.current.value,
+                    name: productFormState.data.name,
                     subCategories: productFormState.data.subCategories,
                     categoryId: productFormState.data.categoryId,
                     brand: productFormState.data.brand,
