@@ -695,8 +695,8 @@ export default function ProductAddComponent() {
                                                             {productFormState.data.images.map((item: any, index: number) => (
 
                                                                  <div className="flex flex-col justify-start items-start">
-                                                                      <input type="text" onBlur={fillImageAlt} id={item.name} className=" w-full  bg-white  text-gray-900 text-sm  block  p-2.5     outline-none" />
-                                                                      <input type="radio" name="status" value={item.name} onChange={fillImageStatus} />
+                                                                      <input type="text" onChange={fillImageAlt} id={item.name} value={item.alt} className=" w-full  bg-white  text-gray-900 text-sm  block  p-2.5     outline-none" />
+                                                                      <input type="radio" name="status" checked={item.status} value={item.name} onChange={fillImageStatus} />
                                                                       <img key={item.name}
                                                                            src={getDefaultImageAvator(
                                                                                 item.name

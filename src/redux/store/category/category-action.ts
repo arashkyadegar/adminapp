@@ -6,7 +6,7 @@ export const submitAddCategoryAction = (category: any) =>
     onSuccess: "categoryForm/categoryFormCleared",
     onError: "categoryForm/categoryFormLoadingStoped",
     onStart: "categoryForm/categoryFormRequested",
-    credentials: "include",
+    // credentials: "include"
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -20,7 +20,7 @@ export const getCategoryAction = (id: any) =>
     onSuccess: "categoryForm/categoryFormFetched",
     onError: "categoryForm/categoryFormFaild",
     method: "GET",
-    credentials: "include",
+    // credentials: "include"
     headers: {
       "Content-Type": "application/json",
     },
@@ -33,7 +33,7 @@ export const getCategoriesAction = () =>
     onError: "categories/categoriesLoadingStoped",
     onStart: "categories/categoriesRequested",
     method: "GET",
-    credentials: "include",
+    // credentials: "include"
     headers: {
       "Content-Type": "application/json",
     },
@@ -48,7 +48,7 @@ export const searchCategoriesAction = (name: string) =>
     onError: "categories/categoriesLoadingStoped",
     onStart: "categories/categoriesRequested",
     method: "GET",
-    credentials: "include",
+    // credentials: "include"
     headers: {
       "Content-Type": "application/json",
     },
@@ -63,7 +63,7 @@ export const submitDeleteCategoryAction = (id: any) =>
     onError: "categories/categoriesLoadingStoped",
     onStart: "categories/categoriesRequested",
     method: "DELETE",
-    credentials: "include",
+    // credentials: "include"
     headers: {
       "Content-Type": "application/json",
     },
@@ -76,7 +76,7 @@ export const submitEditCategoryAction = (category: any) =>
     onSuccess: "categoryForm/categoryFormLoadingStoped",
     onError: "categoryForm/categoryFormLoadingStoped",
     onStart: "categoryForm/categoryFormRequested",
-    credentials: "include",
+    // credentials: "include"
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

@@ -350,6 +350,7 @@ export default function CategoryAddComponent() {
                                                        border-gray-100 text-gray-900 text-sm rounded-lg  block  p-2.5
                                                        w-full    outline-non" onChange={selectParentCategoryId}>
                                                        <option value="11">انتخاب کنید...</option>
+                                                       
                                                        {categoriesState.list.map((item: any) => (
                                                             <option value={item._id}>{item.name}</option>
                                                        ))}
@@ -411,11 +412,11 @@ export default function CategoryAddComponent() {
                                                   <div className="flex flex-row gap-2 m-2">
                                                        <img
                                                             src={getDefaultImageAvator(
-                                                                 categoryFormState.data.image
-                                                            )}
+                                                                 categoryFormState.data.image)
+                                                            }
                                                             className="w-full h-20"
                                                             alt="store logo"
-                                                            crossOrigin="anonymous"
+                                                        
                                                        />
                                                   </div>
                                              </div>
@@ -443,7 +444,7 @@ export default function CategoryAddComponent() {
                                                             )}
                                                             className="w-full h-20"
                                                             alt="store logo"
-                                                            crossOrigin="anonymous"
+                                                     
                                                        />
                                                   </div>
                                              </div>

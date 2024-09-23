@@ -139,6 +139,12 @@ export default function PcSidebarComponent() {
 
                </div>
 
+               {/* تنظیمات */}
+               <div className="relative flex cursor-pointer hover:text-white rounded-md hover:bg-gray-400 border border-gray-200  text-gray-500 duration-150 flex-col  m-2 h-10 items-center justify-center">
+               <button onClick={() => navigateToUrl("/setting")}>111</button>
+
+               </div>
+
 
                {/* خروج */}
                <div className="relative flex cursor-pointer hover:text-white rounded-md hover:bg-gray-400 border border-gray-200  text-gray-500 duration-150 flex-col  m-2 h-10 items-center justify-center">
@@ -147,9 +153,6 @@ export default function PcSidebarComponent() {
                     </svg>
 
                </div>
-
-
-
           </div>
      );
 }

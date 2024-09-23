@@ -17,6 +17,7 @@ import OrderListComponent from './components/order/order-list';
 
 import { LoginForm } from './models/entities';
 import { persistStore } from 'redux-persist';
+import SettingComponent from './components/setting/setting-edit';
 
 function App() {
 
@@ -76,36 +77,37 @@ function App() {
         setNavbarShow,
       }}
     >
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" >
-                <Route path="/" element={<LoginComponent />} />
-              </Route>
-              <Route path="/" element={<Layout />}>
-                {/* <Route index element={<LandingPageComponent />} /> */}
-                {/* <Route path="login" element={<LoginComponent />} /> */}
-                <Route path="dashboard" element={<DashboardComponent />} />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" >
+            <Route path="/" element={<LoginComponent />} />
+          </Route>
+          <Route path="/" element={<Layout />}>
+            {/* <Route index element={<LandingPageComponent />} /> */}
+            {/* <Route path="login" element={<LoginComponent />} /> */}
+            <Route path="dashboard" element={<DashboardComponent />} />
 
 
-                <Route path="product/product-add" element={<ProductAddComponent />} />
-                <Route path="product/product-list" element={<ProductListComponent />} />
-                <Route path="product/product-edit/:id" element={<ProductEditComponent />} />
+            <Route path="setting" element={<SettingComponent />} />
+            <Route path="product/product-add" element={<ProductAddComponent />} />
+            <Route path="product/product-list" element={<ProductListComponent />} />
+            <Route path="product/product-edit/:id" element={<ProductEditComponent />} />
 
 
-                <Route path="category/category-add" element={<CategoryAddComponent />} />
-                <Route path="category/category-list" element={<CategoryListComponent />} />
-                <Route path="category/category-edit/:id" element={<CategoryEditComponent />} />
+            <Route path="category/category-add" element={<CategoryAddComponent />} />
+            <Route path="category/category-list" element={<CategoryListComponent />} />
+            <Route path="category/category-edit/:id" element={<CategoryEditComponent />} />
 
-                <Route path="order/order-add" element={<OrderAddComponent />} />
-                <Route path="order/order-list" element={<OrderListComponent />} />
+            <Route path="order/order-add" element={<OrderAddComponent />} />
+            <Route path="order/order-list" element={<OrderListComponent />} />
 
 
-                {/* <Route path="category-list" element={<CategoryList />} />
+            {/* <Route path="category-list" element={<CategoryList />} />
           <Route path="category-edit/:id" element={<CategoryEdit />} /> */}
-                {/*<Route path="direct" element={<DirectMsgComponent />} /> */}
-              </Route>
-            </Routes>
-          </BrowserRouter>
+            {/*<Route path="direct" element={<DirectMsgComponent />} /> */}
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </myAppContext.Provider>
   );
 }

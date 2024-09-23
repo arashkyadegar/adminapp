@@ -30,6 +30,16 @@ export default function ProductListComponent() {
                     dispatch(getProductsAction());
           }
      }
+     function findMainImage(images: any): string {
+          const x = images.filter((item: any) => item.status == true);
+          if (x.name != undefined) {
+               let name = getDefaultImageAvator(x.name);
+               return name;
+          }
+          return getDefaultImageAvator(images[0].name);
+
+
+     }
 
      return (
           <div className="w-full sm:w-11/12 mr-0 sm:mr-16">
@@ -107,7 +117,7 @@ export default function ProductListComponent() {
                                         </thead>
                                         <tbody>
                                              {productsState.list.map((item: any) => (
-                                                  <tr className="flex flex-row bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600  p-2">
+                                                  <tr key={item._id} className="flex flex-row bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600  p-2">
                                                        <td className="w-4 p-4  ">
                                                             <div className="flex items-center justify-center">
                                                                  <input id="checkbox-table-search-1" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
@@ -116,7 +126,7 @@ export default function ProductListComponent() {
                                                        </td>
 
                                                        <th scope="col" className="flex items-center justify-center w-16">
-                                                            <img src={getDefaultImageAvator(item.images[0])} />
+                                                            <img src={getDefaultImageAvator(item.images[0].name)} />
                                                        </th>
                                                        <td scope="row" className="flex items-center justify-center text-right px-2    w-40">
                                                             {item.name}
@@ -246,7 +256,7 @@ export default function ProductListComponent() {
                                    <div className="flex flex-row-reverse justify-end gap-2 p-2">
                                         <div className="flex items-center justify-center w-8 h-8 bg-teal-600 text-white rounded-md">
                                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-4">
-                                                  <path fillRule="evenodd" d="M7.72 12.53a.75.75 0 0 1 0-1.06l7.5-7.5a.75.75 0 1 1 1.06 1.06L9.31 12l6.97 6.97a.75.75 0 1 1-1.06 1.06l-7.5-7.5Z" clip-rule="evenodd" />
+                                                  <path fillRule="evenodd" d="M7.72 12.53a.75.75 0 0 1 0-1.06l7.5-7.5a.75.75 0 1 1 1.06 1.06L9.31 12l6.97 6.97a.75.75 0 1 1-1.06 1.06l-7.5-7.5Z" clipRule="evenodd" />
                                              </svg>
 
                                         </div>
@@ -255,7 +265,7 @@ export default function ProductListComponent() {
                                         </div>
 
                                         <div className="flex items-center justify-center w-8 h-8 bg-gray-100 text-gray-500 rounded-md">
-                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6">
+                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
                                                   <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
                                              </svg>
 

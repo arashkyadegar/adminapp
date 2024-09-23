@@ -3,7 +3,7 @@ export class FileService {
   async upload(formdata: any): Promise<any> {
     const response = await fetch(this.baseUrl, {
       method: "POST",
-      credentials: "include",
+      // credentials: "include",
       body: formdata,
     });
     return response;
@@ -13,7 +13,7 @@ export class FileService {
   async uploadSingle(formdata: any): Promise<any> {
     const response = await fetch(this.baseUrl + 'productLogo', {
       method: "POST",
-      credentials: "include",
+      // credentials: "include",
       body: formdata,
     });
     return response;

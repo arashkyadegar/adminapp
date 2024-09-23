@@ -6,7 +6,7 @@ export const submitAddProductAction = (product: any) =>
     onSuccess: "productForm/productFormCleared",
     onError: "productForm/productFormLoadingStoped",
     onStart: "productForm/productFormRequested",
-    credentials: "include",
+    // credentials: "include",
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -21,7 +21,7 @@ export const getProductAction = (id: any) =>
     onError: "productForm/productFormLoadingStoped",
     onStart: "productForm/productFormRequested",
     method: "GET",
-    credentials: "include",
+     credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -48,7 +48,7 @@ export const searchProductsAction = ( name: string) =>
     onError: "products/productsLoadingStoped",
     onStart: "products/productsRequested",
     method: "GET",
-    credentials: "include",
+    // credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -63,7 +63,7 @@ export const submitDeleteProductAction = (id: any) =>
     onError: "products/productsLoadingStoped",
     onStart: "products/productsRequested",
     method: "DELETE",
-    credentials: "include",
+    // credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -76,7 +76,7 @@ export const submitEditProductAction = (product: any) =>
     onSuccess: "productForm/productFormLoadingStoped",
     onError: "productForm/productFormLoadingStoped",
     onStart: "productForm/productFormRequested",
-    credentials: "include",
+    // credentials: "include",
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
