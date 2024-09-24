@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const TreeNode = ({ node,onclickFunc }: any) => {
+const TreeNode = ({ node, onclickFunc }: any) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleToggle = () => {
@@ -8,7 +8,7 @@ const TreeNode = ({ node,onclickFunc }: any) => {
   };
 
   return (
-    <div className="tree-node">
+    <div className="tree-node mr-5">
       <div onClick={handleToggle} className={`node-toggle ${isExpanded ? 'expanded flex flex-row items-center gap-2' : ' flex flex-row items-center  gap-2'}`}>
         {isExpanded && node.children.length > 0 ?
 
@@ -36,9 +36,20 @@ const TreeNode = ({ node,onclickFunc }: any) => {
   );
 };
 
-export default function TreeView({ treeData,onclickFunc }: any) {
+export default function TreeView({ treeData, onclickFunc }: any) {
   return (
     <div>
+      <ul>
+        <li className='flex flex-row items-center gap-2'>
+
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-3">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
+          <a className='cursor-pointer' id="0" x-value={0} onClick={onclickFunc}>   اصلی
+
+          </a>
+        </li>
+      </ul>
       {treeData.map((rootNode: any) => (
         <TreeNode key={rootNode.id} node={rootNode} onclickFunc={onclickFunc} />
       ))}

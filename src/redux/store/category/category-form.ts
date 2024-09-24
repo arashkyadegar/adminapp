@@ -10,7 +10,7 @@ export const categoryFormSlice = createSlice({
                name: "",
                pageTitle: "",
                menuTitle: "",
-               parent: "",
+               parent: 0,
                desc: "",
                keywords: [],
                upDesc: "",
@@ -39,7 +39,7 @@ export const categoryFormSlice = createSlice({
                     name: "",
                     pageTitle: "",
                     menuTitle: "",
-                    parent: "",
+                    parent: 0,
                     desc: "",
                     keywords: [],
                     upDesc: "",
@@ -59,7 +59,7 @@ export const categoryFormSlice = createSlice({
                     imageErr: "",
                     formIsValid: false,
                };
-                    state.isLoading = false;
+               state.isLoading = false;
                state.lastFetch = "";
           },
           categoryFormRequested: (state: any, action: PayloadAction<any>) => {

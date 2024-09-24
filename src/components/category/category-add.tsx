@@ -11,7 +11,7 @@ import { useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
 import InputBox1Component from "../share/inputBox1";
 import validator from "validator";
-import { categoryFormFilled } from "../../redux/store/category/category-form";
+import { categoryFormCleared, categoryFormFilled } from "../../redux/store/category/category-form";
 import { rgx_insecure } from "../../utility/regex";
 import TagComponent from "../share/tag";
 import { FileService } from "../../services/fileService";
@@ -31,8 +31,10 @@ export default function CategoryAddComponent() {
      const categoriesState = useAppSelector((state) => state.entities.categories);
      const categoriesTreeState = useAppSelector((state) => state.entities.categoriesTree);
      useEffect(() => {
+          dispatch(categoryFormCleared())
           dispatch(getCategoriesAction());
           dispatch(getCategoriesTreeAction());
+
      }, []);
      // The sunEditor parameter will be set to the core suneditor instance when this function is called
      const getSunEditorInstanceDown = (sunEditor: SunEditorCore) => {
@@ -44,15 +46,15 @@ export default function CategoryAddComponent() {
      };
      function selectCategoryParent(event: any) {
           const node = event.target as HTMLInputElement;
-          const text = node.getAttribute('x-value') || 0;
-               dispatch(
-                    categoryFormFilled({
-                         ...categoryFormState.data,
-                         parentErr: "",
-                         formIsValid: false,
-                         parent: text,
-                    })
-               );
+          const text = node.getAttribute('x-value') || "0";
+          dispatch(
+               categoryFormFilled({
+                    ...categoryFormState.data,
+                    parentErr: "",
+                    formIsValid: true,
+                    parent: parseInt(text),
+               })
+          );
      }
      function fillCategoryName(event: any) {
           let text: string = event.target.value;
@@ -458,7 +460,7 @@ export default function CategoryAddComponent() {
                                    </div>
                               </div>
                          </div>
-                         T</div>
+                         </div>
                     <div className="flex flex-col justify-start items-end">
                          <LargSubmitbtnComponent onClickFunc={submit} title="ثبت دسته بندی" />
 
