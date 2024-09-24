@@ -18,7 +18,8 @@ import { FileService } from "../../services/fileService";
 import ResponseStatus from "../../utility/responseStatus";
 import { ToastAuthFail, ToastFail, ToastSuccess } from "../../utility/tostify";
 import { getDefaultImageAvator } from "../../utility/imageUtility";
-import { getCategoriesAction, submitAddCategoryAction } from "../../redux/store/category/category-action";
+import { getCategoriesAction, getCategoriesTreeAction, submitAddCategoryAction } from "../../redux/store/category/category-action";
+import TreeView from "../treeview/treeview";
 
 export default function CategoryAddComponent() {
      const formdata2 = new FormData();
@@ -28,8 +29,10 @@ export default function CategoryAddComponent() {
      const dispatch = useAppDispatch();
      const categoryFormState = useAppSelector((state) => state.entities.categoryForm);
      const categoriesState = useAppSelector((state) => state.entities.categories);
+     const categoriesTreeState = useAppSelector((state) => state.entities.categoriesTree);
      useEffect(() => {
           dispatch(getCategoriesAction());
+          dispatch(getCategoriesTreeAction());
      }, []);
      // The sunEditor parameter will be set to the core suneditor instance when this function is called
      const getSunEditorInstanceDown = (sunEditor: SunEditorCore) => {
@@ -39,29 +42,17 @@ export default function CategoryAddComponent() {
      const getSunEditorInstanceUp = (sunEditor: SunEditorCore) => {
           editorRefUp.current = sunEditor;
      };
-     function selectParentCategoryId(event: any) {
-          const text = event.target.value
-          if (text == 11) {
+     function selectCategoryParent(event: any) {
+          const node = event.target as HTMLInputElement;
+          const text = node.getAttribute('x-value') || 0;
                dispatch(
                     categoryFormFilled({
                          ...categoryFormState.data,
-                         parentCategoryIdErr: "لطفا زیر مجموعه اصلی  را انتخاب کنید",
+                         parentErr: "",
                          formIsValid: false,
-                         parentCategoryId: text,
+                         parent: text,
                     })
                );
-
-
-          } else {
-               dispatch(
-                    categoryFormFilled({
-                         ...categoryFormState.data,
-                         parentCategoryIdErr: "",
-                         parentCategoryId: text,
-                         formIsValid: true,
-                    })
-               );
-          }
      }
      function fillCategoryName(event: any) {
           let text: string = event.target.value;
@@ -285,14 +276,14 @@ export default function CategoryAddComponent() {
                     name: categoryFormState.data.name,
                     pageTitle: categoryFormState.data.pageTitle,
                     menuTitle: categoryFormState.data.menuTitle,
-                    parentCategoryId: categoryFormState.data.parentCategoryId,
+                    parent: categoryFormState.data.parent,
                     desc: categoryFormState.data.desc,
                     keywords: categoryFormState.data.keywords,
                     upDesc: editorRefUp.current?.getContents(true),
                     downDesc: editorRefDown.current?.getContents(true),
                     icon: categoryFormState.data.icon,
                     image: categoryFormState.data.image,
-
+                    children: [],
                     createdAt: "",
                };
                try {
@@ -310,6 +301,8 @@ export default function CategoryAddComponent() {
           <div className="w-full sm:w-11/12 mr-0 sm:mr-16">
                <div className="w-full flex flex-col p-4 bg-[#f8f9fa]">
                     <BoxTitleLgComponent title="دسته بندی جدید" />
+
+
                     <div className="flex flex-col sm:flex-row w-full gap-4 ">
 
                          <div className="flex w-full sm:w-2/4 flex-col  gap-4  border border-gray-200">
@@ -345,18 +338,21 @@ export default function CategoryAddComponent() {
                                         </div>
                                         <div className="mb-4">
                                              <LabelComponent title="زیر مجموعه" required="true" />
-                                             <div className="flex flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                                  <select id="countries" className="bg-gray-100 border
+                                             <div className="flex flex-row gap-2 justify-start items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+
+
+                                                  <TreeView treeData={categoriesTreeState.list} onclickFunc={selectCategoryParent} />
+                                                  {/* <select id="countries" className="bg-gray-100 border
                                                        border-gray-100 text-gray-900 text-sm rounded-lg  block  p-2.5
-                                                       w-full    outline-non" onChange={selectParentCategoryId}>
+                                                       w-full    outline-non" onChange={selectCategoryParent}>
                                                        <option value="11">انتخاب کنید...</option>
-                                                       
+
                                                        {categoriesState.list.map((item: any) => (
                                                             <option value={item._id}>{item.name}</option>
                                                        ))}
-                                                  </select>
+                                                  </select> */}
                                              </div>
-                                             <ErrComponent text={categoryFormState.data.parentCategoryIdErr} />
+                                             <ErrComponent text={categoryFormState.data.parentErr} />
                                         </div>
                                         <div className="mb-4">
                                              <LabelComponent title="توضیحات" />
@@ -416,7 +412,7 @@ export default function CategoryAddComponent() {
                                                             }
                                                             className="w-full h-20"
                                                             alt="store logo"
-                                                        
+
                                                        />
                                                   </div>
                                              </div>
@@ -444,7 +440,7 @@ export default function CategoryAddComponent() {
                                                             )}
                                                             className="w-full h-20"
                                                             alt="store logo"
-                                                     
+
                                                        />
                                                   </div>
                                              </div>
@@ -462,7 +458,7 @@ export default function CategoryAddComponent() {
                                    </div>
                               </div>
                          </div>
-                    </div>
+                         T</div>
                     <div className="flex flex-col justify-start items-end">
                          <LargSubmitbtnComponent onClickFunc={submit} title="ثبت دسته بندی" />
 

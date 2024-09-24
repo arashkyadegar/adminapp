@@ -4,6 +4,29 @@
 @tailwind components;
 
 @tailwind utilities;
+
+/* src/styles.css */
+/* .tree-node {
+	margin-left: 20px;
+	border-left: 1px dashed #aaa;
+	padding-left: 8px;
+	position: relative;
+}
+
+.node-toggle {
+	cursor: pointer;
+	transition: color 0.3s;
+}
+
+.child-nodes {
+	margin-left: 20px;
+	list-style: none;
+	padding-left: 8px;
+}
+
+.child-nodes > li {
+	margin: 5px 0;
+} */
 @import url(fontiran.css); /* لینک فایلی که وظیفه بارگذاری فونت ها را برعهده دارد */
 
 #roote {
@@ -16,3 +39,4 @@ body {
 
 	margin: 0;
 }
+

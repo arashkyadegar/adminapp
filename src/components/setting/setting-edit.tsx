@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
 import { getSettingAction, submitEditSettingAction } from "../../redux/store/setting/setting-action";
-import settingForm, { settingFormFilled } from "../../redux/store/setting/setting-form";
+import settingForm, { settingFormFilled, settingFormSlideImagesAdded } from "../../redux/store/setting/setting-form";
 import { FileService } from "../../services/fileService";
 import { getDefaultImageAvator } from "../../utility/imageUtility";
 import ResponseStatus from "../../utility/responseStatus";
@@ -10,6 +10,7 @@ import LgSubmitbtnComponent from "../share/btn/lg-submit-btn";
 import LabelComponent from "../share/label";
 import BoxTitleLgComponent from "../share/lg-box-title";
 import Loading from "../share/loading";
+import { produce } from "immer";
 
 export default function SettingComponent() {
   const formdata2 = new FormData();
@@ -21,9 +22,24 @@ export default function SettingComponent() {
   }, []);
 
 
-  function fillSlideImageAlt(event: any) { }
+  function fillSlideImageAlt(event: any) {
+    let element = event.target as HTMLInputElement;
+    let text = element.value;
+    let id = element.getAttribute('id');
+    let obj = settingFormState.data.slideImages.find((x: any) => x.name == id);
+    if (obj != undefined) {
+      const nextState = produce(settingFormState, (draftState) => {
+        draftState.data.slideImages.map((i: any) => {
+          if (i.name == id) {
+            i.alt = text;
+          }
+        });
+      });
+      dispatch(settingFormSlideImagesAdded(nextState.data.slideImages));
+    }
+  }
 
-  function fillSlideImageStatus(event: any) { }
+  function fillSlideImage(event: any) { }
   async function fillSlideImages(event: any) {
     let count = event.target.files.length;
     if (count <= 3) {

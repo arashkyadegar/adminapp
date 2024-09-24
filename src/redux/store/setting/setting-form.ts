@@ -36,7 +36,11 @@ export const settingFormSlice = createSlice({
     settingFormFilled: (state: any, action: PayloadAction<any>) => {
       state.data = action.payload;
       state.lastFetch = "";
-    }
+    },
+    settingFormSlideImagesAdded: (state: any, action: PayloadAction<any>) => {
+      state.data.slideImages = action.payload;
+      state.lastFetch = "";
+ },
   }
 });
 
@@ -47,5 +51,6 @@ export const {
   settingFormLoadingStoped,
   settingFormFetched,
   settingFormFilled,
+  settingFormSlideImagesAdded
 } = settingFormSlice.actions
 export default settingFormSlice.reducer;

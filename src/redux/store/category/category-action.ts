@@ -83,3 +83,18 @@ export const submitEditCategoryAction = (category: any) =>
     },
     body: JSON.stringify(category),
   });
+
+
+  export const getCategoriesTreeAction = () =>
+  apiCallBegan({
+    url: `/categories/findAllGraph`,
+    onSuccess: "categoriesTree/categoriesTreeFetched",
+    onError: "categoriesTree/categoriesTreeLoadingStoped",
+    onStart: "categoriesTree/categoriesTreesRequested",
+    method: "GET",
+    // credentials: "include"
+    headers: {
+      "Content-Type": "application/json",
+    },
+    //body: JSON.stringify(product),
+  });
