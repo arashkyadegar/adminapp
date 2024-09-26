@@ -29,20 +29,9 @@ import { addTabToggle } from "../../redux/store/productTab/productAddTab";
 export default function ProductAddComponent() {
      const formdata2 = new FormData();
 
-     const nameRef = useRef<any>();
-     const categoryIdRef = useRef<any>();
-     const brandRef = useRef<any>();
-     const descRef = useRef<any>();
-     const pageTitleRef = useRef<any>();
-     const pageLinkRef = useRef<any>();
-     const statusRef = useRef<any>();
-     const shortDescRef = useRef<any>();
+     const exterasNameRef = useRef<any>();
+     const exterasValueRef = useRef<any>();
 
-     const priceRef = useRef<any>();
-     const purchasePriceRef = useRef<any>();
-     const sizeRef = useRef<any>();
-     const weightRef = useRef<any>();
-     const stockRef = useRef<any>();
      const strongPointsRef = useRef<any>();
      const weakPointsRef = useRef<any>();
      const subCategoriesRef = useRef<any>();
@@ -544,7 +533,21 @@ export default function ProductAddComponent() {
                })
           );
      }
+     function onAddExtrasClick(event: any) {
+          const name = exterasNameRef.current.value;
+          const value = exterasValueRef.current.value;
+          if ((!validator.isEmpty(name.trim())) && (!validator.isEmpty(value.trim()))) {
+               dispatch(
+                    productFormFilled({
+                         ...productFormState.data,
+                         exteras: [...productFormState.data.exteras, { name, value }]
+                    }))
 
+               exterasNameRef.current.value = "";
+               exterasValueRef.current.value = "";
+          }
+
+     }
      function fillImageStatus(event: any): void {
           let name = event.target.value;
           let obj = productFormState.data.images.find((x: any) => x.name == name);
@@ -636,6 +639,56 @@ export default function ProductAddComponent() {
                                                        )}
                                                   </div>
                                              </div>
+
+                                             <div className="mb-4">
+                                                  <LabelComponent name="subCategories" title="جزییات اضافی" required="true" />
+                                                  <div className="flex flex-col gap-2 justify-between">
+
+
+
+                                                       <div className="flex flex-row justify-between gap-2">
+                                                            <div className="w-full   bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                                                 <input type="text" name="subCategories" placeholder="نام" ref={exterasNameRef} onKeyDown={onSubCategoriesKeyDown} className=" w-full  bg-gray-100  text-gray-900 text-sm  block  p-2.5     outline-none" />
+                                                            </div>
+                                                            <div className="w-full   bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                                                 <input type="text" name="subCategories" placeholder="مقدار" ref={exterasValueRef} onKeyDown={onSubCategoriesKeyDown} className=" w-full  bg-gray-100  text-gray-900 text-sm  block  p-2.5     outline-none" />
+                                                            </div>
+                                                            <div className="w-1/4 flex flex-row items-center">
+                                                                 <a className="font-medium text-blue-600 dark:text-blue-500 cursor-pointer" onClick={onAddExtrasClick}>
+                                                                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
+                                                                           <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                                                      </svg>
+                                                                 </a>
+
+                                                            </div>
+                                                       </div>
+                                                       {productFormState.data.exteras !== undefined && (
+
+                                                            productFormState.data.exteras.map((item: any) => (
+                                                                 <div className="flex flex-row justify-between gap-2">
+                                                                      <div className="w-full   bg-white   text-gray-900 text-sm   px-1  border">
+                                                                           {item.name}
+                                                                      </div>
+                                                                      <div className="w-full   bg-white  text-gray-900 text-sm   px-1  border">
+                                                                           {item.value}                                                                           </div>
+                                                                      <div className="w-1/4 flex flex-row items-center">
+
+                                                                           <a className="font-medium text-red-600 dark:text-red-500 cursor-pointer">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
+                                                                                     <path strokeLinecap="round" strokeLinejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                                                                </svg>
+                                                                           </a>
+                                                                      </div>
+                                                                 </div>
+                                                            ))
+
+                                                       )}
+
+
+                                                  </div>
+                                             </div>
+
+
                                              <div className="mb-4">
                                                   <LabelComponent title="زیر مجموعه اصلی" name="CategoryId" required="true" />
 

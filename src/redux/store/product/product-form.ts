@@ -25,7 +25,7 @@ export const productFormSlice = createSlice({
                longdescErr: "",
                weakPointsErr: "",
                strongPointsErr: [],
-
+               exteras:[],
                pageTitle: "",
                pageLink: "",
                desc: "",
@@ -74,7 +74,7 @@ export const productFormSlice = createSlice({
                     longdesc: "",
                     weakPoints: [],
                     strongPoints: [],
-
+                    exteras:[],
 
                     nameErr: "",
                     subCategoriesErr: "",

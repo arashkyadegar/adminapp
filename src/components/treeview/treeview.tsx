@@ -38,7 +38,7 @@ const TreeNode = ({ node, onclickFunc }: any) => {
 
 export default function TreeView({ treeData, onclickFunc }: any) {
   return (
-    <div>
+    <div className='flex flex-col'>
       <ul>
         <li className='flex flex-row items-center gap-2'>
 
