@@ -73,6 +73,13 @@ export default function PcSidebarComponent() {
                               <li className="cursor-pointer  rounded-b-md flex items-center  w-full  text-gray-900  p-2 hover:bg-teal-300 hover:text-white">
                                    <button onClick={() => navigateToUrl("/product/product-add")}>ثبت کالا</button>
                               </li>
+                              <li className="cursor-pointer flex items-center  w-full  text-gray-900 p-2 hover:bg-teal-300 hover:text-white  ">
+                                   <button onClick={() => navigateToUrl("/brand/brand-list")}>لیست برند ها</button>
+                              </li>
+                              <li className="cursor-pointer flex items-center  w-full  text-gray-900  p-2 hover:bg-teal-300 hover:text-white">
+                                   <button onClick={() => navigateToUrl("/brand/brand-add")}>ثبت برند</button>
+
+                              </li>
                          </ul>
                     )}
 
@@ -141,7 +148,7 @@ export default function PcSidebarComponent() {
 
                {/* تنظیمات */}
                <div className="relative flex cursor-pointer hover:text-white rounded-md hover:bg-gray-400 border border-gray-200  text-gray-500 duration-150 flex-col  m-2 h-10 items-center justify-center">
-               <button onClick={() => navigateToUrl("/setting")}>111</button>
+                    <button onClick={() => navigateToUrl("/setting")}>111</button>
 
                </div>
 

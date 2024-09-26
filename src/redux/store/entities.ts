@@ -1,4 +1,6 @@
 import { combineReducers } from "redux";
+import brandFormReducer from "./brand/brand-form";
+import brandsReducer from "./brand/brands";
 
 import productFormReducer from "./product/product-form";
 import productsReducer from "./product/products";
@@ -8,6 +10,8 @@ import categoriesReducer from "./category/categories";
 import categoriesTreeReducer from "./category/category-tree";
 import addTabReducer from "./productTab/productAddTab";
 export default combineReducers({
+  brands: brandsReducer,
+  brandForm: brandFormReducer,
   categoriesTree: categoriesTreeReducer,
   settingForm: settingFormReducer,
   categoryForm: categoryFormReducer,

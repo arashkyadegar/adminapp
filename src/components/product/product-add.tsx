@@ -24,6 +24,7 @@ import { getCategoriesAction } from "../../redux/store/category/category-action"
 
 import React, { createContext, useContext } from 'react';
 import { addTabToggle } from "../../redux/store/productTab/productAddTab";
+import { getBrandsAction } from "../../redux/store/brand/brand-action";
 
 
 export default function ProductAddComponent() {
@@ -48,10 +49,12 @@ export default function ProductAddComponent() {
      const dispatch = useAppDispatch();
      const productFormState = useAppSelector((state) => state.entities.productForm);
      const categoriesState = useAppSelector((state) => state.entities.categories);
+     const brandsState = useAppSelector((state) => state.entities.brands);
      const productAddTabState = useAppSelector((state) => state.entities.addTab);
      useEffect(() => {
           dispatch(productFormCleared());
           dispatch(getCategoriesAction());
+          dispatch(getBrandsAction());
      }, []);
 
      function onColorsKeyDown(event: any) {
@@ -474,7 +477,7 @@ export default function ProductAddComponent() {
                     longdesc: editorRef.current?.getContents(true),
                     weakPoints: productFormState.data.weakPoints,
                     strongPoints: productFormState.data.strongPoints,
-
+                    extras: productFormState.data.exteras,
                     pageTitle: productFormState.data.pageTitle,
                     pageLink: productFormState.data.pageLink,
                     desc: productFormState.data.desc,
@@ -724,10 +727,10 @@ export default function ProductAddComponent() {
                                                             className="bg-gray-100 border
                         border-gray-100 text-gray-900 text-sm rounded-lg  block  p-2.5
                         w-full    outline-non"   >
-                                                            <option value="11">همه دسته ها</option>
-                                                            <option value="66ca18cb8e6d2287688b9f28">الکترونیک</option>
-                                                            <option value="66ca18cb8e6d2287688b9f28">لباس</option>
-                                                            <option value="66ca18cb8e6d2287688b9f28">خودرو</option>
+                                                            <option value="11">انتخاب کنید</option>
+                                                            {brandsState.list.map((item: any) => (
+                                                                 <option key={item._id} value={item._id}>{item.name}</option>
+                                                            ))}
                                                        </select>
                                                   </div>
 

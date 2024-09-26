@@ -18,6 +18,9 @@ import OrderListComponent from './components/order/order-list';
 import { LoginForm } from './models/entities';
 import { persistStore } from 'redux-persist';
 import SettingComponent from './components/setting/setting-edit';
+import BrandAddComponent from './components/brand/brand-add';
+import BrandEditComponent from './components/brand/brand-edit';
+import BrandListComponent from './components/brand/brand-list';
 
 function App() {
 
@@ -101,7 +104,9 @@ function App() {
             <Route path="order/order-add" element={<OrderAddComponent />} />
             <Route path="order/order-list" element={<OrderListComponent />} />
 
-
+            <Route path="brand/brand-add" element={<BrandAddComponent />} />
+            <Route path="brand/brand-list" element={<BrandListComponent />} />
+            <Route path="brand/brand-edit/:id" element={<BrandEditComponent />} />
             {/* <Route path="category-list" element={<CategoryList />} />
           <Route path="category-edit/:id" element={<CategoryEdit />} /> */}
             {/*<Route path="direct" element={<DirectMsgComponent />} /> */}
