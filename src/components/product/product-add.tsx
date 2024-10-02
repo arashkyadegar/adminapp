@@ -290,7 +290,29 @@ export default function ProductAddComponent() {
 
           }
      }
+     function fillProductDiscount(event: any) {
+          let text: string = event.target.value;
+          if (validator.isNumeric(text)) {
+               dispatch(
+                    productFormFilled({
+                         ...productFormState.data,
+                         discountErr: "",
+                         discount: text,
+                         formIsValid: true,
+                    })
+               );
+          } else {
+               dispatch(
+                    productFormFilled({
+                         ...productFormState.data,
+                         discountErr: "لطفا کارکترهای غیرمجاز وارد نکنید",
+                         formIsValid: false,
+                         discount: text,
+                    })
+               );
 
+          }
+     }
      function fillProductPurchasePrice(event: any) {
           let text: string = event.target.value;
           if (validator.isNumeric(text)) {
@@ -487,6 +509,7 @@ export default function ProductAddComponent() {
                     status: productFormState.data.status,
                     size: productFormState.data.size,
                     price: productFormState.data.price,
+                    discount: productFormState.data.discount,
                     purchasePrice: productFormState.data.purchasePrice,
                     weight: productFormState.data.weight,
                     stock: productFormState.data.stock,
@@ -935,7 +958,7 @@ export default function ProductAddComponent() {
                                                             onChange={fillProductPrice}
                                                             className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
                                                   </div>
-
+                                                  <ErrComponent text={productFormState.data.priceErr} />
                                              </div>
                                              <div className="mb-4">
                                                   <LabelComponent title="قیمت فروش" />
@@ -945,6 +968,21 @@ export default function ProductAddComponent() {
                                                        value={productFormState.data.purchasePrice}
                                                        onChange={fillProductPurchasePrice}
                                                        className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
+                                                  <ErrComponent text={productFormState.data.purchasePriceErr} />
+                                             </div>
+                                             <div className="mb-4">
+                                                  <LabelComponent title="تخفیف (٪)" />
+
+                                                  <div className="flex w-full flex-row gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
+                                                       <input type="text"
+                                                            name="discount"
+                                                            id="discount"
+                                                            value={productFormState.data.discount}
+                                                            onChange={fillProductDiscount}
+                                                            className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
+                                                  </div>
+                                                  <ErrComponent text={productFormState.data.discountErr} />
+
                                              </div>
                                              <div className="mb-4">
                                                   <LabelComponent title="سایز" />
