@@ -32,6 +32,7 @@ function App() {
   const [asideUserDrpToggle, setAsideUserDrpToggle] = useState(false)
   const [asideFinancialDrpToggle, setAsideFinancialDrpToggle] = useState(false)
   const [asideCellarDrpToggle, setAsideCellarDrpToggle] = useState(false);
+  const [asideFaqsDrpToggle, setAsideFaqsDrpToggle] = useState(false);
   const [asideToggle, setAsideToggle] = useState(false);
   const [navbarW, setNavbarW] = useState(false);
   const [drpDwnIsOpen, setDrpDwnIsOpen] = useState(false);
@@ -52,6 +53,8 @@ function App() {
         // setSeoTabToggle,
         // sellTabToggle,
         // setSellTabToggle,
+        asideFaqsDrpToggle,
+        setAsideFaqsDrpToggle,
         loginForm,
         setLoginForm,
         languageDrpDwnIsOpen,

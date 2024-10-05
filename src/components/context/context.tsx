@@ -33,6 +33,8 @@ const myAppContext = createContext({
      setAsideFinancialDrpToggle: (asideFinancialDrpToggle: boolean) => { },
      asideCellarDrpToggle: false,
      setAsideCellarDrpToggle: (asideCellarDrpToggle: boolean) => { },
+     asideFaqsDrpToggle: false,
+     setAsideFaqsDrpToggle: (asideFaqsDrpToggle: boolean) => { },
      passwordVisibility: false,
      setPasswordVisibility: (passwordVisibility: boolean) => { },
      loginForm: {

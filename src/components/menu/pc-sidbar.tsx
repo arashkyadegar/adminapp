@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function PcSidebarComponent() {
      const navigate = useNavigate();
+     const { asideFaqsDrpToggle, setAsideFaqsDrpToggle } = React.useContext(myAppContext);
      const { asideOrderDrpToggle, setAsideOrderDrpToggle } = React.useContext(myAppContext);
      const { asideUserDrpToggle, setAsideUserDrpToggle } = React.useContext(myAppContext);
      const { asideCellarDrpToggle, setAsideCellarDrpToggle } = React.useContext(myAppContext);
@@ -14,6 +15,10 @@ export default function PcSidebarComponent() {
           setAsideCellarDrpToggle(false);
           setAsideUserDrpToggle(false);
           setAsideOrderDrpToggle(false);
+     }
+     function toggleFaqsMenu() {
+          hideAll();
+          setAsideFaqsDrpToggle(!asideFaqsDrpToggle);
      }
      function toggleOrderMenu(event: any) {
           hideAll();
@@ -129,7 +134,7 @@ export default function PcSidebarComponent() {
                {/* مالی */}
 
                <div className="relative flex cursor-pointer rounded-md hover:text-white hover:bg-gray-400 border border-gray-200  text-gray-500 duration-150 flex-col  m-2 h-10 items-center justify-center">
-                    <svg onClick={toggleFinancialMenu}  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
+                    <svg onClick={toggleFinancialMenu} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
                          <path d="M10.464 8.746c.227-.18.497-.311.786-.394v2.795a2.252 2.252 0 0 1-.786-.393c-.394-.313-.546-.681-.546-1.004 0-.323.152-.691.546-1.004ZM12.75 15.662v-2.824c.347.085.664.228.921.421.427.32.579.686.579.991 0 .305-.152.671-.579.991a2.534 2.534 0 0 1-.921.42Z" />
                          <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v.816a3.836 3.836 0 0 0-1.72.756c-.712.566-1.112 1.35-1.112 2.178 0 .829.4 1.612 1.113 2.178.502.4 1.102.647 1.719.756v2.978a2.536 2.536 0 0 1-.921-.421l-.879-.66a.75.75 0 0 0-.9 1.2l.879.66c.533.4 1.169.645 1.821.75V18a.75.75 0 0 0 1.5 0v-.81a4.124 4.124 0 0 0 1.821-.749c.745-.559 1.179-1.344 1.179-2.191 0-.847-.434-1.632-1.179-2.191a4.122 4.122 0 0 0-1.821-.75V8.354c.29.082.559.213.786.393l.415.33a.75.75 0 0 0 .933-1.175l-.415-.33a3.836 3.836 0 0 0-1.719-.755V6Z" clipRule="evenodd" />
                     </svg>
@@ -147,7 +152,27 @@ export default function PcSidebarComponent() {
                     )}
 
                </div>
+               {/* سوالات متداول */}
 
+               <div className="relative flex cursor-pointer rounded-md hover:text-white hover:bg-gray-400 border border-gray-200  text-gray-500 duration-150 flex-col  m-2 h-10 items-center justify-center">
+
+                    <svg onClick={toggleFaqsMenu} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
+                         <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 0 1-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 0 1-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 0 1-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584ZM12 18a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clipRule="evenodd" />
+                    </svg>
+
+                    {asideFaqsDrpToggle && (
+                         <ul className="absolute  rounded-md overflow-hidden  right-16 top-0 w-40 bg-white border border-gray-200  flex flex-col gap-2" >
+                              <li className="cursor-pointer flex items-center  w-full  text-gray-900  p-2 hover:bg-teal-300 hover:text-white  ">
+                                   <a href="#">ثبت سوال</a>
+                              </li>
+                              <li className="cursor-pointer rounded-b-md flex items-center  w-full  text-gray-900  p-2 hover:bg-teal-300 hover:text-white  ">
+                                   <a href="#"> لیست سوالات</a>
+
+                              </li>
+                         </ul>
+                    )}
+
+               </div>
                {/* تنظیمات */}
                <div className="relative flex cursor-pointer hover:text-white rounded-md hover:bg-gray-400 border border-gray-200  text-gray-500 duration-150 flex-col  m-2 h-10 items-center justify-center">
                     <button onClick={() => navigateToUrl("/setting")}>
