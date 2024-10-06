@@ -163,11 +163,16 @@ export default function PcSidebarComponent() {
                     {asideFaqsDrpToggle && (
                          <ul className="absolute  rounded-md overflow-hidden  right-16 top-0 w-40 bg-white border border-gray-200  flex flex-col gap-2" >
                               <li className="cursor-pointer flex items-center  w-full  text-gray-900  p-2 hover:bg-teal-300 hover:text-white  ">
-                                   <a href="#">ثبت سوال</a>
+                                   <button onClick={() => navigateToUrl("/faq/faq-add")}>ثبت سوال</button>
                               </li>
                               <li className="cursor-pointer rounded-b-md flex items-center  w-full  text-gray-900  p-2 hover:bg-teal-300 hover:text-white  ">
-                                   <a href="#"> لیست سوالات</a>
-
+                                   <button onClick={() => navigateToUrl("/faq/faq-list")}>لیست سوالات</button>
+                              </li>
+                              <li className="cursor-pointer rounded-b-md flex items-center  w-full  text-gray-900  p-2 hover:bg-teal-300 hover:text-white  ">
+                                   <button onClick={() => navigateToUrl("/faq-group/faq-group-add")}>ثبت گروهبندی</button>
+                              </li>
+                              <li className="cursor-pointer rounded-b-md flex items-center  w-full  text-gray-900  p-2 hover:bg-teal-300 hover:text-white  ">
+                                   <button onClick={() => navigateToUrl("/faq-group/faq-group-list")}>لیست گروه بندی</button>
                               </li>
                          </ul>
                     )}

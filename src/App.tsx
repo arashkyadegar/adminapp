@@ -21,6 +21,12 @@ import SettingComponent from './components/setting/setting-edit';
 import BrandAddComponent from './components/brand/brand-add';
 import BrandEditComponent from './components/brand/brand-edit';
 import BrandListComponent from './components/brand/brand-list';
+import FaqAddComponent from './components/faq/faq-add';
+import FaqListComponent from './components/faq/faq-list';
+import FaqEditComponent from './components/faq/faq-edit';
+import FaqGroupAddComponent from './components/faq-group/faq-group-add';
+import FaqGroupListComponent from './components/faq-group/faq-group-list';
+import FaqGroupEditComponent from './components/faq-group/faq-group-edit';
 
 function App() {
 
@@ -110,6 +116,15 @@ function App() {
             <Route path="brand/brand-add" element={<BrandAddComponent />} />
             <Route path="brand/brand-list" element={<BrandListComponent />} />
             <Route path="brand/brand-edit/:id" element={<BrandEditComponent />} />
+
+            <Route path="faq/faq-add" element={<FaqAddComponent />} />
+            <Route path="faq/faq-list" element={<FaqListComponent />} />
+            <Route path="faq/faq-edit/:id" element={<FaqEditComponent />} />
+
+
+            <Route path="faq-group/faq-group-add" element={<FaqGroupAddComponent />} />
+            <Route path="faq-group/faq-group-list" element={<FaqGroupListComponent />} />
+            <Route path="faq-group/faq-group-edit/:id" element={<FaqGroupEditComponent />} />
             {/* <Route path="category-list" element={<CategoryList />} />
           <Route path="category-edit/:id" element={<CategoryEdit />} /> */}
             {/*<Route path="direct" element={<DirectMsgComponent />} /> */}
