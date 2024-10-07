@@ -75,7 +75,7 @@ export default function FaqGroupListComponent() {
                                         </thead>
                                         <tbody>
                                              {faqGroupsState.list.map((item: any) => (
-                                                  <tr className="flex flex-row bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600  p-2">
+                                                  <tr className="flex flex-row bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600  py-2">
                                                        <td className="flex w-4 px-4 h-10 items-center justify-center">
                                                             <div className="flex items-center justify-center">
                                                                  <input id="checkbox-table-search-1" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
@@ -87,10 +87,15 @@ export default function FaqGroupListComponent() {
                                                             {item.name}
                                                        </td>
                                                        <td scope="row" className="flex items-center justify-center text-right px-2    w-40">
-                                                            <a>{item.display ? 'نمایش' : 'پنهان'}</a>
+                                                            <>{item.display ?
+                                                                 <a className="bg-green-200 text-green-500 text-xs font-bold px-1 py-1 rounded-md" >نمایش</a>
+                                                                 :
+                                                                 <a className="bg-red-200 text-red-500 text-xs font-bold px-1 py-1 rounded-md" >پنهان</a>
+
+                                                            }</>
 
                                                        </td>
-                                                       <td scope="row" className="flex items-center justify-center text-right px-2  w-40">
+                                                       <td scope="row" className="flex items-center justify-center text-center px-2  w-40">
                                                             {item.priority}
                                                        </td>
 
