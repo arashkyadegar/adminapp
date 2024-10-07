@@ -15,12 +15,16 @@ export const productsSlice = createSlice({
      name: "products",
      initialState: {
           list: [],
+          totalCount: 0,
+          page: 1,
           isLoading: false,
           lastFetch: null,
      },
      reducers: {
           productsFetched: (state: any, action: PayloadAction<any>) => {
-               state.list = action.payload;
+               state.list = action.payload.rows;
+               state.totalCount = action.payload.totalCount;
+               state.page = action.payload.page;
                state.lastFetch = Date.now();
                state.isLoading = false;
           },
@@ -41,5 +45,5 @@ export const productsSlice = createSlice({
      },
 });
 
-export const {productsLoadingStoped,productsRequested, productsFetched, productsToggled, productsFaild } = productsSlice.actions;
+export const { productsLoadingStoped, productsRequested, productsFetched, productsToggled, productsFaild } = productsSlice.actions;
 export default productsSlice.reducer;

@@ -21,15 +21,15 @@ export const getProductAction = (id: any) =>
     onError: "productForm/productFormLoadingStoped",
     onStart: "productForm/productFormRequested",
     method: "GET",
-     credentials: "include",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
   });
 
-export const getProductsAction = () =>
+export const getProductsAction = (page: number = 1) =>
   apiCallBegan({
-    url: `/products`,
+    url: `/products?page=${page}`,
     onSuccess: "products/productsFetched",
     onError: "products/productsLoadingStoped",
     onStart: "products/productsRequested",
@@ -41,7 +41,7 @@ export const getProductsAction = () =>
   });
 
 
-export const searchProductsAction = ( name: string) =>
+export const searchProductsAction = (name: string) =>
   apiCallBegan({
     url: `/products/search?name=${name}`,
     onSuccess: "products/productsFetched",

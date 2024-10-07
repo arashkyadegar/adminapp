@@ -12,9 +12,13 @@ export default function ProductListComponent() {
      const searchInputRef = useRef<HTMLInputElement>(null);
      const dispatch = useAppDispatch();
      useEffect(() => {
-          dispatch(getProductsAction());
+          dispatch(getProductsAction(1));
+
      }, []);
 
+     function nextpage(page: number) {
+          dispatch(getProductsAction(page));
+     }
      function submitDeleteProduct(id: any) {
           if (window.confirm("قصد حذف کالا را دارید ؟ ")) {
                dispatch(submitDeleteProductAction(id));
@@ -253,32 +257,28 @@ export default function ProductListComponent() {
                                              </tr> */}
                                         </tbody>
                                    </table>
-                                   <div className="flex flex-row-reverse justify-end gap-2 p-2">
-                                        <div className="flex items-center justify-center w-8 h-8 bg-teal-600 text-white rounded-md">
-                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-4">
-                                                  <path fillRule="evenodd" d="M7.72 12.53a.75.75 0 0 1 0-1.06l7.5-7.5a.75.75 0 1 1 1.06 1.06L9.31 12l6.97 6.97a.75.75 0 1 1-1.06 1.06l-7.5-7.5Z" clipRule="evenodd" />
-                                             </svg>
-
-                                        </div>
-                                        <div className="flex items-center justify-center w-8 h-8 bg-teal-600 text-white rounded-md">
-                                             <a>۰۱</a>
-                                        </div>
-
-                                        <div className="flex items-center justify-center w-8 h-8 bg-gray-100 text-gray-500 rounded-md">
-                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
-                                                  <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                                             </svg>
-
-                                        </div>
-
-                                        <div className="flex items-center justify-center w-8 h-8 bg-gray-100 text-gray-500 rounded-md">
-                                             <a>۰۲</a>
-                                        </div>
-
-                                        <div className="flex items-center justify-center w-8 h-8 bg-gray-100 text-gray-500 rounded-md">
-                                             <a>۰۳</a>
-                                        </div>
-
+                                   <div className="flex flex-row-reverse justify-center gap-2 p-2">
+                                        <>
+                                             {(() => {
+                                                  const arr = [];
+                                                  for (let i = 1; i <= (Math.ceil(productsState.totalCount / 10)); i++) {
+                                                       if (i === productsState.page) {
+                                                            arr.push(
+                                                                 <div className="flex items-center text-xs justify-center w-6 h-6 bg-gray-100 text-gray-500 rounded-md">
+                                                                      <a>{i}</a>
+                                                                 </div>
+                                                            );
+                                                       } else {
+                                                            arr.push(
+                                                                 <button onClick={() => { nextpage(i) }} className="flex items-center text-xs justify-center w-6 h-6 bg-teal-600 text-white rounded-md">
+                                                                      <a>{i}</a>
+                                                                 </button>
+                                                            );
+                                                       }
+                                                  }
+                                                  return arr;
+                                             })()}
+                                        </>
                                    </div>
                               </div>
                          </div>
