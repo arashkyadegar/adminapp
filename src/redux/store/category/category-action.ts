@@ -26,9 +26,9 @@ export const getCategoryAction = (id: any) =>
     },
   });
 
-export const getCategoriesAction = () =>
+export const getCategoriesAction = (page: number = 1) =>
   apiCallBegan({
-    url: `/categories`,
+    url: `/categories?page=${page}`,
     onSuccess: "categories/categoriesFetched",
     onError: "categories/categoriesLoadingStoped",
     onStart: "categories/categoriesRequested",
@@ -85,7 +85,7 @@ export const submitEditCategoryAction = (category: any) =>
   });
 
 
-  export const getCategoriesTreeAction = () =>
+export const getCategoriesTreeAction = () =>
   apiCallBegan({
     url: `/categories/findAllGraph`,
     onSuccess: "categoriesTree/categoriesTreeFetched",
