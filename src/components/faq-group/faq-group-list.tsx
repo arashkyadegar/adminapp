@@ -4,14 +4,14 @@ import BoxTitleLgComponent from "../share/lg-box-title";
 import { getDefaultImageAvator } from "../../utility/imageUtility";
 import { Link } from "react-router-dom";
 import Loading from "../share/loading";
-import { getfaqgroupsAction, submitDeleteFaqGroupAction } from "../../redux/store/faqgroup/faq-group-action";
+import { getFaqGroupsAction, submitDeleteFaqGroupAction } from "../../redux/store/faqgroup/faq-group-action";
 
 export default function FaqGroupListComponent() {
      const faqGroupsState = useAppSelector((state) => state.entities.faqGroups);
 
      const dispatch = useAppDispatch();
      useEffect(() => {
-          dispatch(getfaqgroupsAction());
+          dispatch(getFaqGroupsAction());
      }, []);
 
      function submitDeleteFaqGroup(id: any) {

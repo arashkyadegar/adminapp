@@ -26,7 +26,7 @@ export const getFaqGroupAction = (id: any) =>
     },
   });
 
-export const getfaqgroupsAction = () =>
+export const getFaqGroupsAction = () =>
   apiCallBegan({
     url: `/faqgroups`,
     onSuccess: "faqGroups/faqGroupsFetched",

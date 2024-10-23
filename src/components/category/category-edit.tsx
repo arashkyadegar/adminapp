@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import BoxTitleUnderlineComponent from "../share/box-title-underline";
 import LabelComponent from "../share/label";
 import BoxTitleLgComponent from "../share/lg-box-title";
-import 'suneditor/dist/css/suneditor.min.css'
 import SunEditor from 'suneditor-react';
 import SunEditorCore from "suneditor/src/lib/core";
 

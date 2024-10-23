@@ -15,12 +15,16 @@ export const brandsSlice = createSlice({
      name: "brands",
      initialState: {
           list: [],
+          totalCount: 0,
+          page: 1,
           isLoading: false,
           lastFetch: null,
      },
      reducers: {
           brandsFetched: (state: any, action: PayloadAction<any>) => {
-               state.list = action.payload;
+               state.list = action.payload.rows;
+               state.totalCount = action.payload.totalCount;
+               state.page = action.payload.page;
                state.lastFetch = Date.now();
                state.isLoading = false;
           },

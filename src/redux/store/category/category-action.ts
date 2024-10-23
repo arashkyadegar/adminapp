@@ -41,9 +41,9 @@ export const getCategoriesAction = (page: number = 1) =>
   });
 
 
-export const searchCategoriesAction = (name: string) =>
+export const searchCategoriesAction = (name: string,page: number = 1) =>
   apiCallBegan({
-    url: `/categories/search?name=${name}`,
+    url: `/categories/search?name=${name}&page=${page}`,
     onSuccess: "categories/categoriesFetched",
     onError: "categories/categoriesLoadingStoped",
     onStart: "categories/categoriesRequested",

@@ -26,9 +26,9 @@ export const getBrandAction = (id: any) =>
     },
   });
 
-export const getBrandsAction = () =>
+export const getBrandsAction = (page: number = 1) =>
   apiCallBegan({
-    url: `/brands`,
+    url: `/brands?page=${page}`,
     onSuccess: "brands/brandsFetched",
     onError: "brands/brandsLoadingStoped",
     onStart: "brands/brandsRequested",
@@ -41,9 +41,9 @@ export const getBrandsAction = () =>
   });
 
 
-export const searchBrandsAction = (name: string) =>
+export const searchBrandsAction = (name: string, page: number = 1) =>
   apiCallBegan({
-    url: `/brands/search?name=${name}`,
+    url: `/brands/search?name=${name}&page=${page}`,
     onSuccess: "brands/brandsFetched",
     onError: "brands/brandsLoadingStoped",
     onStart: "brands/brandsRequested",

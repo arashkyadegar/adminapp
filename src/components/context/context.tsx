@@ -15,14 +15,6 @@ const myAppContext = createContext({
      setNavbarShow: (navbarShow: boolean) => { },
      navbarW: false,
      setNavbarW: (navbarW: boolean) => { },
-
-     // generalTabToggle: true,
-     // setGeneralTabToggle: (generalTabToggle: boolean) => { },
-     // seoTabToggle: false,
-     // setSeoTabToggle: (seoTabToggle: boolean) => { },
-     // sellTabToggle: false,
-     // setSellTabToggle: (sellTabToggle: boolean) => { },
-
      asideToggle: true,
      setAsideToggle: (asideToggle: boolean) => { },
      asideOrderDrpToggle: false,

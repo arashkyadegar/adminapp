@@ -28,6 +28,7 @@ export const productsSlice = createSlice({
                state.lastFetch = Date.now();
                state.isLoading = false;
           },
+
           productsToggled: (state: any, action: PayloadAction<any>) => {
                state.list = action.payload;
                state.lastFetch = Date.now();
@@ -45,5 +46,5 @@ export const productsSlice = createSlice({
      },
 });
 
-export const { productsLoadingStoped, productsRequested, productsFetched, productsToggled, productsFaild } = productsSlice.actions;
+export const {  productsLoadingStoped, productsRequested, productsFetched, productsToggled, productsFaild } = productsSlice.actions;
 export default productsSlice.reducer;

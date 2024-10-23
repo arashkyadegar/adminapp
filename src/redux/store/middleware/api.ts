@@ -67,7 +67,7 @@ const api =
         } catch (error: any) {
           ToastFail(error);
 
-          // if (onError) dispatch({ type: onError });
+          if (onError) dispatch({ type: onError });
           // dispatch(actions.apiCallFailed(error.message));
 
           //specified handling

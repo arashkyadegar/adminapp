@@ -40,3 +40,21 @@ body {
 	margin: 0;
 }
 
+
+li > ul {
+	width: 150px;
+  transform: translatex(100%) scale(0);
+}
+
+li:hover > ul {
+  transform: translatex(101%) scale(1);
+}
+
+
+.addtobasket:hover ul {
+  transform: translatex(101%) scale(1);
+}
+
+.basket-icon:hover ul {
+  transform: translatex(101%) scale(1);
+}

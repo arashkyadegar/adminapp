@@ -26,9 +26,9 @@ export const getFaqAction = (id: any) =>
     },
   });
 
-export const getfaqsAction = () =>
+export const getfaqsAction = (page: number = 1) =>
   apiCallBegan({
-    url: `/faqs`,
+    url: `/faqs?page=${page}`,
     onSuccess: "faqs/faqsFetched",
     onError: "faqs/faqsLoadingStoped",
     onStart: "faqs/faqsRequested",
@@ -85,7 +85,7 @@ export const submitEditFaqAction = (faq: any) =>
   });
 
 
-  export const getfaqsTreeAction = () =>
+export const getfaqsTreeAction = () =>
   apiCallBegan({
     url: `/faqs/findAllGraph`,
     onSuccess: "faqsTree/faqsTreeFetched",

@@ -1,28 +1,17 @@
-import BoxTitleUnderlineComponent from "../share/box-title-underline";
 import LabelComponent from "../share/label";
 import BoxTitleLgComponent from "../share/lg-box-title";
-import 'suneditor/dist/css/suneditor.min.css'
-import SunEditor from 'suneditor-react';
-import SunEditorCore from "suneditor/src/lib/core";
-
 import LargSubmitbtnComponent from "../share/btn/lg-submit-btn";
 import ErrComponent from "../share/err";
 import { useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
-import InputBox1Component from "../share/inputBox1";
 import validator from "validator";
-import { categoryFormCleared, categoryFormFilled } from "../../redux/store/category/category-form";
+import { categoryFormCleared } from "../../redux/store/category/category-form";
 import { rgx_insecure } from "../../utility/regex";
-import TagComponent from "../share/tag";
-import { FileService } from "../../services/fileService";
-import ResponseStatus from "../../utility/responseStatus";
-import { ToastAuthFail, ToastFail, ToastSuccess } from "../../utility/tostify";
-import { getDefaultImageAvator } from "../../utility/imageUtility";
-import { getCategoriesAction, getCategoriesTreeAction, submitAddCategoryAction } from "../../redux/store/category/category-action";
-import TreeView from "../treeview/treeview";
+import {  ToastFail } from "../../utility/tostify";
+import { getCategoriesAction, getCategoriesTreeAction } from "../../redux/store/category/category-action";
 import { faqFormFilled } from "../../redux/store/faq/faq-form";
 import { submitAddFaqAction } from "../../redux/store/faq/faq-action";
-
+import {  getFaqGroupsAction } from "../../redux/store/faqgroup/faq-group-action";
 export default function FaqAddComponent() {
      const dispatch = useAppDispatch();
      const faqFormState = useAppSelector((state) => state.entities.faqForm);
@@ -30,9 +19,8 @@ export default function FaqAddComponent() {
      const faqGroupsState = useAppSelector((state) => state.entities.faqGroups);
      useEffect(() => {
           dispatch(categoryFormCleared())
-          dispatch(getCategoriesAction());
+          dispatch(getFaqGroupsAction());
           dispatch(getCategoriesTreeAction());
-
      }, []);
 
      function selectFaqGroupId(event: any) {

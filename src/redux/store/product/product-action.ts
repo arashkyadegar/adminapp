@@ -41,9 +41,9 @@ export const getProductsAction = (page: number = 1) =>
   });
 
 
-export const searchProductsAction = (name: string) =>
+export const searchProductsAction = (name: string,page: number = 1) =>
   apiCallBegan({
-    url: `/products/search?name=${name}`,
+    url: `/products/search?name=${name}&page=${page}`,
     onSuccess: "products/productsFetched",
     onError: "products/productsLoadingStoped",
     onStart: "products/productsRequested",
