@@ -3,8 +3,9 @@ export default function PcSidebarComponent() {
      const navigate = useNavigate();
 
      return (
-          <div className="border-gray-200 border text-sm  z-40 w-16 absolute h-screen hidden sm:inline-block bg-white  flex-col justify-start  m-1 right-0 ">
-               <ul className="p-2">
+          <div className="border-gray-100 border-l text-sm  z-40 w-16 absolute h-screen hidden sm:inline-block bg-white  flex-col justify-start  right-0 ">
+               <img src="/imgs/brands/brand-1.jpg" />
+               <ul className=" px-2">
                     {/* خانه */}
                     <li onClick={() => navigate("/dashboard")} className=" relative mx-auto rounded-md  hover:border  border-gray-200  text-gray-500 duration-150 flex-col  m-2 h-10 items-center justify-cente">
                          <button

@@ -159,13 +159,12 @@ export default function PcNavbarComponent() {
                     }}
                     data-collapse-toggle="navbar-sticky"
                     type="button"
-                    className="sm:hidden inline-flex transition-all duration-300 items-center ml-2 w-10 h-10 justify-center text-sm   rounded-lg outline-none "
+                    className="sm:hidden inline-flex m-1 border transition-all duration-300 items-center ml-2 w-8 h-8 p-1 justify-center  outline-none "
                     aria-controls="navbar-sticky"
                     aria-expanded="false"
                >
-                    <span className="sr-only">Open main menu</span>
                     <svg
-                         className="w-5 h-5"
+                         className="size-5"
                          aria-hidden="true"
                          xmlns="http://www.w3.org/2000/svg"
                          fill="none"
