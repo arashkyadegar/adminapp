@@ -81,6 +81,35 @@ export default function PcSidebarComponent() {
                               <li onClick={() => navigate("/product/product-list")} className="px-3 py-1 hover:bg-gray-100 cursor-pointer">لیست کالا ها</li>
                          </ul>
                     </li>
+
+                    {/* برندها */}
+                    <li className=" relative mx-auto rounded-md  hover:border  border-gray-200  text-gray-500 duration-150 flex-col  m-2 h-10 items-center justify-center">
+                         <button
+                              aria-haspopup="true"
+                              aria-controls="menu-lang"
+                              className="w-full items-center justify-center py-2 flex flex-col  outline-none focus:outline-none"
+                         >
+                              <span className="">
+                                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
+                                        <path fillRule="evenodd" d="M5.246 3.744a.75.75 0 0 1 .75-.75h7.125a4.875 4.875 0 0 1 3.346 8.422 5.25 5.25 0 0 1-2.97 9.58h-7.5a.75.75 0 0 1-.75-.75V3.744Zm7.125 6.75a2.625 2.625 0 0 0 0-5.25H8.246v5.25h4.125Zm-4.125 2.251v6h4.5a3 3 0 0 0 0-6h-4.5Z" clipRule="evenodd" />
+                                   </svg>
+
+                              </span>
+
+                         </button>
+                         <ul
+                              id="menu-lang"
+                              aria-hidden="true"
+                              className="bg-white border rounded-sm absolute top-0 right-52
+  transition duration-200 ease-in-out origin-top-left
+  min-w-32
+  "
+                         >
+                              <li onClick={() => navigate("/brand/brand-add")} className="px-3 py-1 hover:bg-gray-100 cursor-pointer"> برند جدید</li>
+                              <li onClick={() => navigate("/brand/brand-list")} className="px-3 py-1 hover:bg-gray-100 cursor-pointer">لیست برند ها</li>
+                         </ul>
+                    </li>
+
                     {/* کیف پول */}
                     <li className=" relative mx-auto rounded-md  hover:border  border-gray-200  text-gray-500 duration-150 flex-col  m-2 h-10 items-center justify-cente">
                          <button

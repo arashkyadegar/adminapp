@@ -31,16 +31,16 @@ export default function MobileNavbarComponent() {
         <div
           className={
             asideToggle
-              ? "border-gray-200 border z-20 text-xs sm:hidden absolute bg-white flex flex-col justify-end   top-0  right-0 transition-all "
-              : "border-gray-200 border z-20 text-xs w-full h-0 flex  bg-white  flex-row  justify-end transition-all "
+              ? "w-5/6 h-[100%] border-gray-200 border z-20 text-sm bg-white  sm:hidden absolute  flex flex-col top-0  right-0 transition-all "
+              : "border-gray-200 border z-20 text-sm w-full h-0 flex  bg-white   flex-row  justify-start transition-all "
           }
         >
 
           <div
             className={
               asideToggle
-                ? " w-full flex flex-col justify-center bg-white  sm:bg-transparent top-0"
-                : " w-10 h-0 overflow-hidden flex-col bg-white  sm:bg-transparent top-0"
+                ? " w-full flex flex-col justify-center   sm:bg-transparent top-0"
+                : " w-10 h-0 overflow-hidden flex-col    sm:bg-transparent top-0"
             }
           >
             <div className="flex flex-row-reverse justify-between ">

@@ -4,7 +4,7 @@ import SmTitleComponent from "../share/sm-title";
 export default function DashboardComponent() {
   //bg-[#f8f9fa]
   return (
-    <div className="w-full sm:w-11/12 mr-0 sm:mr-16 bg-blue-500">
+    <div className="w-full sm:w-11/12 mr-0 sm:mr-16">
       <div className="w-full flex flex-col p-4 ">
         <div className="flex flex-col w-full gap-4 ">
 

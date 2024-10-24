@@ -14,6 +14,7 @@ import LabelComponent from "../share/label";
 import ErrComponent from "../share/err";
 import { getDefaultImageAvator } from "../../utility/imageUtility";
 
+
 export default function BrandAddComponent() {
   const formdata2 = new FormData();
 
@@ -117,7 +118,9 @@ export default function BrandAddComponent() {
       {brandFormState.isLoading && (
         <Loading />
       )}
+
       <div className="w-full flex flex-col p-4 bg-[#f8f9fa]">
+
         <BoxTitleLgComponent title="برند جدید" />
         <div className="flex flex-col sm:flex-row gap-2">
           <div className="flex flex-col w-full bg-white  border border-gray-200">
@@ -169,7 +172,8 @@ export default function BrandAddComponent() {
         <LgSubmitbtnComponent title="ثبت  برند" onClickFunc={submit}>
         </LgSubmitbtnComponent>
       </div>
-    </div>
+
+    </div >
 
 
 

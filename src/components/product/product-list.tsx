@@ -137,8 +137,12 @@ export default function ProductListComponent() {
                                         </tr> */}
                                         </thead>
                                         <tbody>
-                                             {productsState.list.map((item: any) => (
-                                                  <tr key={item._id} className="flex flex-row bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600  p-2">
+                                             {productsState.list.map((item: any, index: number) => (
+
+
+                                                  <tr key={item._id}
+                                                       className={index % 2 == 0 ? 'flex flex-row bg-white  dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600  py-2' :
+                                                            'flex flex-row bg-gray-50  dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600  py-2'}>
                                                        <td className="w-4 p-4  ">
                                                             <div className="flex items-center justify-center">
                                                                  <input id="checkbox-table-search-1" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
@@ -170,7 +174,7 @@ export default function ProductListComponent() {
                                                                       <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                                                                  </svg>
                                                             </Link>
-                                   
+
 
 
                                                             <a className="font-medium text-red-600 dark:text-red-500 hover:border-red-600 ms-3 border cursor-pointer">
