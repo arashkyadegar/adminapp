@@ -63,6 +63,17 @@ export default function BrandListComponent() {
                   </svg>
 
                 </button>
+
+                {/* add new button  */}
+                <button id="countries" className="flex bg-gray-50 border border-gray-300 text-gray-300 items-center justify-center hover:text-gray-700 text-sm rounded-lg w-fit  p-2.5 ">
+                  <Link
+                    to={`/brand/brand-add`}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
+                      <path fillRule="evenodd" d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z" clipRule="evenodd" />
+                    </svg>
+                  </Link>
+                </button>
               </div>
 
 
