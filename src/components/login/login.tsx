@@ -59,13 +59,13 @@ export default function LoginComponent() {
      }
 
      return (
-          <div className="mx-auto  my-20 w-full sm:w-1/2 bg-blue-400 h-96 -rotate-3 rounded-lg bg-gradient-to-r from-indigo-500 from-10% via-sky-500 to-90%">
+          <div className="mx-auto  my-20 w-2/3 sm:w-1/3 bg-blue-400  -rotate-3 rounded-lg bg-gradient-to-r from-indigo-500 from-10% via-sky-500 to-90%">
 
-               <div className="flex flex-col justify-around items-center border shadow-gray-400 shadow-sm border-gray-200 rotate-3 h-96 bg-white rounded-lg ">
+               <div className="flex w-full flex-col justify-center gap-4 items-center border shadow-gray-400 shadow-sm border-gray-200 rotate-3  bg-white rounded-lg  py-4">
                     <div>
-                         <h1 className="font-semibold text-lg">ورود به سایت</h1>
+                         <h1 className="font-semibold text-sm mx-2">ورود به سایت</h1>
                     </div>
-                    <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-2">
                          <div className="flex flex-col items-end">
                               <label htmlFor="email" className="w-full text-right mb-2 text-xs font-medium text-gray-900 dark:text-white">نام کاربری</label>
                               <input type="email" name="email" id="email"
@@ -103,13 +103,13 @@ export default function LoginComponent() {
                               <p className="text-red-400 text-xs  text-right h-4">{loginForm.passwordError}</p>
                          </div>
                     </div>
-                    <div >
+                    <div>
                          <Link to="/dashboard/" className="text-xs bg-white font-semibold text-black border border-gray-300 px-4 py-2 rounded-lg cursor-pointer hover:text-white hover:bg-blue-600 transition-all duration-500" >ورود</Link>
 
                     </div>
-                    <div className="flex flex-row items-center justify-center gap-1  text-sm">
-                         <a>Don’t have an account yet? </a>
-                         <a className=" text-blue-600"> Register here!</a>
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-1  text-sm">
+                         <a>?Don’t have an account yet</a>
+                         <a className=" text-blue-600">!Register here</a>
                     </div>
                </div>
           </div >)
