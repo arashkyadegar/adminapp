@@ -824,7 +824,7 @@ export default function ProductEditComponent() {
                                                                            )}
                                                                            className="w-full h-20"
                                                                            alt="store logo"
-                                                                           crossOrigin="anonymous"
+                                                                           // crossOrigin="anonymous"
                                                                       />
 
                                                                  </div>

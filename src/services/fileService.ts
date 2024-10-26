@@ -10,14 +10,21 @@ export class FileService {
   }
 
 
+  // async uploadSingle(formdata: any): Promise<any> {
+  //   const response = await fetch(this.baseUrl + 'productLogo', {
+  //     method: "POST",
+  //     // credentials: "include",
+  //     body: formdata,
+  //   });
+  //   return response;
+  // }
+
   async uploadSingle(formdata: any): Promise<any> {
-    const response = await fetch(this.baseUrl + 'productLogo', {
+    const response = await fetch(this.baseUrl + 'upload-single', {
       method: "POST",
       // credentials: "include",
       body: formdata,
     });
     return response;
   }
-
-
 }

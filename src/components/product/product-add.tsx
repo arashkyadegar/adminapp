@@ -809,20 +809,23 @@ export default function ProductAddComponent() {
                                                             multiple
                                                             onChange={fillProductImages}
                                                        />
-                                                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 m-2">
+                                                       <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 m-2">
                                                             {productFormState.data.images.map((item: any, index: number) => (
 
-                                                                 <div className="flex flex-col justify-start items-start">
-                                                                      <input type="text" onChange={fillImageAlt} id={item.name} value={item.alt} className=" w-full  bg-white  text-gray-900 text-sm  block  p-2.5     outline-none" />
-                                                                      <input type="radio" name="status" checked={item.status} value={item.name} onChange={fillImageStatus} />
+                                                                 <div className="flex flex-col gap-1 w-full justify-start items-center border rounded-lg overflow-hidden p-2">
                                                                       <img key={item.name}
                                                                            src={getDefaultImageAvator(
                                                                                 item.name
                                                                            )}
                                                                            className="w-full h-20"
                                                                            alt="store logo"
-                                                                           crossOrigin="anonymous"
+                                                                           // crossOrigin="anonymous"
                                                                       />
+                                                                      <div className="flex flex-row-reverse w-full justify-center items-center ">
+                                                                           <LabelComponent title="تصویر اصلی" name="brand" />
+                                                                           <input type="radio" name="status" checked={item.status} value={item.name} onChange={fillImageStatus} />
+                                                                      </div>
+                                                                      <input type="text" onChange={fillImageAlt} id={item.name} value={item.alt} className=" w-full  bg-white  text-gray-900 text-sm  block  p-1.5    outline-none" />
 
                                                                  </div>
 
