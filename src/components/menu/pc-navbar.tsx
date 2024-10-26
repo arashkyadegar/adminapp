@@ -3,20 +3,7 @@ import React from "react";
 import myAppContext from "../context/context";
 
 export default function PcNavbarComponent() {
-     const { languageDrpDwnIsOpen, setLanguageDrpDwnIsOpen } = React.useContext(myAppContext);
-     const { userDrpDwnIsOpen, setUserDrpDwnIsOpen } = React.useContext(myAppContext);
      const { asideToggle, setAsideToggle } = React.useContext(myAppContext);
-
-     function toggleLanguageUserDrpDwn() {
-          // setUserDrpDwnIsOpen(false);
-          // setLanguageDrpDwnIsOpen(!languageDrpDwnIsOpen);
-     }
-
-     function toggleUserDrpDwn() {
-          // setUserDrpDwnIsOpen(!userDrpDwnIsOpen);
-          // setLanguageDrpDwnIsOpen(false);
-     }
-
 
      return (
           <div className="flex flex-row-reverse relative z-10 w-full">
