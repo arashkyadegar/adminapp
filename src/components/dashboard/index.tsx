@@ -4,12 +4,12 @@ import SmTitleComponent from "../share/sm-title";
 export default function DashboardComponent() {
   //bg-[#f8f9fa]
   return (
-    <div className="w-full sm:w-11/12 mr-0 sm:mr-16">
+    <div className="w-full sm:w-10/12 mr-0 sm:mr-16">
       <div className="w-full flex flex-col p-4 ">
         <div className="flex flex-col w-full gap-4 ">
 
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-10 justify-between">
-            <div className="flex flex-row w-full bg-white  border border-gray-200 gap-4 p-4 rounded-xl">
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-10 justify-between overflow-hidden">
+            <div className="flex flex-col sm:flex-row w-full bg-white  border border-gray-200 gap-4 p-4 rounded-xl">
               <div className="w-12 h-10  flex justify-center items-center rounded-full bg-lime-400">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6 text-green-600">
                   <path d="M3.375 4.5C2.339 4.5 1.5 5.34 1.5 6.375V13.5h12V6.375c0-1.036-.84-1.875-1.875-1.875h-8.25ZM13.5 15h-12v2.625c0 1.035.84 1.875 1.875 1.875h.375a3 3 0 1 1 6 0h3a.75.75 0 0 0 .75-.75V15Z" />
@@ -23,7 +23,7 @@ export default function DashboardComponent() {
                 <h1 className="text-xs text-gray-500">به استثنای سفارشات در ترانزیت</h1>
               </div>
             </div>
-            <div className="flex flex-row w-full bg-white  border border-gray-200 gap-4 p-4 rounded-xl">
+            <div className="flex flex-col sm:flex-row w-full bg-white  border border-gray-200 gap-4 p-4 rounded-xl">
               <div className="w-12 h-10  flex justify-center items-center rounded-full bg-orange-400">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6 text-red-600">
                   <path d="M10.464 8.746c.227-.18.497-.311.786-.394v2.795a2.252 2.252 0 0 1-.786-.393c-.394-.313-.546-.681-.546-1.004 0-.323.152-.691.546-1.004ZM12.75 15.662v-2.824c.347.085.664.228.921.421.427.32.579.686.579.991 0 .305-.152.671-.579.991a2.534 2.534 0 0 1-.921.42Z" />

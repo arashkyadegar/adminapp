@@ -57,6 +57,8 @@ export default function ProductAddComponent() {
           dispatch(getBrandsAction());
      }, []);
 
+
+
      function onColorsKeyDown(event: any) {
           let text: string = event.target.value;
           if (!validator.isEmpty(text.trim())) {
@@ -69,6 +71,18 @@ export default function ProductAddComponent() {
                          }))
                     colorsRef.current.value = "";
                }
+          }
+     }
+
+     function onColorsAddClick(event: any) {
+          let text: string = colorsRef.current.value;
+          if (!validator.isEmpty(text.trim())) {
+               dispatch(
+                    productFormFilled({
+                         ...productFormState.data,
+                         colors: [...productFormState.data.colors, text]
+                    }))
+               colorsRef.current.value = "";
           }
      }
      function onTagsKeyDown(event: any) {
@@ -142,6 +156,47 @@ export default function ProductAddComponent() {
                     subCategoriesRef.current.value = "";
                }
           }
+     }
+
+     function onSubCategoriesAddClick(event: any) {
+          let text: string = subCategoriesRef.current.value;
+          if (!validator.isEmpty(text.trim())) {
+               dispatch(
+                    productFormFilled({
+                         ...productFormState.data,
+                         subCategories: [...productFormState.data.subCategories, text]
+                    }))
+               subCategoriesRef.current.value = "";
+          }
+     }
+
+     function onKeywordsAddClick(event: any) {
+          let text: string = KeywordsRef.current.value;
+
+          if (!validator.isEmpty(text.trim())) {
+
+
+               dispatch(
+                    productFormFilled({
+                         ...productFormState.data,
+                         keywords: [...productFormState.data.keywords, text]
+                    }))
+               KeywordsRef.current.value = "";
+          }
+
+     }
+
+     function onTagsAddClick(event: any) {
+          let text: string = tagsRef.current.value;
+          if (!validator.isEmpty(text.trim())) {
+               dispatch(
+                    productFormFilled({
+                         ...productFormState.data,
+                         tags: [...productFormState.data.tags, text]
+                    }))
+               tagsRef.current.value = "";
+          }
+
      }
 
 
@@ -694,9 +749,16 @@ export default function ProductAddComponent() {
                                              <div className="mb-4">
                                                   <LabelComponent name="subCategories" title="زیر مجموعه" required="true" />
                                                   <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                                       <div className="w-full">
-                                                            <input type="text" id="subCategories" name="subCategories" ref={subCategoriesRef} onKeyDown={onSubCategoriesKeyDown} className=" w-full  bg-gray-100  text-gray-900 text-sm  block  p-2.5     outline-none" />
+                                                       <div className="w-full flex flex-row">
+                                                            <input type="text" id="subCategories" name="subCategories" ref={subCategoriesRef} onKeyDown={onSubCategoriesKeyDown} className=" w-full  bg-gray-100   text-gray-900 text-sm  block  p-2.5     outline-none" />
+                                                            {/* add new button  */}
+                                                            <button id="countries" onClick={onSubCategoriesAddClick} className="flex m-1 sm:hidden bg-gray-50 border border-gray-300 text-gray-300 items-center justify-center hover:text-gray-700 text-sm rounded-lg w-fit  p-2.5 ">
+                                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
+                                                                      <path fillRule="evenodd" d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z" clipRule="evenodd" />
+                                                                 </svg>
+                                                            </button>
                                                        </div>
+
                                                        {productFormState.data.subCategories !== undefined && (
                                                             <div className="grid grid-cols-4 w-full justify-start items-start">
                                                                  {productFormState.data.subCategories.map((item: any) => (
@@ -705,6 +767,8 @@ export default function ProductAddComponent() {
                                                             </div>
                                                        )}
                                                   </div>
+
+
                                              </div>
 
                                              <div className="mb-4">
@@ -819,7 +883,7 @@ export default function ProductAddComponent() {
                                                                            )}
                                                                            className="w-full h-20"
                                                                            alt="store logo"
-                                                                           // crossOrigin="anonymous"
+                                                                      // crossOrigin="anonymous"
                                                                       />
                                                                       <div className="flex flex-row-reverse w-full justify-center items-center ">
                                                                            <LabelComponent title="تصویر اصلی" name="brand" />
@@ -935,8 +999,14 @@ export default function ProductAddComponent() {
                                                   <LabelComponent title="کلمات کلیدی" />
                                                   <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
 
-                                                       <div className="w-full">
+                                                       <div className="w-full flex flex-row">
                                                             <input type="text" ref={KeywordsRef} onKeyDown={onKeywordsKeyDown} className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
+                                                            {/* add new button  */}
+                                                            <button id="countries" onClick={onKeywordsAddClick} className="flex m-1 sm:hidden bg-gray-50 border border-gray-300 text-gray-300 items-center justify-center hover:text-gray-700 text-sm rounded-lg w-fit  p-2.5 ">
+                                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
+                                                                      <path fillRule="evenodd" d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z" clipRule="evenodd" />
+                                                                 </svg>
+                                                            </button>
                                                        </div>
                                                        <div className="grid grid-cols-4 justify-start items-start w-full">
                                                             {productFormState.data.keywords.map((item: any) => (
@@ -970,8 +1040,14 @@ export default function ProductAddComponent() {
                                              <div className="mb-4">
                                                   <LabelComponent title="برچسب ها" />
                                                   <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                                       <div className="w-full">
+                                                       <div className="w-full flex flex-row">
                                                             <input type="text" id="tags" name="tags" ref={tagsRef} onKeyDown={onTagsKeyDown} className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
+                                                            {/* add new button  */}
+                                                            <button id="countries" onClick={onTagsAddClick} className="flex m-1 sm:hidden bg-gray-50 border border-gray-300 text-gray-300 items-center justify-center hover:text-gray-700 text-sm rounded-lg w-fit  p-2.5 ">
+                                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
+                                                                      <path fillRule="evenodd" d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z" clipRule="evenodd" />
+                                                                 </svg>
+                                                            </button>
                                                        </div>
                                                        <div className="grid grid-cols-4 justify-start items-start w-full">
                                                             {productFormState.data.tags.map((item: any) => (
@@ -1056,9 +1132,15 @@ export default function ProductAddComponent() {
                                              <div className="mb-4">
                                                   <LabelComponent title="رنگ" />
                                                   <div className="flex flex-col gap-2 justify-end items-center bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
-                                                       <div className="w-full">
+                                                       <div className="w-full flex flex-row">
                                                             <input type="text" name="colors"
                                                                  id="colors" ref={colorsRef} onKeyDown={onColorsKeyDown} className="w-full  bg-gray-100  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
+                                                            {/* add new button  */}
+                                                            <button id="countries" onClick={onColorsAddClick} className="flex m-1 sm:hidden bg-gray-50 border border-gray-300 text-gray-300 items-center justify-center hover:text-gray-700 text-sm rounded-lg w-fit  p-2.5 ">
+                                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
+                                                                      <path fillRule="evenodd" d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z" clipRule="evenodd" />
+                                                                 </svg>
+                                                            </button>
                                                        </div>
                                                        <div className="grid grid-cols-4 justify-start items-start w-full">
                                                             {productFormState.data.colors.map((item: any) => (

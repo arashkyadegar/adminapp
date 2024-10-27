@@ -143,7 +143,7 @@ export default function FaqGroupAddComponent() {
 
 
      return (
-          <div className="w-full sm:w-11/12 mr-0 sm:mr-16">
+          <div className="w-full sm:w-10/12 mr-0 sm:mr-16">
                <div className="w-full flex flex-col p-4 bg-[#f8f9fa]">
                     <BoxTitleLgComponent title="گروهبندی جدید" />
 
