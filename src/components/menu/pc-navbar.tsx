@@ -6,7 +6,7 @@ export default function PcNavbarComponent() {
      const { asideToggle, setAsideToggle } = React.useContext(myAppContext);
 
      return (
-          <div className="flex flex-row-reverse relative z-10 w-full">
+          <div className="flex flex-row-reverse relative z-10 w-full bg-white">
                <div className="w-full  flex flex-col sm:flex-row bg-transparent px-4">
                     <div className="w-full    justify-start   text-black z-20 flex-row  py-3">
                          <ul className=" items-center text-sm py-1 gap-4 w-full flex justify-end flex-row h-10">

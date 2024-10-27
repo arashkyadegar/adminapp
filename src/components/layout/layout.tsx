@@ -5,12 +5,12 @@ import LabtopNavbarComponent from "../menu/pc-navbar";
 
 const Layout = () => {
      return (
-          <>    {/* shown navbar in mobile view  */}
+          <div className="bg-[#f8f9fa]">    {/* shown navbar in mobile view  */}
                <MobileNavbarComponent />
                {/* shown navbar in pc view  */}
                <LabtopNavbarComponent />
                <Outlet />
-          </>
+          </div>
      )
 };
 

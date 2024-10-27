@@ -90,7 +90,7 @@ export default function SettingComponent() {
       ToastFail("لطفا مقادیر فیلدهای الزامی را با دقت وارد کنید");
     }
   }
-  return (<div className="w-full sm:w-11/12 mr-0 sm:mr-16">
+  return (<div className="w-full sm:w-10/12 mr-0 sm:mr-16">
     {settingFormState.isLoading && (
       <Loading />
     )}
