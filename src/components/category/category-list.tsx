@@ -112,7 +112,7 @@ export default function CategoryListComponent() {
                                              </Link>
                                         </button>
                                    </div>
-                                   <div className="flex flex-row gap-2">
+                                   <div className="flex flex-row gap-2 justify-start ">
 
                                         {/* delete-all button  */}
                                         {/* <div className="flex flex-row gap-2 justify-end ">

@@ -7,10 +7,10 @@ export default function OrderListComponent() {
           <div className="w-full sm:w-10/12 mr-0 sm:mr-16">
                <div className="w-full flex flex-col p-4 bg-[#f8f9fa]">
                     <BoxTitleLgComponent title="لیست سفارشات" />
-                    <div className="flex flex-col sm:flex-row gap-4">
-                         <div className="flex sm:w-3/4 flex-col gap-4 border border-gray-200">
+                    <div className="flex flex-col  gap-4">
+                         <div className="flex w-full flex-col gap-4 border border-gray-200">
                               <div className="flex flex-col w-full bg-white">
-                                   <div className="flex flex-col sm:flex-row gap-2 justify-between p-4">
+                                   <div className="flex flex-col gap-2 justify-between p-4">
                                         <div className="flex flex-row gap-2">
                                              <div className="flex w-full flex-row gap-2 justify-end items-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  px-1">
                                                   <input type="text" className="w:4/5 bg-gray-50  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
@@ -27,7 +27,7 @@ export default function OrderListComponent() {
 
                                              </button>
                                              {/* add new button  */}
-                                             <button id="countries" className="flex bg-gray-50 border border-gray-300 text-gray-300 items-center justify-center hover:text-gray-700 text-sm rounded-lg w-fit  p-2.5 ">
+                                             <button id="countries" className="flex  bg-gray-50 border border-gray-300 text-gray-300 items-center justify-center hover:text-gray-700 text-sm rounded-lg w-fit  p-2.5 ">
                                                   <Link
                                                        to={`/order/order-add`}
                                                   >
@@ -257,42 +257,40 @@ export default function OrderListComponent() {
 
                                         </div>
                                    </div>
-
-
                               </div>
                          </div>
-                         <div className="flex sm:w-1/4 flex-col  gap-4  border border-gray-200">
-                              <div className="flex flex-col w-full bg-white  border border-gray-200 p-4">
+                         <div className="flex w-full flex-col  gap-4  border border-gray-200">
+                              <div className="flex flex-col justify-start items-start w-full bg-white  border border-gray-200 p-4">
                                    <LabelComponent title="شماره سفارش" />
                                    <div className="flex flex-row gap-2 justify-end items-center bg-gray-50   text-gray-900 text-sm rounded-lg  px-1">
-                                        <input type="text" className="w:4/5 bg-gray-50  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
+                                        <input type="text" className="w-full bg-gray-50  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
                                    </div>
                                    <LabelComponent title="مشتری" />
 
                                    <div className="flex flex-row gap-2 justify-end items-center bg-gray-50   text-gray-900 text-sm rounded-lg  px-1">
-                                        <input type="text" className="w:4/5 bg-gray-50  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
+                                        <input type="text" className="w-full bg-gray-50  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
                                    </div>
                                    <LabelComponent title="وضعیت سفارش" />
 
                                    <div className="flex flex-row gap-2 justify-end items-center bg-gray-50   text-gray-900 text-sm rounded-lg  px-1">
-                                        <input type="text" className="w:4/5 bg-gray-50  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
+                                        <input type="text" className="w-full bg-gray-50  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
                                    </div>
                                    <LabelComponent title="تاریخ اضافه شده" />
 
                                    <div className="flex flex-row gap-2 justify-end items-center bg-gray-50   text-gray-900 text-sm rounded-lg  px-1">
-                                        <input type="text" className="w:4/5 bg-gray-50  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
+                                        <input type="text" className="w-full bg-gray-50  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
                                    </div>
 
                                    <LabelComponent title="تاریخ اصلاح شده" />
 
                                    <div className="flex flex-row gap-2 justify-end items-center bg-gray-50   text-gray-900 text-sm rounded-lg  px-1">
-                                        <input type="text" className="w:4/5 bg-gray-50  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
+                                        <input type="text" className="w-full bg-gray-50  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
                                    </div>
 
                                    <LabelComponent title="مشتری" />
 
                                    <div className="flex flex-row gap-2 justify-end items-center bg-gray-50   text-gray-900 text-sm rounded-lg  px-1">
-                                        <input type="text" className="w:4/5 bg-gray-50  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
+                                        <input type="text" className="w-full bg-gray-50  text-gray-900 text-sm rounded-lg  block  p-2.5     outline-none" />
                                    </div>
                               </div>
                          </div>
