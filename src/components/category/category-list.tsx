@@ -100,7 +100,7 @@ export default function CategoryListComponent() {
                                              </svg>
 
                                         </button>
-                                        
+
                                         {/* add new button  */}
                                         <button id="countries" className="flex sm:hidden bg-gray-50 border border-gray-300 text-gray-300 items-center justify-center hover:text-gray-700 text-sm rounded-lg w-fit  p-2.5 ">
                                              <Link
@@ -187,7 +187,9 @@ export default function CategoryListComponent() {
                                                        </td>
 
                                                        <th scope="col" className="flex items-center justify-center w-16">
-                                                            <img src={getDefaultImageAvator(item.image)} className="w-10 h-10" />
+                                                            <img src={getDefaultImageAvator(item.image)}
+                                                                 width="40rem" height="40rem"
+                                                                 loading="lazy" />
                                                        </th>
                                                        <td scope="row" className="flex items-center justify-center w-40">
                                                             {item.name}

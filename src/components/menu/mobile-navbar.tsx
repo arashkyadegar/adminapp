@@ -18,8 +18,8 @@ export default function MobileNavbarComponent() {
         <div
           className={
             asideToggle
-              ? "w-full h-[100%] border-gray-200 border z-20 text-sm bg-white  sm:hidden absolute  flex flex-col top-0  right-0 transition-all "
-              : "border-gray-200 border z-20 text-sm w-full h-0 flex  bg-white   flex-row  justify-start transition-all "
+              ? "w-full h-[100%] border-gray-200 border z-20 text-sm bg-gray-50  sm:hidden absolute  flex flex-col top-0  right-0 transition-all "
+              : "border-gray-200 border z-20 text-sm w-full h-0 flex   bg-gray-50    flex-row  justify-start transition-all "
           }
         >
 

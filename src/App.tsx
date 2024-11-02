@@ -27,6 +27,8 @@ import FaqEditComponent from './components/faq/faq-edit';
 import FaqGroupAddComponent from './components/faq-group/faq-group-add';
 import FaqGroupListComponent from './components/faq-group/faq-group-list';
 import FaqGroupEditComponent from './components/faq-group/faq-group-edit';
+import ImageAddComponent from './components/image/image-add';
+import ImageListComponent from './components/image/image-list';
 
 function App() {
 
@@ -125,6 +127,12 @@ function App() {
             <Route path="faq-group/faq-group-add" element={<FaqGroupAddComponent />} />
             <Route path="faq-group/faq-group-list" element={<FaqGroupListComponent />} />
             <Route path="faq-group/faq-group-edit/:id" element={<FaqGroupEditComponent />} />
+
+
+            <Route path="image/image-add" element={<ImageAddComponent />} />
+            <Route path="image/image-list" element={<ImageListComponent />} />
+            {/* <Route path="image/image-list" element={<ImageListComponent />} />
+            <Route path="image/image-edit/:id" element={<ImageEditComponent />} /> */}
             {/* <Route path="category-list" element={<CategoryList />} />
           <Route path="category-edit/:id" element={<CategoryEdit />} /> */}
             {/*<Route path="direct" element={<DirectMsgComponent />} /> */}
