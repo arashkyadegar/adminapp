@@ -108,6 +108,35 @@ export default function PcSidebarComponent() {
                          </ul>
                     </li>
 
+                    {/* تیکت ها */}
+                    <li className=" relative mx-auto rounded-md  hover:border  border-gray-200  text-gray-500 duration-150 flex-col  m-2 h-10 items-center justify-center">
+                         <button
+                              aria-haspopup="true"
+                              aria-controls="menu-lang"
+                              className="w-full items-center justify-center py-2 flex flex-col  outline-none focus:outline-none"
+                         >
+                              <span className="">
+                                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
+                                        <path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z" />
+                                        <path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z" />
+                                   </svg>
+                              </span>
+
+                         </button>
+                         <ul
+                              id="menu-lang"
+                              aria-hidden="true"
+                              className="bg-white border rounded-sm absolute top-0 right-52
+  transition duration-200 ease-in-out origin-top-left
+  min-w-32
+  "
+                         >
+                              <li onClick={() => navigate("/ticket/ticket-add")} className="px-3 py-1 hover:bg-gray-100 cursor-pointer">ثبت تیکت</li>
+                              <li onClick={() => navigate("/ticket/ticket-list")} className="px-3 py-1 hover:bg-gray-100 cursor-pointer">لیست تیکت ها</li>
+                         </ul>
+                    </li>
+
+
                     {/* برندها */}
                     <li className=" relative mx-auto rounded-md  hover:border  border-gray-200  text-gray-500 duration-150 flex-col  m-2 h-10 items-center justify-center">
                          <button
