@@ -31,6 +31,8 @@ import ImageAddComponent from './components/image/image-add';
 import ImageListComponent from './components/image/image-list';
 import TicketAddComponent from './components/ticket/ticket-add';
 import TicketListComponent from './components/ticket/ticket-list';
+import AccessAddComponent from './components/access/access-add';
+import AccessListComponent from './components/access/access-list';
 
 function App() {
 
@@ -137,6 +139,10 @@ function App() {
 
             <Route path="ticket/ticket-add" element={<TicketAddComponent />} />
             <Route path="ticket/ticket-list" element={<TicketListComponent />} />
+
+            <Route path="access/access-add" element={<AccessAddComponent />} />
+            <Route path="access/access-list" element={<AccessListComponent />} />
+            
             {/* <Route path="image/image-list" element={<ImageListComponent />} />
             <Route path="image/image-edit/:id" element={<ImageEditComponent />} /> */}
             {/* <Route path="category-list" element={<CategoryList />} />

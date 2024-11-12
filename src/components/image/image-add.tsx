@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
-import { imageFormCleared, imageFormFilled, imageFormImagesAdded } from "../../redux/store/image/image-form";
+import imageForm, { imageFormCleared, imageFormFilled, imageFormImagesAdded } from "../../redux/store/image/image-form";
 import BoxTitleLgComponent from "../share/lg-box-title";
 import Loading from "../share/loading";
 import LabelComponent from "../share/label";
@@ -109,7 +109,14 @@ export default function ImageAddComponent() {
     }
   }
 
-
+  function removeImage(value: any) {
+    const list = imageFormState.data.images.filter((item: any) => item.name != value);
+    dispatch(
+      imageFormFilled({
+        ...imageFormState.data,
+        images: list
+      }))
+  }
   return (
     <div className="w-full sm:w-10/12 mr-0 sm:mr-16">
       {imageFormState.isLoading && (
@@ -140,7 +147,7 @@ export default function ImageAddComponent() {
                       {imageFormState.data.images.map((item: any, index: number) => (
                         <div key={item.name} className="flex flex-col gap-1 w-full justify-start items-center border rounded-lg overflow-hidden p-2">
                           <div className="flex w-full justify-end">
-                            <div className="w-fit  border hover:border-red-500 cursor-pointer">
+                            <div onClick={() => { removeImage(item.name) }} className="w-fit  border hover:border-red-500 cursor-pointer">
                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-4">
                                 <path fillRule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
                               </svg>
@@ -157,7 +164,7 @@ export default function ImageAddComponent() {
                             />
                           </div>
                           <div className="my-4 flex w-full flex-col items-start">
-                            <LabelComponent name="name" title="عنوان" required="true" />
+                            <LabelComponent name="title" title="عنوان" required="true" />
                             <div className="flex w-full flex-row-reverse gap-2 justify-start items-start bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
 
                               <input type="text"
@@ -168,10 +175,10 @@ export default function ImageAddComponent() {
                                 className="w-full bg-gray-100  text-gray-900 text-sm rounded-lg  p-2.5     outline-none" />
                             </div>
 
-                            <LabelComponent name="name" title="alt" required="true" />
+                            <LabelComponent name="alt" title="alt" required="true" />
                             <div className="flex w-full flex-row-reverse gap-2 justify-start items-start bg-gray-100   text-gray-900 text-sm rounded-lg  px-1">
                               <input type="text"
-                                name="name"
+                                name="alt"
                                 id={item.name}
                                 value={item.alt}
                                 onChange={fillImageAlt}

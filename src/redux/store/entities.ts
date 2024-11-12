@@ -14,7 +14,9 @@ import settingFormReducer from "./setting/setting-form";
 import categoriesReducer from "./category/categories";
 import categoriesTreeReducer from "./category/category-tree";
 import addTabReducer from "./productTab/productAddTab";
+import ticketsReducer from "./ticket/tickets";
 export default combineReducers({
+  tickets: ticketsReducer,
   imageForm: imageFormReducer,
   images: imagesReducer,
   faqGroupForm: faqGroupFormReducer,
