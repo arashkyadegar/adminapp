@@ -1,8 +1,10 @@
 "use client"
 import React from "react";
 import myAppContext from "../context/context";
+import { useAuth } from "../hooks/AuthProvider";
 
 export default function PcNavbarComponent() {
+     const auth = useAuth();
      const { asideToggle, setAsideToggle } = React.useContext(myAppContext);
 
      return (
@@ -40,46 +42,46 @@ export default function PcNavbarComponent() {
 
 
                               <li className="navbar  flex relative flex-row-reverse gap-1 justify-center items-center text-gray-500  cursor-pointer">
-                                  
-                                        <li className="navbar relative flex flex-row-reverse gap-1  justify-center items-center text-gray-500 cursor-pointer">
 
-                                             <span >
-                                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-3">
-                                                       <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                                                  </svg>
+                                   <li className="navbar relative flex flex-row-reverse gap-1  justify-center items-center text-gray-500 cursor-pointer">
 
-                                             </span>
-                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-8">
-                                                  <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM6.262 6.072a8.25 8.25 0 1 0 10.562-.766 4.5 4.5 0 0 1-1.318 1.357L14.25 7.5l.165.33a.809.809 0 0 1-1.086 1.085l-.604-.302a1.125 1.125 0 0 0-1.298.21l-.132.131c-.439.44-.439 1.152 0 1.591l.296.296c.256.257.622.374.98.314l1.17-.195c.323-.054.654.036.905.245l1.33 1.108c.32.267.46.694.358 1.1a8.7 8.7 0 0 1-2.288 4.04l-.723.724a1.125 1.125 0 0 1-1.298.21l-.153-.076a1.125 1.125 0 0 1-.622-1.006v-1.089c0-.298-.119-.585-.33-.796l-1.347-1.347a1.125 1.125 0 0 1-.21-1.298L9.75 12l-1.64-1.64a6 6 0 0 1-1.676-3.257l-.172-1.03Z" clipRule="evenodd" />
+                                        <span >
+                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-3">
+                                                  <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                              </svg>
 
-                                             <ul className="text-xs font-semibold text-gray-500 absolute top-8 right-10 w-40 bg-gray-50 border border-gray-300 transition-all duration-200">
-                                                  <li className="p-2 relative flex flex-row-reverse items-center justify-end gap-1">
-                                                       <a>Turkiye</a>
-                                                       <img src="/imgs/theme/flag-cn.png" className="w-5 h-5" />
+                                        </span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-8">
+                                             <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM6.262 6.072a8.25 8.25 0 1 0 10.562-.766 4.5 4.5 0 0 1-1.318 1.357L14.25 7.5l.165.33a.809.809 0 0 1-1.086 1.085l-.604-.302a1.125 1.125 0 0 0-1.298.21l-.132.131c-.439.44-.439 1.152 0 1.591l.296.296c.256.257.622.374.98.314l1.17-.195c.323-.054.654.036.905.245l1.33 1.108c.32.267.46.694.358 1.1a8.7 8.7 0 0 1-2.288 4.04l-.723.724a1.125 1.125 0 0 1-1.298.21l-.153-.076a1.125 1.125 0 0 1-.622-1.006v-1.089c0-.298-.119-.585-.33-.796l-1.347-1.347a1.125 1.125 0 0 1-.21-1.298L9.75 12l-1.64-1.64a6 6 0 0 1-1.676-3.257l-.172-1.03Z" clipRule="evenodd" />
+                                        </svg>
+
+                                        <ul className="text-xs font-semibold text-gray-500 absolute top-8 right-10 w-40 bg-gray-50 border border-gray-300 transition-all duration-200">
+                                             <li className="p-2 relative flex flex-row-reverse items-center justify-end gap-1">
+                                                  <a>Turkiye</a>
+                                                  <img src="/imgs/theme/flag-cn.png" className="w-5 h-5" />
 
 
-                                                  </li>
+                                             </li>
 
-                                                  <li className="p-2 relative flex flex-row-reverse items-center justify-end gap-1">
-                                                       <a>French</a>
+                                             <li className="p-2 relative flex flex-row-reverse items-center justify-end gap-1">
+                                                  <a>French</a>
 
-                                                       <img src="/imgs/theme/flag-fr.png" className="w-5 h-5" />
-
-
-                                                  </li>
-
-                                                  <li className="p-2 relative flex flex-row-reverse items-center justify-end gap-1">
-                                                       <a>English</a>
-
-                                                       <img src="/imgs/theme/flag-us.png" className="w-5 h-5" />
-
-                                                  </li>
-                                             </ul>
+                                                  <img src="/imgs/theme/flag-fr.png" className="w-5 h-5" />
 
 
-                                        </li>
-                                   
+                                             </li>
+
+                                             <li className="p-2 relative flex flex-row-reverse items-center justify-end gap-1">
+                                                  <a>English</a>
+
+                                                  <img src="/imgs/theme/flag-us.png" className="w-5 h-5" />
+
+                                             </li>
+                                        </ul>
+
+
+                                   </li>
+
                               </li>
 
 
@@ -124,7 +126,7 @@ export default function PcNavbarComponent() {
                                              </svg>
 
                                         </li>
-                                        <li className="p-2 flex flex-row-reverse items-center justify-end gap-1 border-t border-red-500"><a className="text-red-600">خروج</a>
+                                        <li onClick={() => { auth.logout() }} className="p-2 flex flex-row-reverse items-center justify-end gap-1 border-t border-red-500"><a className="text-red-600">خروج</a>
                                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-4">
                                                   <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
                                              </svg>

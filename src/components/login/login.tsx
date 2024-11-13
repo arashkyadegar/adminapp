@@ -5,6 +5,7 @@ import { useAppDispatch } from "../../redux/store/hooks";
 import { ToastFail } from "../../utility/tostify";
 
 import { Link } from "react-router-dom";
+import login, { useAuth } from "../hooks/AuthProvider";
 export default function LoginComponent() {
 
      const usernameInputRef = useRef<HTMLInputElement>(null);
@@ -12,6 +13,7 @@ export default function LoginComponent() {
      const dispatch = useAppDispatch();
      const { loginForm, setLoginForm } = React.useContext(myAppContext);
      const { passwordVisibility, setPasswordVisibility } = React.useContext(myAppContext);
+     const auth = useAuth();
 
      function fillLoginPassword(event: any): void {
           let text: string = validator.escape(event.target.value);
@@ -54,7 +56,18 @@ export default function LoginComponent() {
      function tooglePasswordVisibility(event: any): void {
           setPasswordVisibility(!passwordVisibility);
      }
-     function submitSigninUser() {
+     function handleSubmitEvent() {
+
+          if (usernameInputRef.current && passwordInputRef.current) {
+
+               const data = {
+                    email: usernameInputRef.current.value,
+                    password: passwordInputRef.current.value,
+                    remember_me: true
+               }
+               
+               auth.login(data)
+          }
 
      }
 
@@ -104,6 +117,7 @@ export default function LoginComponent() {
                          </div>
                     </div>
                     <div>
+                         <button onClick={handleSubmitEvent}>handle</button>
                          <Link to="/dashboard/" className="text-xs bg-white font-semibold text-black border border-gray-300 px-4 py-2 rounded-lg cursor-pointer hover:text-white hover:bg-blue-600 transition-all duration-500" >ورود</Link>
 
                     </div>

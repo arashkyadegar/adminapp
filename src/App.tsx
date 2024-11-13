@@ -33,6 +33,7 @@ import TicketAddComponent from './components/ticket/ticket-add';
 import TicketListComponent from './components/ticket/ticket-list';
 import AccessAddComponent from './components/access/access-add';
 import AccessListComponent from './components/access/access-list';
+import AuthProvider from './components/hooks/AuthProvider';
 
 function App() {
 
@@ -96,60 +97,62 @@ function App() {
       }}
     >
       <BrowserRouter>
-        <Routes>
-          <Route path="/" >
-            <Route path="/" element={<LoginComponent />} />
-          </Route>
-          <Route path="/" element={<Layout />}>
-            {/* <Route index element={<LandingPageComponent />} /> */}
-            {/* <Route path="login" element={<LoginComponent />} /> */}
-            <Route path="dashboard" element={<DashboardComponent />} />
+        <AuthProvider>
+          <Routes>
+            <Route path="/" >
+              <Route path="/" element={<LoginComponent />} />
+            </Route>
+            <Route path="/" element={<Layout />}>
+              {/* <Route index element={<LandingPageComponent />} /> */}
+              {/* <Route path="login" element={<LoginComponent />} /> */}
+              <Route path="dashboard" element={<DashboardComponent />} />
 
 
-            <Route path="setting" element={<SettingComponent />} />
-            <Route path="product/product-add" element={<ProductAddComponent />} />
-            <Route path="product/product-list" element={<ProductListComponent />} />
-            <Route path="product/product-edit/:id" element={<ProductEditComponent />} />
+              <Route path="setting" element={<SettingComponent />} />
+              <Route path="product/product-add" element={<ProductAddComponent />} />
+              <Route path="product/product-list" element={<ProductListComponent />} />
+              <Route path="product/product-edit/:id" element={<ProductEditComponent />} />
 
 
-            <Route path="category/category-add" element={<CategoryAddComponent />} />
-            <Route path="category/category-list" element={<CategoryListComponent />} />
-            <Route path="category/category-edit/:id" element={<CategoryEditComponent />} />
+              <Route path="category/category-add" element={<CategoryAddComponent />} />
+              <Route path="category/category-list" element={<CategoryListComponent />} />
+              <Route path="category/category-edit/:id" element={<CategoryEditComponent />} />
 
-            <Route path="order/order-add" element={<OrderAddComponent />} />
-            <Route path="order/order-list" element={<OrderListComponent />} />
+              <Route path="order/order-add" element={<OrderAddComponent />} />
+              <Route path="order/order-list" element={<OrderListComponent />} />
 
-            <Route path="brand/brand-add" element={<BrandAddComponent />} />
-            <Route path="brand/brand-list" element={<BrandListComponent />} />
-            <Route path="brand/brand-edit/:id" element={<BrandEditComponent />} />
+              <Route path="brand/brand-add" element={<BrandAddComponent />} />
+              <Route path="brand/brand-list" element={<BrandListComponent />} />
+              <Route path="brand/brand-edit/:id" element={<BrandEditComponent />} />
 
-            <Route path="faq/faq-add" element={<FaqAddComponent />} />
-            <Route path="faq/faq-list" element={<FaqListComponent />} />
-            <Route path="faq/faq-edit/:id" element={<FaqEditComponent />} />
-
-
-            <Route path="faq-group/faq-group-add" element={<FaqGroupAddComponent />} />
-            <Route path="faq-group/faq-group-list" element={<FaqGroupListComponent />} />
-            <Route path="faq-group/faq-group-edit/:id" element={<FaqGroupEditComponent />} />
+              <Route path="faq/faq-add" element={<FaqAddComponent />} />
+              <Route path="faq/faq-list" element={<FaqListComponent />} />
+              <Route path="faq/faq-edit/:id" element={<FaqEditComponent />} />
 
 
-            <Route path="image/image-add" element={<ImageAddComponent />} />
-            <Route path="image/image-list" element={<ImageListComponent />} />
+              <Route path="faq-group/faq-group-add" element={<FaqGroupAddComponent />} />
+              <Route path="faq-group/faq-group-list" element={<FaqGroupListComponent />} />
+              <Route path="faq-group/faq-group-edit/:id" element={<FaqGroupEditComponent />} />
 
 
-            <Route path="ticket/ticket-add" element={<TicketAddComponent />} />
-            <Route path="ticket/ticket-list" element={<TicketListComponent />} />
+              <Route path="image/image-add" element={<ImageAddComponent />} />
+              <Route path="image/image-list" element={<ImageListComponent />} />
 
-            <Route path="access/access-add" element={<AccessAddComponent />} />
-            <Route path="access/access-list" element={<AccessListComponent />} />
-            
-            {/* <Route path="image/image-list" element={<ImageListComponent />} />
+
+              <Route path="ticket/ticket-add" element={<TicketAddComponent />} />
+              <Route path="ticket/ticket-list" element={<TicketListComponent />} />
+
+              <Route path="access/access-add" element={<AccessAddComponent />} />
+              <Route path="access/access-list" element={<AccessListComponent />} />
+
+              {/* <Route path="image/image-list" element={<ImageListComponent />} />
             <Route path="image/image-edit/:id" element={<ImageEditComponent />} /> */}
-            {/* <Route path="category-list" element={<CategoryList />} />
+              {/* <Route path="category-list" element={<CategoryList />} />
           <Route path="category-edit/:id" element={<CategoryEdit />} /> */}
-            {/*<Route path="direct" element={<DirectMsgComponent />} /> */}
-          </Route>
-        </Routes>
+              {/*<Route path="direct" element={<DirectMsgComponent />} /> */}
+            </Route>
+          </Routes>
+        </AuthProvider>
       </BrowserRouter>
     </myAppContext.Provider>
   );
