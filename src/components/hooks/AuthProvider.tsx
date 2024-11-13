@@ -10,6 +10,7 @@ type LoginType = {
 interface ProviderProps {
   user: string | null,
   token: string,
+  roles: string[],
   login(data: LoginType): void,
   logout(): void,
 }
@@ -17,6 +18,7 @@ interface ProviderProps {
 const AuthContext = createContext<ProviderProps>({
   user: null,
   token: '',
+  roles: [],
   login: () => { },
   logout: () => { }
 })
@@ -34,15 +36,17 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const storedInfo = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') || '{}') : null
   const [user, setUser] = useState<string | null>(storedInfo?.email)
   const [token, setToken] = useState(storedInfo?.token || '')
+  const [roles, setRoles] = useState(storedInfo?.roles || [])
   const navigate = useNavigate()
 
   const login = (data: LoginType) => {
 
     const t = randomAlphaNumeric(50)
     setTimeout(() => {
-      const obj = { ...data, token: t }
+      const obj = { ...data, token: t, roles: ['admin','account'] }
       setUser(data.email)
       setToken(t)
+      setRoles(roles)
       localStorage.setItem('user', JSON.stringify(obj))
       navigate('/dashboard')
     }, 1000);
@@ -55,7 +59,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout }}>
+    <AuthContext.Provider value={{ user, token, roles, login, logout }}>
       {children}
     </AuthContext.Provider>
   )

@@ -34,6 +34,7 @@ import TicketListComponent from './components/ticket/ticket-list';
 import AccessAddComponent from './components/access/access-add';
 import AccessListComponent from './components/access/access-list';
 import AuthProvider from './components/hooks/AuthProvider';
+import ProtectedRoute from './components/hooks/protected-route';
 
 function App() {
 
@@ -108,8 +109,26 @@ function App() {
               <Route path="dashboard" element={<DashboardComponent />} />
 
 
-              <Route path="setting" element={<SettingComponent />} />
-              <Route path="product/product-add" element={<ProductAddComponent />} />
+
+              <Route
+                path="/setting"
+                element={(
+                  <ProtectedRoute role={'admin'}>
+                    <SettingComponent />
+                  </ProtectedRoute>
+                )}
+              />
+
+              <Route
+                path="product/product-add"
+                element={(
+                  <ProtectedRoute role={'manager'}>
+                    <ProductAddComponent />
+                  </ProtectedRoute>
+                )}
+              />
+
+              {/* <Route path="product/product-add" element={<ProductAddComponent />} /> */}
               <Route path="product/product-list" element={<ProductListComponent />} />
               <Route path="product/product-edit/:id" element={<ProductEditComponent />} />
 
@@ -154,7 +173,7 @@ function App() {
           </Routes>
         </AuthProvider>
       </BrowserRouter>
-    </myAppContext.Provider>
+    </myAppContext.Provider >
   );
 }
 

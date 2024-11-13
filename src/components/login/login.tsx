@@ -57,18 +57,14 @@ export default function LoginComponent() {
           setPasswordVisibility(!passwordVisibility);
      }
      function handleSubmitEvent() {
-
           if (usernameInputRef.current && passwordInputRef.current) {
-
                const data = {
                     email: usernameInputRef.current.value,
                     password: passwordInputRef.current.value,
                     remember_me: true
-               }
-               
+               }    
                auth.login(data)
           }
-
      }
 
      return (
