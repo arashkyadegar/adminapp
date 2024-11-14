@@ -43,10 +43,11 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     const t = randomAlphaNumeric(50)
     setTimeout(() => {
-      const obj = { ...data, token: t, roles: ['admin','account'] }
+      const obj = { ...data, token: t, roles: ['guest','account','user'] }
       setUser(data.email)
       setToken(t)
       setRoles(roles)
+      console.log(obj)
       localStorage.setItem('user', JSON.stringify(obj))
       navigate('/dashboard')
     }, 1000);

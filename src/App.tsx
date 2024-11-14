@@ -35,6 +35,7 @@ import AccessAddComponent from './components/access/access-add';
 import AccessListComponent from './components/access/access-list';
 import AuthProvider from './components/hooks/AuthProvider';
 import ProtectedRoute from './components/hooks/protected-route';
+import NotAllowedComponent from './components/not-allowed/not-allowed';
 
 function App() {
 
@@ -107,13 +108,10 @@ function App() {
               {/* <Route index element={<LandingPageComponent />} /> */}
               {/* <Route path="login" element={<LoginComponent />} /> */}
               <Route path="dashboard" element={<DashboardComponent />} />
-
-
-
               <Route
                 path="/setting"
                 element={(
-                  <ProtectedRoute role={'admin'}>
+                  <ProtectedRoute role={['admin']}>
                     <SettingComponent />
                   </ProtectedRoute>
                 )}
@@ -127,7 +125,7 @@ function App() {
                   </ProtectedRoute>
                 )}
               />
-
+              <Route path="not-allowed" element={<NotAllowedComponent />} />
               {/* <Route path="product/product-add" element={<ProductAddComponent />} /> */}
               <Route path="product/product-list" element={<ProductListComponent />} />
               <Route path="product/product-edit/:id" element={<ProductEditComponent />} />
