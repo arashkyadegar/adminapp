@@ -3,9 +3,16 @@ import React from "react";
 import myAppContext from "../context/context";
 import { useAuth } from "../hooks/AuthProvider";
 
+
 export default function PcNavbarComponent() {
-     const auth = useAuth();
      const { asideToggle, setAsideToggle } = React.useContext(myAppContext);
+     const auth = useAuth();
+     let avatar;
+     const user = localStorage.getItem('user')
+     if (user) {
+          avatar = JSON.parse(user).picture;
+     }
+
 
      return (
           <div className="flex flex-row-reverse relative z-10 w-full bg-white">
@@ -92,7 +99,7 @@ export default function PcNavbarComponent() {
                                              <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                         </svg>
                                    </span>
-                                   <img src="/imgs/people/avatar1.jpg" className="w-9 h-9 rounded-full overflow-hidden hover:ring-2 ring-primary-green" />
+                                   <img src={avatar} className="w-9 h-9 rounded-full overflow-hidden hover:ring-2 ring-primary-green" />
 
                                    <ul className="text-xs font-semibold text-gray-500 absolute top-8 right-10 w-40 bg-gray-50 border border-gray-300  transition-all duration-200">
                                         <li className="p-2 flex flex-row-reverse items-center justify-end gap-1">

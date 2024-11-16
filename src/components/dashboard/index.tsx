@@ -3,8 +3,8 @@ import SmTitleComponent from "../share/sm-title";
 
 export default function DashboardComponent() {
   //bg-[#f8f9fa]
-  const x = localStorage.getItem('user')
-  console.log(x)
+  // const x = localStorage.getItem('user')
+  // console.log(x)
 
   return (
     <div className="w-full sm:w-10/12 mr-0 sm:mr-16">

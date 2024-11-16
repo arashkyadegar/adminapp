@@ -1,9 +1,17 @@
 import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+type userType = {
+  email: string;
+  family_name: string;
+  given_name: string;
+  picture: string;
+  name: string;
+}
 type LoginType = {
   email: string;
   password: string;
+  roles: string[];
   remember_me?: boolean | undefined;
 }
 
@@ -43,10 +51,10 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     const t = randomAlphaNumeric(50)
     setTimeout(() => {
-      const obj = { ...data, token: t, roles: ['guest','account','user'] }
+      const obj = { ...data, token: t }
       setUser(data.email)
       setToken(t)
-      setRoles(roles)
+      setRoles(data.roles)
       console.log(obj)
       localStorage.setItem('user', JSON.stringify(obj))
       navigate('/dashboard')

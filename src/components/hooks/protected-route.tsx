@@ -23,8 +23,8 @@ import { useAuth } from './AuthProvider';
 
 const ProtectedRoute = ({ children, role }: any) => {
   const { user, roles } = useAuth();
-  // console.log(roles)
-  // console.log(role)
+  console.log(roles)
+  console.log(role)
   // console.log(roles && roles.includes(role))
   //return (roles.some(item => role.includes(item))) ? children : <Navigate to="/" replace />;
   

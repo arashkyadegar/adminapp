@@ -3,9 +3,10 @@ import myAppContext from "../context/context"
 import validator from "validator";
 import { useAppDispatch } from "../../redux/store/hooks";
 import { ToastFail } from "../../utility/tostify";
-
 import { Link } from "react-router-dom";
 import login, { useAuth } from "../hooks/AuthProvider";
+import GoogleLoginComponent from "./google-login";
+import { GoogleOAuthProvider } from '@react-oauth/google';
 export default function LoginComponent() {
 
      const usernameInputRef = useRef<HTMLInputElement>(null);
@@ -56,19 +57,13 @@ export default function LoginComponent() {
      function tooglePasswordVisibility(event: any): void {
           setPasswordVisibility(!passwordVisibility);
      }
-     function handleSubmitEvent() {
-          if (usernameInputRef.current && passwordInputRef.current) {
-               const data = {
-                    email: usernameInputRef.current.value,
-                    password: passwordInputRef.current.value,
-                    remember_me: true
-               }    
-               auth.login(data)
-          }
-     }
+
+
+
 
      return (
           <div className="mx-auto  my-20 w-2/3 sm:w-1/3 bg-blue-400  -rotate-3 rounded-lg bg-gradient-to-r from-indigo-500 from-10% via-sky-500 to-90%">
+
 
                <div className="flex w-full flex-col justify-center gap-4 items-center border shadow-gray-400 shadow-sm border-gray-200 rotate-3  bg-white rounded-lg  py-4">
                     <div>
@@ -112,14 +107,21 @@ export default function LoginComponent() {
                               <p className="text-red-400 text-xs  text-right h-4">{loginForm.passwordError}</p>
                          </div>
                     </div>
-                    <div>
-                         <button onClick={handleSubmitEvent}>handle</button>
-                         <Link to="/dashboard/" className="text-xs bg-white font-semibold text-black border border-gray-300 px-4 py-2 rounded-lg cursor-pointer hover:text-white hover:bg-blue-600 transition-all duration-500" >ورود</Link>
 
-                    </div>
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-1  text-sm">
-                         <a>?Don’t have an account yet</a>
+                    <div className="flex flex-col  items-center justify-center gap-1  text-sm">
+                         {/* <a>?Don’t have an account yet</a>
                          <a className=" text-blue-600">!Register here</a>
+                         <h1>or</h1> */}
+                         <div className="flex flex-col">
+
+                              <GoogleOAuthProvider clientId="562111561687-r2suobjoiucadg65peg6h80de3pinujt.apps.googleusercontent.com">
+                                   <GoogleLoginComponent />
+                              </GoogleOAuthProvider>
+
+
+                              {/* <Link to="/dashboard/" className="text-xs text-center bg-white  text-black border border-gray-300 px-4 py-2 rounded-lg cursor-pointer  hover:bg-blue-50 transition-all duration-500" >ورود</Link> */}
+                              {/* <Link to="http://localhost:3007/api/auth/google" >google</Link> */}
+                         </div>
                     </div>
                </div>
           </div >)
